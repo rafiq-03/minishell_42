@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 10:54:25 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/06 15:09:37 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:38:23 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_quotes(t_item *tmp, int *last_state, int *last, int state)
 {
-	if (last_state[*last] == state) // if the state is in quote it's mean it is last quote
+	if (last_state[*last] == state)
 		tmp->state = last_state[--(*last)];
 	else
 	{
@@ -25,8 +25,8 @@ void	handle_quotes(t_item *tmp, int *last_state, int *last, int state)
 
 void	ft_add_state(t_item **head)
 {
-	int	last_state[1024];
-	int	last;
+	int		last_state[1024];
+	int		last;
 	t_item	*tmp;
 
 	tmp = *head;
@@ -44,10 +44,10 @@ void	ft_add_state(t_item **head)
 	}
 }
 
-	// int a = -1;
-	// printf("\n");
-	// while (++a < 6)
-	// {
-	// 	printf("| %d ", last_state[a]);
-	// }
-	// printf("|\n\n");
+// int a = -1;
+// printf("\n");
+// while (++a < 6)
+// {
+// 	printf("| %d ", last_state[a]);
+// }
+// printf("|\n\n");

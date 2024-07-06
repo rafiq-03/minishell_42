@@ -12,9 +12,10 @@
 
 #include "../minishell.h"
 
-char *rtype(int type)
+char	*rtype(int type)
 {
-	char *str;
+	char	*str;
+
 	str = NULL;
 	if (type == WORD)
 		str = "WORD";
@@ -45,16 +46,22 @@ char *rtype(int type)
 
 void	print_list(t_item *head)
 {
-	char *token;
-	char *state[4] = {"general", "\033[0;32mIN_QUT\033[0m", "\033[0;33mIN_DQUT\033[0m", NULL};
+	char	*token;
+	char	*state[4];
+
+	state[4] = {"general", "\033[0;32mIN_QUT\033[0m",
+		"\033[0;33mIN_DQUT\033[0m", NULL};
 	printf(" --------------------------------------------------------------------------------\n");
 	printf("|	[CMD]	|	[len]	|	[state]	|	[token]				\n");
 	printf(" --------------------------------------------------------------------------------\n");
 	while (head)
 	{
 		token = rtype(head->type);
-		printf("|	[%s]	|   %d		|	%s	|	%s			\n", head->content,
-											head->len, state[head->state - 1], token);
+		printf("|	[%s]	|   %d		|	%s	|	%s			\n",
+														head->content,
+														head->len,
+														state[head->state - 1],
+														token);
 		head = head->next;
 	}
 	printf(" _______________________________________________________________________________\n\n");

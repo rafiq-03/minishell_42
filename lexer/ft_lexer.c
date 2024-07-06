@@ -12,23 +12,24 @@
 
 #include "../minishell.h"
 
-int is_whitespace(char c)
+int	is_whitespace(char c)
 {
 	if ((c == 32 || (c >= 9 && c <= 13)))
-        return(1);
+		return (1);
 	return (0);
 }
 
-int is_token(char c)
+int	is_token(char c)
 {
-	if (is_whitespace(c) || c == '\n' || c == '\'' || c == '\"' || c == '\\' || c == '$' || c == '|' || c == '<' || c == '>')
-		return(1);
-	return(0);
+	if (is_whitespace(c) || c == '\n' || c == '\'' || c == '\"' || c == '\\'
+		|| c == '$' || c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
 }
 
-int tokenization(t_item **ptr2head, char *str)
+int	tokenization(t_item **ptr2head, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (is_token(str[i]))
@@ -42,16 +43,16 @@ int tokenization(t_item **ptr2head, char *str)
 	return (i);
 }
 
-void    my_lexer(char *input)
+void	my_lexer(char *input)
 {
-	int i;
-	t_item *head;
+	int		i;
+	t_item	*head;
+	int		state;
 
 	head = NULL;
 	i = 0;
-	int state;
 	state = 2;
-	while(input[i])
+	while (input[i])
 	{
 		i += tokenization(&head, input + i);
 	}

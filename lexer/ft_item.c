@@ -14,20 +14,20 @@
 
 t_item	*new_item(char *content, int len, enum e_token type, enum e_state state)
 {
-    t_item *new_node;
+	t_item	*new_node;
 
-    new_node = malloc(sizeof(t_item));
-    if (!new_node)
-    {
-        printf("error substr\n");
-        return (NULL);
-    }
-    new_node->content = ft_substr(content, 0, len);
-    new_node->len = len;
-    new_node->state = state;
-    new_node->type = type;
-    new_node->next = NULL;
-    return(new_node);
+	new_node = malloc(sizeof(t_item));
+	if (!new_node)
+	{
+		printf("error substr\n");
+		return (NULL);
+	}
+	new_node->content = ft_substr(content, 0, len);
+	new_node->len = len;
+	new_node->state = state;
+	new_node->type = type;
+	new_node->next = NULL;
+	return (new_node);
 }
 
 t_item	*last_item(t_item *lst)
@@ -49,7 +49,6 @@ void	add_back_items(t_item **lst, t_item *new)
 	{
 		if (*lst)
 		{
-
 			last = last_item(*lst);
 			last->next = new;
 		}
