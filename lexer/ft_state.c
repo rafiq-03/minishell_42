@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 10:54:25 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/08 10:43:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:28:04 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_item	*handle_quotes(t_item *tmp, int type, int state)
 {
 	if (tmp->next)
 		tmp = tmp->next;
-	while (tmp->type != type)
+	while (tmp && tmp->type != type)
 	{
 		tmp->state = state;
 		tmp = tmp->next;
@@ -37,6 +37,7 @@ void	ft_add_state(t_item **head)
 			tmp = handle_quotes(tmp, DOUBLE_QUOTE, IN_DQUOTE);
 		else
 			tmp->state = GENERAL;
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 }
