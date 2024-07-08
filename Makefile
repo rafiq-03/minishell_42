@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+         #
+#    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/07 16:24:59 by mskhairi         ###   ########.fr        #
+#    Updated: 2024/07/08 16:49:47 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,15 +27,21 @@ S_LEXER= $(addprefix $(LEXER_DIR), 	\
 									lexer_errors_utils.c)
 O_LEXER=$(S_LEXER:.c=.o)
 
+PARSER_DIR=parser/
+S_PARSER= $(addprefix $(PARSER_DIR), 	\
+										ft_parser.c \
+									)
+O_PARSER=$(S_PARSER:.c=.o)
+
 
 NAME = minishell
 
 
 all: $(NAME)
 
-$(NAME): $(O_LEXER) main.o
+$(NAME): $(O_LEXER) $(O_PARSER) main.o 
 	make -C Libft
-	$(CC) main.o $(CFLAGS) $(O_LEXER) $(LIBS) -o $(NAME)
+	$(CC) main.o $(CFLAGS) $(O_LEXER) $(O_PARSER) $(LIBS) -o $(NAME)
 
 %.o:%.c
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -43,8 +49,9 @@ $(NAME): $(O_LEXER) main.o
 clean:
 	make fclean -C Libft
 	rm -f $(O_LEXER) main.o
+	rm -r $(O_PARSER)
 
 fclean: clean
-	rm -f $(O_LEXER) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all

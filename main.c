@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/07 15:43:07 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:16:01 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int main()
 {
     char *input;
+    t_item *lexer;
     while(1)
     {
         input = readline("[minishell]::~>");
@@ -24,7 +25,8 @@ int main()
             return (1);
         if (ft_strlen(input))
         {
-            my_lexer(input);
+            lexer = my_lexer(input);
+            ft_parser(&lexer);
             add_history(input);
         }
     }

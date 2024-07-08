@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/08 12:07:52 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:32:23 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ typedef struct s_item
 	struct s_item	*prev;
 }					t_item;
 
+typedef struct s_cmd_limits
+{
+	t_item *start;
+	t_item *end;
+	int		i;
+	struct s_cmd_limits *next;
+	// struct s_cmd_limits *prev;
+}	t_cmd_limits;
+
 typedef	struct s_fd
 {
 	int	in; // == 0
@@ -65,7 +74,7 @@ typedef struct s_simple_cmd
 {
 	char **cmd;//command with its falags and options
 	char *redir_in; //name of in_file // NULL if there is no redir else there is redir
-	char *redir_out; // name of ou_file // same
+	char *redir_out; // name of ou_file // same file1
 	t_fd fd; //file descriptor of in and out
 	int	pipe[2];
 	int	pipe_flag_before;// if there is a pipe or not
@@ -74,7 +83,7 @@ typedef struct s_simple_cmd
 	struct s_simple_cmd *prev;
 }	t_simple_cmd;
 
-void		my_lexer(char *input);
+t_item	*my_lexer(char *input);
 t_item		*new_item(char *content, int len, enum e_token type, 
 				enum e_state state);
 t_item		*last_item(t_item *lst);
@@ -101,6 +110,7 @@ void	ft_free_list(t_item **lst);
 int is_empty(char *str);
 
 int 	is_redirection(char *str);
+t_cmd_limits	*ft_parser(t_item **head);
 
 void	ft_print_error(void);
 
