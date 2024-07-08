@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:25:21 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/07 16:29:35 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:52:05 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_print_error(void)
 // 		ft_print_error();
 // 	}
 // }
+
 void check_pipes(t_item **lst)
 {
 	t_item *search;

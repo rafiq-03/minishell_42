@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/07 16:25:29 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:07:52 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,27 @@ typedef struct s_item
 	enum e_state	state;
 	struct s_item	*next;
 	struct s_item	*prev;
-	// struct s_elem				*prev;
 }					t_item;
+
+typedef	struct s_fd
+{
+	int	in; // == 0
+	int	out; // == 1
+}	t_fd;
+
+//simple command
+typedef struct s_simple_cmd
+{
+	char **cmd;//command with its falags and options
+	char *redir_in; //name of in_file // NULL if there is no redir else there is redir
+	char *redir_out; // name of ou_file // same
+	t_fd fd; //file descriptor of in and out
+	int	pipe[2];
+	int	pipe_flag_before;// if there is a pipe or not
+	int	pipe_flag_after;// if there is a pipe or not
+	struct s_simple_cmd *next;
+	struct s_simple_cmd *prev;
+}	t_simple_cmd;
 
 void		my_lexer(char *input);
 t_item		*new_item(char *content, int len, enum e_token type, 
