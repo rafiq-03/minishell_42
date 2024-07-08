@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/07 15:43:07 by mskhairi         ###   ########.fr       */
+/*   Created: 2024/07/07 15:42:46 by mskhairi          #+#    #+#             */
+/*   Updated: 2024/07/07 15:48:37 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main()
+int is_empty(char *str)
 {
-    char *input;
-    while(1)
+    int i = 0;
+
+    while(str[i])
     {
-        input = readline("[minishell]::~>");
-        if (!input)
-            printf("Exit\n");
-        if (!ft_strncmp(input, "",ft_strlen(input)) || is_empty(input))
-            return (1);
-        if (ft_strlen(input))
-        {
-            my_lexer(input);
-            add_history(input);
-        }
+        if (!(str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
+            return(0);
+        i++;
     }
+    return(1);
 }
