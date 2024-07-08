@@ -6,48 +6,37 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 10:54:25 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/06 15:38:23 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/08 10:43:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	handle_quotes(t_item *tmp, int *last_state, int *last, int state)
+t_item	*handle_quotes(t_item *tmp, int type, int state)
 {
-	if (last_state[*last] == state)
-		tmp->state = last_state[--(*last)];
-	else
+	if (tmp->next)
+		tmp = tmp->next;
+	while (tmp->type != type)
 	{
-		last_state[++(*last)] = state;
-		tmp->state = last_state[*last - 1];
+		tmp->state = state;
+		tmp = tmp->next;
 	}
+	return (tmp);
 }
 
 void	ft_add_state(t_item **head)
 {
-	int		last_state[1024];
-	int		last;
 	t_item	*tmp;
 
 	tmp = *head;
-	last_state[0] = GENERAL;
-	last = 0;
 	while (tmp)
 	{
 		if (tmp->type == QOUTE)
-			handle_quotes(tmp, last_state, &last, IN_QUOTE);
+			tmp = handle_quotes(tmp, QOUTE, IN_QUOTE);
 		else if (tmp->type == DOUBLE_QUOTE)
-			handle_quotes(tmp, last_state, &last, IN_DQUOTE);
+			tmp = handle_quotes(tmp, DOUBLE_QUOTE, IN_DQUOTE);
 		else
-			tmp->state = last_state[last];
+			tmp->state = GENERAL;
 		tmp = tmp->next;
 	}
 }
-
-// int a = -1;
-// printf("\n");
-// while (++a < 6)
-// {
-// 	printf("| %d ", last_state[a]);
-// }
-// printf("|\n\n");
