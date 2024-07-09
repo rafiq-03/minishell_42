@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 14:25:56 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:26:36 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,4 @@ int	main(void)
             add_history(input);
         }
     }
-	char	*input;
-
-	while (1)
-	{
-		input = readline("[minishell]::~>");
-		//str_trim
-		if (!input)
-			printf("Exit\n");
-		if (!ft_strncmp(input, "", ft_strlen(input)) || is_empty(input))
-			return (1);
-		if (ft_strlen(input))
-		{
-			my_lexer(input);
-			add_history(input);
-		}
-	}
 }
