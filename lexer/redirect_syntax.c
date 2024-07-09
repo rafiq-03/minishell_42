@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:38:02 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 13:01:35 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:31:25 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int is_alone(t_item *lst)
 	check_after(tmp, &after);
 	if (is_redirection(tmp->content) && ((!after && !before) || (before && !after)))
 		return (0);
-	else if (*(tmp->content) == '|' && ((!after && !before) || (!before && after)))
+	else if (*(tmp->content) == '|' && ((!after && !before) || (!before && after) || (before && !after)))
 			return (0);
 	return (1);
 }
