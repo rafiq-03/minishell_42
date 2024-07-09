@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 10:54:25 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/08 11:28:04 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:41:38 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ t_item	*handle_quotes(t_item *tmp, int type, int state)
 	return (tmp);
 }
 
-void	ft_add_state(t_item **head)
+void	ft_add_state(t_item **head)// not perfect 
 {
+	/* we have a problem in the test "$PATH" it give state in_dquote to all*/
 	t_item	*tmp;
 
 	tmp = *head;

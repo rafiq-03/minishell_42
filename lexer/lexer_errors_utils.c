@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_errors-utils.c                               :+:      :+:    :+:   */
+/*   lexer_errors_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:14:59 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/07 16:16:33 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:36:40 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int 	is_redirection(char *str)
 {
-	if (!ft_strncmp(str, ">>", 2) || !ft_strncmp(str, ">>", 2) || *(str) == '>' || *(str) == '<')
+	if (!ft_strncmp(str, ">>", 2) || !ft_strncmp(str, ">>", 2) || *(str) == REDIR_OUT || *(str) == REDIR_IN)
 		return (1);
 	return (0);
 }
