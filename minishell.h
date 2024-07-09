@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 14:24:18 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 18:56:56 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ enum				e_token
 	REDIR_OUT = '>',
 	HERE_DOC,
 	DREDIR_OUT,
+	REDIR_IN_FILE, // redir files
+	HERE_DOC_LIMITER,
+	REDIR_OUT_FILE, // redir files
+	DREDIR_OUT_FILE,
 };
 
 enum				e_state
@@ -91,17 +95,20 @@ typedef	struct	s_redir
 // Simple command
 typedef struct s_simple_cmd
 {
-	char *cmd_name;
+	char *cmd_name;// command name
 	char **cmd;//command with its falags and options
-	int	in_num;// number of redir in
+	int	in_num;// number of redir in 
 	int	out_num;// number of redir out
+	// we must check pipe flag befor assignment of in_out fd
 	t_redir	*redir_in;//in 
 	t_redir	*redir_out;//out
 	t_fd fd; //file descriptor of in and out ft.in = open(redir_in->path);
 	int	pipe[2];// pipe if needed
-	int	pipe_flag;// if there is a pipe or not 1 = before 2 = after 3 = befor & after
-	struct s_simple_cmd *next;
-	struct s_simple_cmd *prev;
+	int	pipe_flag;// if there is a pipe or not : 0 = no pipe  1 = before 2 = after 3 = befor & after
+	struct s_simple_cmd *next;//next_command
+	struct s_simple_cmd *prev;// prev_command
+	//10 elemnts
+	
 }	t_simple_cmd;
 
 //this struct will store all data

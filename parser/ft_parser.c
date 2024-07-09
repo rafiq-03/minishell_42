@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/09 10:39:18 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:36:55 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ t_cmd_limits	*last_limit(t_cmd_limits *lst)
 	if (!lst)
 		return (lst);
 	while (lst->next)
-	{
 		lst = lst->next;
-	}
 	return (lst);
 }
 
@@ -90,7 +88,9 @@ t_cmd_limits	*ft_parser(t_item **head)
 	t_cmd_limits *list;
 	t_cmd_limits *new;
 	t_item	*tmp;
+	int			i;
 
+	i = 0;
 	tmp = *head;
 	list = new_limit(tmp);
 	tmp = skip_other_types(tmp);
@@ -99,12 +99,13 @@ t_cmd_limits	*ft_parser(t_item **head)
 	while (tmp)
 	{
 		// printf("[%s]\n", tmp->content);
-		if (tmp->type == PIPE_LINE && tmp->next)
+		if (tmp->type == PIPE_LINE && tmp->state == GENERAL && tmp->next)
 		{
 			// printf("pipe : %s\n", tmp->content);
 			new = new_limit(tmp->next);
 			tmp = skip_other_types(tmp);
 			new->end = tmp;
+			new->i = ++i;
 			add_back_limit(&list, new);
 		}
 		tmp = tmp->next;
