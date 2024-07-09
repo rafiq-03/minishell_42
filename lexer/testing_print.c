@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:20:07 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/08 10:55:19 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:17:57 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	print_list(t_item *head)
 	{
 		token = rtype(head->type);
 		printf("|	[%s]	|   %d		|	%s	|	%s			\n",
-														head->content,
-														head->len,
-														state[head->state - 1],
-														token);
+				head->content,
+				head->len,
+				state[head->state - 1],
+				token);
 		head = head->next;
 	}
 	printf(" _______________________________________________________________________________\n\n");

@@ -6,7 +6,7 @@
 #    By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/07 16:24:59 by mskhairi         ###   ########.fr        #
+#    Updated: 2024/07/09 10:38:49 by mskhairi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ S_LEXER= $(addprefix $(LEXER_DIR), 	\
 									ft_free_list.c	\
 									lexer_errors.c\
 									is_empty.c	\
-									lexer_errors_utils.c)
+									lexer_errors_utils.c	\
+									redirect_syntax.c)
 O_LEXER=$(S_LEXER:.c=.o)
 
 

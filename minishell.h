@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/08 12:07:52 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:03:10 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,10 @@ int 	is_redirection(char *str);
 
 void	ft_print_error(void);
 
-void check_redirections(t_item **lst);
+int check_redirections(t_item **lst);
 
+int	check_pipes(t_item **lst);
 
+int is_alone(t_item *lst);
 
 #endif

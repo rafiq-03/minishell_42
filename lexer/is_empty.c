@@ -6,21 +6,22 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:42:46 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/07 15:48:37 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:14:24 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int is_empty(char *str)
+int	is_empty(char *str)
 {
-    int i = 0;
+	int	i;
 
-    while(str[i])
-    {
-        if (!(str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
-            return(0);
-        i++;
-    }
-    return(1);
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
+			return (0);
+		i++;
+	}
+	return (1);
 }

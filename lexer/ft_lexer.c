@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:03 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/08 10:43:33 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:20:44 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,15 @@ int	tokenization(t_item **ptr2head, char *str)
 
 void	my_lexer(char *input)
 {
-	size_t		i;
+	size_t	i;
 	t_item	*head;
-	// t_item	*test;
-	int		state;
 
 	head = NULL;
 	i = 0;
-	state = 2;
 	while (input[i] && i < ft_strlen(input))
 		i += tokenization(&head, input + i);
 	ft_add_state(&head);
-	// pause();
-	// lexer_errors(&head);
+	lexer_errors(&head);
 	printf("----------\n");
 	print_list(head);
 }
