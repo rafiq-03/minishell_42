@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 12:55:58 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:26:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,8 @@ typedef	struct s_fd
 
 typedef	struct	s_redir
 {
-	int	num;// number of this redir type
-	int	type;// out [ (1 = '>') (2 = '>>') ] //  in [ (1 = '<') (2 = '<<') ]         
-	char *path;// path of this redir
+	int	type;// out [ (1 = '>') (2 = '>>') ] //  in [ (1 = '<') (2 = '<<') ]
+	char *path_or_limiter;// path of this redir or limiter in the case of herdoc
 }	t_redir;
 
 // Simple command
@@ -94,12 +93,13 @@ typedef struct s_simple_cmd
 {
 	char *cmd_name;
 	char **cmd;//command with its falags and options
-	t_redir	*redir_in;//in
+	int	in_num;// number of redir in
+	int	out_num;// number of redir out
+	t_redir	*redir_in;//in 
 	t_redir	*redir_out;//out
-	t_fd fd; //file descriptor of in and out
+	t_fd fd; //file descriptor of in and out ft.in = open(redir_in->path);
 	int	pipe[2];// pipe if needed
-	int	pipe_flag_before;// if there is a pipe or not
-	int	pipe_flag_after;// if there is a pipe or not
+	int	pipe_flag;// if there is a pipe or not 1 = before 2 = after 3 = befor & after
 	struct s_simple_cmd *next;
 	struct s_simple_cmd *prev;
 }	t_simple_cmd;
