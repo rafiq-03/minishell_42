@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 13:03:10 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:24:18 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+/*------------------------[ includes ]----------------------------------*/
 
 # include "Libft/libft.h"
 # include "readline/readline.h"
@@ -20,6 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+/*---------------------------[ enum ]------------------------------------*/
 
 enum				e_token
 {
@@ -44,6 +48,9 @@ enum				e_state
 	IN_DQUOTE = 3,
 };
 
+/*-------------------------------------[ typedefs ]--------------------------------------*/
+
+// Lexing ----------------------//
 typedef struct s_item
 {
 	char			*content;
@@ -54,32 +61,65 @@ typedef struct s_item
 	struct s_item	*prev;
 }					t_item;
 
+// Parsing :-------------------//
+
+
+typedef struct s_cmd_limits
+{
+	t_item *start;
+	t_item *end;
+	int		i;
+	struct s_cmd_limits *next;
+	// struct s_cmd_limits *prev;
+}	t_cmd_limits;
+
+// in_out_fd ::--------::
 typedef	struct s_fd
 {
 	int	in; // == 0
 	int	out; // == 1
 }	t_fd;
 
-//simple command
+//redir ::-------------::
+
+typedef	struct	s_redir
+{
+	int	type;// out [ (1 = '>') (2 = '>>') ] //  in [ (1 = '<') (2 = '<<') ]
+	char *path_or_limiter;// path of this redir or limiter in the case of herdoc
+}	t_redir;
+
+// Simple command
 typedef struct s_simple_cmd
 {
+	char *cmd_name;
 	char **cmd;//command with its falags and options
-	char *redir_in; //name of in_file // NULL if there is no redir else there is redir
-	char *redir_out; // name of ou_file // same
-	t_fd fd; //file descriptor of in and out
-	int	pipe[2];
-	int	pipe_flag_before;// if there is a pipe or not
-	int	pipe_flag_after;// if there is a pipe or not
+	int	in_num;// number of redir in
+	int	out_num;// number of redir out
+	t_redir	*redir_in;//in 
+	t_redir	*redir_out;//out
+	t_fd fd; //file descriptor of in and out ft.in = open(redir_in->path);
+	int	pipe[2];// pipe if needed
+	int	pipe_flag;// if there is a pipe or not 1 = before 2 = after 3 = befor & after
 	struct s_simple_cmd *next;
 	struct s_simple_cmd *prev;
 }	t_simple_cmd;
 
-void		my_lexer(char *input);
-t_item		*new_item(char *content, int len, enum e_token type, 
-				enum e_state state);
+//this struct will store all data
+typedef struct s_data
+{
+	t_simple_cmd	*cmds;
+	t_item			*tokenization;
+	t_cmd_limits	*limits;
+}	t_data;
+
+/*-------------------------Prototypes---------------------------------*/
+
+
+t_item		*my_lexer(char *input);
+t_item		*new_item(char *content, int len, enum e_token type, enum e_state state);
 t_item		*last_item(t_item *lst);
 
-int	ft_lstsize(t_item *lst);
+int			ft_lstsize(t_item *lst);
 
 int			is_empty(char *str);
 int			is_whitespace(char c);
@@ -94,15 +134,16 @@ void		ft_add_state(t_item **head);
 
 void		print_list(t_item *head);
 
-void	lexer_errors(t_item **lst);
+void			lexer_errors(t_item **lst);
 
-void	ft_free_list(t_item **lst);
+void			ft_free_list(t_item **lst);
 
-int is_empty(char *str);
+int 			is_empty(char *str);
 
-int 	is_redirection(char *str);
+int 			is_redirection(char *str);
+t_cmd_limits	*ft_parser(t_item **head);
 
-void	ft_print_error(void);
+void			ft_print_error(void);
 
 int check_redirections(t_item **lst);
 

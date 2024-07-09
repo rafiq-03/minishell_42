@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:03 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/08 15:20:44 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:15:13 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	tokenization(t_item **ptr2head, char *str)
 	return (i);
 }
 
-void	my_lexer(char *input)
+t_item	*my_lexer(char *input)
 {
 	size_t	i;
 	t_item	*head;
@@ -55,7 +55,8 @@ void	my_lexer(char *input)
 	while (input[i] && i < ft_strlen(input))
 		i += tokenization(&head, input + i);
 	ft_add_state(&head);
-	lexer_errors(&head);
+	// pause();
+	// lexer_errors(&head);
 	printf("----------\n");
 	print_list(head);
 }
