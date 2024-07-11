@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 14:26:36 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:35:03 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 int	main(void)
 {
     char *input;
+    char *tmp;
     t_item *lexer;
+
     while(1)
     {
-        input = readline("[minishell]::~>");
+        tmp = readline("[minishell]::~>");
+		input = ft_strtrim(tmp, "\t \f\v\n\r");
+		free(tmp);
         if (!input)
             printf("Exit\n");
         if (!ft_strncmp(input, "",ft_strlen(input)) || is_empty(input))

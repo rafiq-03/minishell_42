@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_errors_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:14:59 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 14:13:04 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:29:45 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	check_pipes(t_item **lst)
 	{
 		if (*(tmp->content) == '|')
 		{
+			if (!is_alone(tmp))
+				return (0);
 			while (search->prev)
 			{
-				if (!is_alone(tmp))
-					return (0);
 				if (is_redirection(search->prev->content) || *(search->prev->content) == '|')
 					return (0);
 				else if (!is_empty(search->prev->content)
