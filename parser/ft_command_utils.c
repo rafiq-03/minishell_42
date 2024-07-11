@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_redir.c                                         :+:      :+:    :+:   */
+/*   ft_command_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/09 19:47:56 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:07:20 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	cmd_number(t_cmd_limits *cmd)
+int		cmd_number(t_cmd_limits *cmd)// number of commands
 {
 	int i;
 
@@ -25,7 +25,7 @@ int	cmd_number(t_cmd_limits *cmd)
 	return (i);
 }
 
-char	**fill_cmd(t_cmd_limits *cmd)
+char	**set_cmd_arr(t_cmd_limits *cmd)// command array aka command and its options
 {
 	char	**cmd_array;
 	int		len;
@@ -53,7 +53,7 @@ char	**fill_cmd(t_cmd_limits *cmd)
 	return (cmd_array);
 }
 
-int	check_redir(t_cmd_limits *cmd,  int	type_1, int	type_2)
+int		check_redir(t_cmd_limits *cmd,  int	type_1, int	type_2) // check redirections numbers of a type
 {
 	t_item	*tmp;
 	int		i;
@@ -67,13 +67,14 @@ int	check_redir(t_cmd_limits *cmd,  int	type_1, int	type_2)
 	}
 	return (i);
 }
-t_redir	*fill_redir(t_cmd_limits *cmd, int type1, int type2, int num)
+
+t_redir	*set_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 {
 	t_item	*tmp;
 	t_redir *redir;
 
 	tmp = cmd->start;
-	redir = malloc (sizeof(redir) * num);
+	redir = malloc (sizeof(redir) * (num + 1));
 	if (!redir)
 		return (NULL);
 	while (tmp != cmd->end->next)
@@ -90,43 +91,23 @@ t_redir	*fill_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 		}
 		tmp = tmp->next;
 	}
+	redir->path_or_limiter = NULL;
 	return (redir);
 }
 
-t_simple_cmd *new_cmd_node(t_cmd_limits *cmd)
+void	set_pipe_flag(t_simple_cmd *head, int cmd_nbr)
 {
-	t_simple_cmd *new;
-
-	new = malloc(sizeof(t_simple_cmd));
-	if(!new)
-		return (NULL);
-	new->cmd = fill_cmd(cmd);
-	new->cmd_name = ft_strdup(new->cmd[0]);// cmd_name is first element
-	new->next = NULL;
-	new->prev = NULL;
-	new->in_num = check_redir(cmd, REDIR_IN , HERE_DOC);
-	new->out_num = check_redir(cmd, REDIR_OUT, DREDIR_OUT);
-	new->pipe_flag = 0;// how to check pipe flag ??
-	new->fd.in = -1;// execution part
-	new->fd.out = -1;// execution part
-	new->redir_in = fill_redir(cmd, REDIR_IN_FILE, HERE_DOC_LIMITER,  new->in_num);
-	new->redir_out = fill_redir(cmd, REDIR_OUT_FILE, DREDIR_OUT_FILE, new->out_num);
-	return (new);
+	if (cmd_nbr == 1)
+		return;
+	while (head)
+	{
+		if (head->i == 0)
+			head->pipe_flag = 2; // after
+		else if (head->i == cmd_nbr - 1)
+			head->pipe_flag = 1; // before
+		else
+			head->pipe_flag = 3; // before and after
+		head = head->next;
+	}
 }
 
-t_simple_cmd	*ft_fill_cmd(t_cmd_limits **list)
-{
-	t_simple_cmd *cmds_list;
-	t_simple_cmd *new_cmd;
-	t_cmd_limits *tmp;
-
-	tmp = *list;
-	cmds_list = new_cmd_node(tmp); //create a node;
-	/*
-		implement :
-			* cmd name and its options and flags
-			* redir if there is
-			* pipe if needed
-	*/
-	
-}

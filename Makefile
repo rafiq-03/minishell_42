@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/09 14:17:03 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/11 13:14:32 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ O_LEXER=$(S_LEXER:.c=.o)
 
 PARSER_DIR=parser/
 S_PARSER= $(addprefix $(PARSER_DIR), 	\
-										ft_parser.c \
+										ft_command_limits.c\
+										ft_command_utils.c\
+										ft_command.c\
+										testing.c\
 									)
 O_PARSER=$(S_PARSER:.c=.o)
 

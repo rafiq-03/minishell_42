@@ -1,38 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_command_limits.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/09 19:36:55 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:15:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-
-void	print_lst(t_cmd_limits *lst)
-{
-	t_cmd_limits *tmp;
-	t_item *tm;
-
-	tmp = lst;
-	while (tmp)
-	{
-		tm = tmp->start;
-		printf("**************************************\n\n");
-		while (tm != tmp->end)
-		{
-			printf("[%s]\t", tm->content);
-			tm = tm->next;
-		}
-		printf("[%s]\t", tm->content);
-		printf("\n");
-		tmp = tmp->next;
-	}
-		printf("\n**************************************\n");
-}
+#include "parser.h"
 
 t_cmd_limits	*new_limit(t_item *start)
 {
@@ -66,7 +44,6 @@ void	add_back_limit(t_cmd_limits **lst, t_cmd_limits *new)
 		if (*lst)
 		{
 			last = last_limit(*lst);
-			// new->prev = last;
 			last->next = new;
 		}
 		else
@@ -83,32 +60,30 @@ t_item	*skip_other_types(t_item *tmp)
 	return (tmp);
 }
 
-t_cmd_limits	*ft_parser(t_item **head)
+t_cmd_limits	*set_cmd_limits(t_item *head)
 {
 	t_cmd_limits *list;
 	t_cmd_limits *new;
-	t_item	*tmp;
 	int			i;
 
 	i = 0;
-	tmp = *head;
-	list = new_limit(tmp);
-	tmp = skip_other_types(tmp);
-	list->end = tmp;
+	list = new_limit(head);
+	head = skip_other_types(head);
+	list->end = head;
 	// printf("start  = %s\tend %s\n", list->start->content, list->end->content);
-	while (tmp)
+	while (head)
 	{
 		// printf("[%s]\n", tmp->content);
-		if (tmp->type == PIPE_LINE && tmp->state == GENERAL && tmp->next)
+		if (head->type == PIPE_LINE && head->state == GENERAL && head->next)
 		{
 			// printf("pipe : %s\n", tmp->content);
-			new = new_limit(tmp->next);
-			tmp = skip_other_types(tmp);
-			new->end = tmp;
+			new = new_limit(head->next);
+			head = skip_other_types(head);
+			new->end = head;
 			new->i = ++i;
 			add_back_limit(&list, new);
 		}
-		tmp = tmp->next;
+		head = head->next;
 	}
 	print_lst(list);
 	return (list);

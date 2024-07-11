@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testing_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:20:07 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/08 15:17:57 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:16:57 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*rtype(int type)
 	else if (type == REDIR_IN)
 		str = "REDIR_IN";
 	else if (type == REDIR_OUT)
-		str = "REDIR_IN";
+		str = "REDIR_OUT";
 	else if (type == HERE_DOC)
 		str = "HERE_DOC";
 	else if (type == DREDIR_OUT)

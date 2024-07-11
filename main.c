@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 15:35:03 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:04:56 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 int	main(void)
 {
-    char *input;
+    t_data  mini;
+
     char *tmp;
-    t_item *lexer;
 
     while(1)
     {
         tmp = readline("[minishell]::~>");
-		input = ft_strtrim(tmp, "\t \f\v\n\r");
+		mini.line = ft_strtrim(tmp, "\t \f\v\n\r");
 		free(tmp);
-        if (!input)
+        if (!mini.line)
             printf("Exit\n");
-        if (!ft_strncmp(input, "",ft_strlen(input)) || is_empty(input))
+        if (!ft_strncmp(mini.line, "",ft_strlen(mini.line)) || is_empty(mini.line))
             return (1);
-        if (ft_strlen(input))
+        if (ft_strlen(mini.line))
         {
-            lexer = my_lexer(input);
-            ft_parser(&lexer);
-            add_history(input);
+            mini.tokenization = my_lexer(mini.line);
+            mini.limits = set_cmd_limits(mini.tokenization);
+            add_history(mini.line);
         }
     }
 }

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 18:56:56 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:05:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ typedef	struct	s_redir
 // Simple command
 typedef struct s_simple_cmd
 {
+	int	i;// index of command;
 	char *cmd_name;// command name
 	char **cmd;//command with its falags and options
-	int	in_num;// number of redir in 
+	int	in_num;// number of redir in
 	int	out_num;// number of redir out
 	// we must check pipe flag befor assignment of in_out fd
 	t_redir	*redir_in;//in 
@@ -114,9 +115,10 @@ typedef struct s_simple_cmd
 //this struct will store all data
 typedef struct s_data
 {
-	t_simple_cmd	*cmds;
-	t_item			*tokenization;
-	t_cmd_limits	*limits;
+	char			*line;// line
+	t_simple_cmd	*cmds; //parsing
+	t_item			*tokenization;//lexing
+	t_cmd_limits	*limits; // parsing
 }	t_data;
 
 /*-------------------------Prototypes---------------------------------*/
@@ -148,7 +150,7 @@ void			ft_free_list(t_item **lst);
 int 			is_empty(char *str);
 
 int 			is_redirection(char *str);
-t_cmd_limits	*ft_parser(t_item **head);
+t_cmd_limits	*set_cmd_limits(t_item *head);
 
 void			ft_print_error(void);
 
