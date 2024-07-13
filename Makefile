@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/11 16:47:11 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/13 18:12:16 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ S_LEXER= $(addprefix $(LEXER_DIR), 	\
 									lexer_errors.c\
 									is_empty.c	\
 									lexer_errors_utils.c	\
+									reset_tokens.c\
 									redirect_syntax.c)
 O_LEXER=$(S_LEXER:.c=.o)
 

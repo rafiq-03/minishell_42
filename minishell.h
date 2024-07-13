@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/11 15:19:28 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 18:10:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ int	check_pipes(t_item **lst);
 
 int is_alone(t_item *lst);
 
+void	reset_tokens(t_item *list);
 
 t_simple_cmd	*ft_cmd_list(t_cmd_limits *list);
 
