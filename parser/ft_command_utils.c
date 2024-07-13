@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 17:04:43 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 19:01:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_redir	*set_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 	t_redir *redir;
 	int	i;
 
+	(void)type1;
+	(void)type2;
 	i = 0;
 	tmp = cmd->start;
 	redir = malloc (sizeof(t_redir) * num);
@@ -84,28 +86,18 @@ t_redir	*set_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 		return (NULL);
 	while (tmp != cmd->end->next)
 	{
-		if (tmp->type == type1)// redir_in or redir_out
+		if (tmp->type == type1)
 		{
 			redir[i].type = 1;//< or > 
-			redir[i].path_or_limiter = ft_strdup(tmp->content);
-			printf("%d\n", tmp->type);
-			printf("%d\n", REDIR_OUT_FILE);
-			printf("redir type %d\n", redir[i].type);
-			printf("redir == %s\n", redir[i].path_or_limiter);
+			redir[i++].path_or_limiter = ft_strdup(tmp->content);
 		}
 		else if (tmp->type == type2)// heredoc or dredir_out
 		{
 			redir[i].type = 2;// << or >> 
-			redir[i].path_or_limiter = ft_strdup(tmp->content);
-			printf("redir type %d\n", redir[i].type);
-			printf("redir == %s\n", redir[i].path_or_limiter);
+			redir[i++].path_or_limiter = ft_strdup(tmp->content);
 		}
 		tmp = tmp->next;
-		i++;
 	}
-	// printf("aaredir type %d\n", redir[0].type);
-	// printf("aaaredir == %s\n", redir[0].path_or_limiter);
-	// redir[i] = NULL;
 	return (redir);
 }
 

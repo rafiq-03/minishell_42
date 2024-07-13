@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:07:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 17:01:50 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 18:46:26 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	print_cmd(t_simple_cmd *cmd)
 		printf("pipe flag	: no pipe\n");
 	print_redir(cmd->redir_in, 1, cmd->in_num);
 	print_redir(cmd->redir_out, 2, cmd->out_num);
-	printf("%s\n", cmd->redir_in[0].path_or_limiter);
+	// printf("%s\n", cmd->redir_in[0].path_or_limiter);
 }
 
 void	print_cmds(t_simple_cmd *cmd)
