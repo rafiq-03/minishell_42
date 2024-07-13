@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/11 13:15:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:03:06 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 		}
 		head = head->next;
 	}
-	print_lst(list);
+	// print_lst(list);
 	return (list);
 }
 

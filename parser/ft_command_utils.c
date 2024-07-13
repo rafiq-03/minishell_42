@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/11 13:07:20 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:35:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		cmd_number(t_cmd_limits *cmd)// number of commands
 	i = 0;
 	while (cmd)
 	{
-		i++;
 		cmd = cmd->next;
+		i++;
 	}
 	return (i);
 }
@@ -39,6 +39,7 @@ char	**set_cmd_arr(t_cmd_limits *cmd)// command array aka command and its option
 	{
 		if (tmp->type == WORD)
 			len++;
+		tmp = tmp->next;
 	}
 	cmd_array = malloc(sizeof(char *) * (len + 1));
 	if (!cmd_array)
@@ -48,6 +49,7 @@ char	**set_cmd_arr(t_cmd_limits *cmd)// command array aka command and its option
 	{
 		if (tmp->type == WORD)
 			cmd_array[i++] = ft_strdup(tmp->content);
+		tmp = tmp->next;
 	}
 	cmd_array[i] = NULL;
 	return (cmd_array);
@@ -64,6 +66,7 @@ int		check_redir(t_cmd_limits *cmd,  int	type_1, int	type_2) // check redirectio
 	{
 		if (tmp->type == type_1 || tmp->type == type_2)
 			i++;
+		tmp = tmp->next;
 	}
 	return (i);
 }
@@ -72,7 +75,9 @@ t_redir	*set_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 {
 	t_item	*tmp;
 	t_redir *redir;
+	int	i;
 
+	i = 0;
 	tmp = cmd->start;
 	redir = malloc (sizeof(redir) * (num + 1));
 	if (!redir)
@@ -81,17 +86,18 @@ t_redir	*set_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 	{
 		if (tmp->type == type1)
 		{
-			redir->type = 1;
-			redir->path_or_limiter = ft_strdup(tmp->content);
+			redir[i].type = 1;
+			redir[i].path_or_limiter = ft_strdup(tmp->content);
 		}
 		else if (tmp->type == type2)
 		{
-			redir->type = 2;
-			redir->path_or_limiter = ft_strdup(tmp->content);
+			redir[i].type = 2;
+			redir[i].path_or_limiter = ft_strdup(tmp->content);
 		}
 		tmp = tmp->next;
+		i++;
 	}
-	redir->path_or_limiter = NULL;
+	// redir[i] = NULL;
 	return (redir);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:03 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 14:35:24 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:05:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ t_item	*my_lexer(char *input)
 		i += tokenization(&head, input + i);
 	ft_add_state(&head);
 	lexer_errors(&head);
-	print_list(head);
+	// print_list(head);
 	return (head);
 }

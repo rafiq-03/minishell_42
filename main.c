@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/11 15:04:56 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:19:56 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(void)
         {
             mini.tokenization = my_lexer(mini.line);
             mini.limits = set_cmd_limits(mini.tokenization);
+            mini.cmds = ft_cmd_list(mini.limits);
+            
             add_history(mini.line);
         }
     }
