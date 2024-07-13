@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/11 16:47:11 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/13 15:58:41 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ S_PARSER= $(addprefix $(PARSER_DIR), 	\
 										ft_command_limits.c\
 										ft_command_utils.c\
 										ft_command.c\
+										set_token.c\
 										testing.c\
 									)
 O_PARSER=$(S_PARSER:.c=.o)

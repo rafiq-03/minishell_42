@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:20:07 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/11 12:16:57 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 17:46:29 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ char	*rtype(int type)
 		str = "DREDIR_OUT";
 	else if (type == ESCAPE)
 		str = "ESCAPE";
+	else if (type == REDIR_IN_FILE)
+		str = "REDIR_IN_FILE";
+	else if (type == REDIR_OUT_FILE)
+		str = "REDIR_OUT_FILE";
+	else if (type == HERE_DOC_LIMITER)
+		str = "HERE_DOC_LIMITER";
+	else if (type == DREDIR_OUT_FILE)
+		str = "DREDIR_OUT_FILE";
 	return (str);
 }
 

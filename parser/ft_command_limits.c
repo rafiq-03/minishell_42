@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/11 16:03:06 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 17:15:14 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	add_back_limit(t_cmd_limits **lst, t_cmd_limits *new)
 
 t_item	*skip_other_types(t_item *tmp)
 {
-	if (tmp->next && tmp->next->type != PIPE_LINE)
-		tmp = tmp->next;
 	while (tmp && tmp->next && tmp->next->type != PIPE_LINE)
 		tmp = tmp->next;
 	return (tmp);
@@ -67,6 +65,8 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 	int			i;
 
 	i = 0;
+	set_tokens(&head);
+	print_list(head);
 	list = new_limit(head);
 	head = skip_other_types(head);
 	list->end = head;
@@ -85,7 +85,7 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 		}
 		head = head->next;
 	}
-	// print_lst(list);
+	print_lst(list);
 	return (list);
 }
 
@@ -93,5 +93,5 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 	|| ls segf
 	|	not a good behaviour
 	ls || ls segf
-	
+	-| syntax error
 */

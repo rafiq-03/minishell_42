@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:07:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/11 16:50:46 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 17:01:50 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,19 @@ void	print(char **str)
 	printf("\033[0;33m|  NULL  |\033[0m\n");
 	// printf("-------------------------------------\n");
 }
-
 void	print_redir(t_redir *redir, int type, int num)
 {
 	int i = 0;
 	(void)type;
+	if (type == 1)
+		printf("\n* redirection in :\n");
+	else if (type == 2)
+		printf("\n* redirection out :\n");
+	if (num == 0)
+		printf("\tno redir\n");
 	while (i < num)
 	{
-		printf("type : %d\t", redir[i].type);
+		printf("\ttype : %d\t", redir[i].type);
 		printf("path : %s\n", redir[i].path_or_limiter);
 		i++;
 	}
@@ -60,7 +65,7 @@ void	print_redir(t_redir *redir, int type, int num)
 void	print_cmd(t_simple_cmd *cmd)
 {
 	printf("\n\033[0;32m=============================================================\033[0m\n\n");
-	printf("command name	: %s\n", cmd->cmd_name);
+	printf("command name	: %s\n\n", cmd->cmd_name);
 	print(cmd->cmd);
 	printf("index		: %d\n", cmd->i);
 	if (cmd->pipe_flag == 2)
@@ -68,11 +73,12 @@ void	print_cmd(t_simple_cmd *cmd)
 	else if (cmd->pipe_flag == 1)
 		printf("pipe flag	: before\n");
 	else if (cmd->pipe_flag == 3)
-		printf("pipe flag	:between\n");
+		printf("pipe flag	: between\n");
 	else 
-		printf("pipe flag	:no pipe\n");
+		printf("pipe flag	: no pipe\n");
 	print_redir(cmd->redir_in, 1, cmd->in_num);
-	print_redir(cmd->redir_out, 1, cmd->in_num);
+	print_redir(cmd->redir_out, 2, cmd->out_num);
+	printf("%s\n", cmd->redir_in[0].path_or_limiter);
 }
 
 void	print_cmds(t_simple_cmd *cmd)

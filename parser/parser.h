@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:25:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/11 15:27:53 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 16:23:43 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define PARSER_H
 
 #include "../minishell.h"
+
+//
+
+void	set_tokens(t_item **head);
+
+
+
 
 t_cmd_limits	*new_limit(t_item *start);
 t_cmd_limits	*last_limit(t_cmd_limits *lst);
