@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:42:46 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 10:14:24 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/14 12:21:38 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_empty(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!(str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
+		if (!is_whitespace(str[i]))
 			return (0);
 		i++;
 	}
