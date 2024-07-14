@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/13 18:10:46 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 11:41:03 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void			ft_free_list(t_item **lst);
 
 int 			is_empty(char *str);
 
-int 			is_redirection(char *str);
+int 			is_redirection(int type);
 t_cmd_limits	*set_cmd_limits(t_item *head);
 
 void			ft_print_error(void);

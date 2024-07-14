@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:03 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/13 18:12:53 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 11:59:49 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	is_whitespace(char c)
 
 int	is_token(char c)
 {
-	if (is_whitespace(c) || c == '\n' || c == '\'' || c == '\"' || c == '\\'
-		|| c == '$' || c == '|' || c == '<' || c == '>')
+	if (is_whitespace(c) || c == NEW_LINE || c == QOUTE || c == DOUBLE_QUOTE || c == ESCAPE
+		|| c == ENV || c == PIPE_LINE || c == REDIR_IN || c == REDIR_OUT)
 		return (1);
 	return (0);
 }
@@ -56,7 +56,7 @@ t_item	*my_lexer(char *input)
 		i += tokenization(&head, input + i);
 	ft_add_state(&head);
 	reset_tokens(head);
-	print_list(head);
 	lexer_errors(&head);
+	print_list(head);
 	return (head);
 }

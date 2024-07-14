@@ -6,15 +6,15 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:14:59 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/09 15:29:45 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/14 11:41:26 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_redirection(char *str)
+int	is_redirection(int type)
 {
-	if (!ft_strncmp(str, ">>", 2) || !ft_strncmp(str, ">>", 2) || *(str) == '>' || *(str) == '<')
+	if (type == DREDIR_OUT || type == HERE_DOC || type == REDIR_OUT || type == REDIR_IN)
 		return (1);
 	return (0);
 }
@@ -28,16 +28,16 @@ int	check_pipes(t_item **lst)
 	search = *lst;
 	while (lst && tmp)
 	{
-		if (*(tmp->content) == '|')
+		if (tmp->type == PIPE_LINE)
 		{
 			if (!is_alone(tmp))
 				return (0);
 			while (search->prev)
 			{
-				if (is_redirection(search->prev->content) || *(search->prev->content) == '|')
+				if (is_redirection(search->prev->type) || search->prev->type == PIPE_LINE)
 					return (0);
 				else if (!is_empty(search->prev->content)
-						&& !is_redirection(search->prev->content))
+						&& !is_redirection(search->prev->type))
 					break ;
 				search = search->prev;
 			}
@@ -58,16 +58,16 @@ int	check_redirections(t_item	**lst)
 	search = *lst;
 	while (lst && tmp)
 	{
-		if (is_redirection(tmp->content))
+		if (is_redirection(tmp->type))
 		{
 			if (!is_alone(tmp))
 				return (0);
 			while (search->prev)
 			{
-				if (is_redirection(search->prev->content))
+				if (is_redirection(search->prev->type))
 					return(0);
 				else if (!is_empty(search->prev->content)
-						&& !is_redirection(search->prev->content))
+						&& !is_redirection(search->prev->type))
 					break ;
 				search = search->prev;
 			}
