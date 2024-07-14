@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:25:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 19:36:35 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 14:51:27 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void			print_lst(t_cmd_limits *lst);
 void			print(char **str);
 void			print_cmd(t_simple_cmd *cmd);
 void			print_cmds(t_simple_cmd *cmd);
+
+void	expander(t_item *list);
 
 #endif

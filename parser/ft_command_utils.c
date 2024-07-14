@@ -6,11 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 19:45:10 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:08:49 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
 int	cmd_number(t_cmd_limits *cmd)// number of commands
 {

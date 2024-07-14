@@ -6,14 +6,29 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 15:01:29 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:08:40 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
 // expand values of env variables
 // char *expander(char *env_var, t_env *env);
+
+int	check_herdoc(t_item *list)
+{
+	if (list->prev)
+		list = list->prev;
+	while(list)
+	{
+		if (list->type != WHITE_SPACE)
+			break;
+		list = list->prev;
+	}
+	if (list->type == HERE_DOC)
+		return (1);
+	return (0);
+}
 
 char	*env_search(char *env_var)
 {
@@ -27,15 +42,16 @@ void	expander(t_item *list)
 
 	while (list)
 	{
-		if (list->type == ENV && list->state == IN_DQUOTE)
+		if (list->type == ENV)
 		{
-			tmp = list->content;
-			free(list->content);
-			list->content = env_search(tmp + 1);
+			if (!check_herdoc(list))
+			{
+				tmp = list->content;
+				free(list->content);
+				list->content = env_search(tmp + 1);
+			}
 			list->type = WORD;
 		}
-		else if (list->type == ENV && list->state == IN_QUOTE)
-			list->type = WORD;
 		list = list->next;
 	}
 }

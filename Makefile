@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/14 12:31:58 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/14 15:05:36 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ S_PARSER= $(addprefix $(PARSER_DIR), 	\
 										set_token.c\
 										organize.c\
 										testing.c\
+										expander.c\
 									)
 O_PARSER=$(S_PARSER:.c=.o)
 
