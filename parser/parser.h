@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:25:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 19:36:35 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:06:50 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define PARSER_H
 
 # include "../minishell.h"
-
-//
+# include "../lexer/lexer.h"
 
 void			set_tokens(t_item **head);
 
