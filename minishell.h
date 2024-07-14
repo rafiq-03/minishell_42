@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 12:40:10 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:18:30 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,44 +124,9 @@ typedef struct s_data
 
 /*-------------------------Prototypes---------------------------------*/
 
-
 t_item		*my_lexer(char *input);
-t_item		*new_item(char *content, int len, enum e_token type, enum e_state state);
-t_item		*last_item(t_item *lst);
-
-int			ft_lstsize(t_item *lst);
-
-int			is_empty(char *str);
-int			is_whitespace(char c);
-void		add_back_items(t_item **lst, t_item *new);
-int			set_env_item(t_item **ptr2head, char *str, int i);
-int			set_redout_item(t_item **ptr2head, char *str, int i);
-int			set_redin_item(t_item **ptr2head, char *str, int i);
-int			is_token(char c);
-int			set_token_items(t_item **ptr2head, char *str, int i);
-
-void		ft_add_state(t_item **head);
-
-void		print_list(t_item *head);
-
-void			lexer_errors(t_item **lst);
-
-void			ft_free_list(t_item **lst);
-
-int 			is_empty(char *str);
-
-int 			is_redirection(int type);
-t_cmd_limits	*set_cmd_limits(t_item *head);
-
-void			ft_print_error(void);
-
-int check_redirections(t_item **lst);
-
-int	check_pipes(t_item **lst);
-
-int is_alone(t_item *lst);
 t_item	*organizer(t_item *list);
-
+t_cmd_limits	*set_cmd_limits(t_item *head);
 t_simple_cmd	*ft_cmd_list(t_cmd_limits *list);
-
+int				is_empty(char *str);
 #endif

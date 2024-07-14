@@ -6,11 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:42:46 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 12:21:38 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:15:34 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 int	is_empty(char *str)
 {

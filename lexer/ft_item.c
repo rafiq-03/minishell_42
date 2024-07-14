@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_item.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 06:57:29 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/07 16:17:10 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:15:23 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 int	ft_lstsize(t_item *lst)
 {

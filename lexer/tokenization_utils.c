@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 11:47:11 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 11:24:32 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:15:59 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 int	set_env_item(t_item **ptr2head, char *str, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 10:54:25 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/09 12:41:38 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:15:31 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 t_item	*handle_quotes(t_item *tmp, int type, int state)
 {

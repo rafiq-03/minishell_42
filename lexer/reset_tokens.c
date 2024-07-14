@@ -6,11 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:01:21 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 18:15:13 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:15:52 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 int	exepted_tokens(t_item *list)
 {

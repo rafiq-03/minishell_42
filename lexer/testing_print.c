@@ -6,11 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:20:07 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/13 17:46:29 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:15:56 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 char	*rtype(int type)
 {
