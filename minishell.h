@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 11:41:03 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/14 12:34:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_data
 	char			*line;// line
 	t_simple_cmd	*cmds; //parsing
 	t_item			*tokenization;//lexing
+	t_item			*token_lst; // lexing
 	t_cmd_limits	*limits; // parsing
 }	t_data;
 
@@ -160,7 +161,6 @@ int	check_pipes(t_item **lst);
 
 int is_alone(t_item *lst);
 
-void	reset_tokens(t_item *list);
 
 t_simple_cmd	*ft_cmd_list(t_cmd_limits *list);
 

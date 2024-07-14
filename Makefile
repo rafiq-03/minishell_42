@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/13 18:12:16 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/14 12:31:58 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,11 @@ O_LEXER=$(S_LEXER:.c=.o)
 
 PARSER_DIR=parser/
 S_PARSER= $(addprefix $(PARSER_DIR), 	\
-										ft_command_limits.c\
+										ft_cmd_limits.c\
 										ft_command_utils.c\
 										ft_command.c\
+										set_token.c\
+										organize.c\
 										testing.c\
 									)
 O_PARSER=$(S_PARSER:.c=.o)
@@ -44,7 +46,7 @@ NAME = minishell
 
 all: $(NAME)
 
-$(NAME): $(O_LEXER) $(O_PARSER) main.o 
+$(NAME): $(O_LEXER) $(O_PARSER) main.o
 	make -C Libft
 	$(CC) main.o $(CFLAGS) $(O_LEXER) $(O_PARSER) $(LIBS) -o $(NAME)
 

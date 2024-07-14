@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/11 16:03:06 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 19:30:54 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_cmd_limits	*new_limit(t_item *start)
 {
-	t_cmd_limits *new;
+	t_cmd_limits	*new;
 
 	new = malloc(sizeof(t_cmd_limits));
 	if (!new)
@@ -53,8 +53,6 @@ void	add_back_limit(t_cmd_limits **lst, t_cmd_limits *new)
 
 t_item	*skip_other_types(t_item *tmp)
 {
-	if (tmp->next && tmp->next->type != PIPE_LINE)
-		tmp = tmp->next;
 	while (tmp && tmp->next && tmp->next->type != PIPE_LINE)
 		tmp = tmp->next;
 	return (tmp);
@@ -62,21 +60,20 @@ t_item	*skip_other_types(t_item *tmp)
 
 t_cmd_limits	*set_cmd_limits(t_item *head)
 {
-	t_cmd_limits *list;
-	t_cmd_limits *new;
-	int			i;
+	t_cmd_limits	*list;
+	t_cmd_limits	*new;
+	int				i;
 
 	i = 0;
+	set_tokens(&head);
+	print_list(head);
 	list = new_limit(head);
 	head = skip_other_types(head);
 	list->end = head;
-	// printf("start  = %s\tend %s\n", list->start->content, list->end->content);
 	while (head)
 	{
-		// printf("[%s]\n", tmp->content);
 		if (head->type == PIPE_LINE && head->state == GENERAL && head->next)
 		{
-			// printf("pipe : %s\n", tmp->content);
 			new = new_limit(head->next);
 			head = skip_other_types(head);
 			new->end = head;
@@ -85,7 +82,7 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 		}
 		head = head->next;
 	}
-	// print_lst(list);
+	print_lst(list);
 	return (list);
 }
 
@@ -93,5 +90,5 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 	|| ls segf
 	|	not a good behaviour
 	ls || ls segf
-	
+	-| syntax error
 */
