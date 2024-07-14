@@ -6,15 +6,15 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 19:01:46 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 19:45:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		cmd_number(t_cmd_limits *cmd)// number of commands
+int	cmd_number(t_cmd_limits *cmd)// number of commands
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmd)
@@ -25,7 +25,23 @@ int		cmd_number(t_cmd_limits *cmd)// number of commands
 	return (i);
 }
 
-char	**set_cmd_arr(t_cmd_limits *cmd)// command array aka command and its options
+int	array_len(t_cmd_limits *cmd)
+{
+	int		len;
+	t_item	*tmp;
+
+	len = 0;
+	tmp = cmd->start;
+	while (tmp != cmd->end->next) //must check last limit aka end not end->next
+	{
+		if (tmp->type == WORD)
+			len++;
+		tmp = tmp->next;
+	}
+	return (len);
+}
+
+char	**set_cmd_arr(t_cmd_limits *cmd)//cmd array aka command and its options
 {
 	char	**cmd_array;
 	int		len;
@@ -35,17 +51,11 @@ char	**set_cmd_arr(t_cmd_limits *cmd)// command array aka command and its option
 	i = 0;
 	len = 0;
 	tmp = cmd->start;
-	while (tmp != cmd->end->next)// must check last limit aka end not end->next
-	{
-		if (tmp->type == WORD)
-			len++;
-		tmp = tmp->next;
-	}
+	len = array_len(cmd);
 	cmd_array = malloc(sizeof(char *) * (len + 1));
 	if (!cmd_array)
 		return (NULL);
-	tmp = cmd->start;
-	while (tmp != cmd->end->next)// same as above
+	while (tmp != cmd->end->next) // same as above
 	{
 		if (tmp->type == WORD)
 			cmd_array[i++] = ft_strdup(tmp->content);
@@ -55,14 +65,14 @@ char	**set_cmd_arr(t_cmd_limits *cmd)// command array aka command and its option
 	return (cmd_array);
 }
 
-int		check_redir(t_cmd_limits *cmd,  int	type_1, int	type_2) // check redirections numbers of a type
+int	check_redir(t_cmd_limits *cmd, int type_1, int type_2)//nbr of type
 {
 	t_item	*tmp;
 	int		i;
 
 	i = 0;
 	tmp = cmd->start;
-	while(tmp != cmd->end->next) // must check last limit aka end not end->next
+	while (tmp != cmd->end->next) //must check last limit aka end not end->next
 	{
 		if (tmp->type == type_1 || tmp->type == type_2)
 			i++;
@@ -74,26 +84,24 @@ int		check_redir(t_cmd_limits *cmd,  int	type_1, int	type_2) // check redirectio
 t_redir	*set_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 {
 	t_item	*tmp;
-	t_redir *redir;
-	int	i;
+	t_redir	*redir;
+	int		i;
 
-	(void)type1;
-	(void)type2;
 	i = 0;
 	tmp = cmd->start;
-	redir = malloc (sizeof(t_redir) * num);
+	redir = malloc(sizeof(t_redir) * num);
 	if (!redir)
 		return (NULL);
 	while (tmp != cmd->end->next)
 	{
 		if (tmp->type == type1)
 		{
-			redir[i].type = 1;//< or > 
+			redir[i].type = 1; //< or >
 			redir[i++].path_or_limiter = ft_strdup(tmp->content);
 		}
-		else if (tmp->type == type2)// heredoc or dredir_out
+		else if (tmp->type == type2) // heredoc or dredir_out
 		{
-			redir[i].type = 2;// << or >> 
+			redir[i].type = 2; // << or >>
 			redir[i++].path_or_limiter = ft_strdup(tmp->content);
 		}
 		tmp = tmp->next;
@@ -104,7 +112,7 @@ t_redir	*set_redir(t_cmd_limits *cmd, int type1, int type2, int num)
 void	set_pipe_flag(t_simple_cmd *head, int cmd_nbr)
 {
 	if (cmd_nbr == 1)
-		return;
+		return ;
 	while (head)
 	{
 		if (head->i == 0)
@@ -116,4 +124,3 @@ void	set_pipe_flag(t_simple_cmd *head, int cmd_nbr)
 		head = head->next;
 	}
 }
-

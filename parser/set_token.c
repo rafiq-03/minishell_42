@@ -25,7 +25,7 @@
 
 // void	set_tokens(t_itme *list);
 
-void	change_token(t_item *list, int	type, int	token)
+void	change_token(t_item *list, int type, int token)
 {
 	if (list->type == type)
 	{
@@ -38,7 +38,9 @@ void	change_token(t_item *list, int	type, int	token)
 
 void	set_tokens(t_item **head)
 {
-	t_item *list = *head;
+	t_item	*list;
+
+	list = *head;
 	while (list)
 	{
 		if (list->type == REDIR_IN)

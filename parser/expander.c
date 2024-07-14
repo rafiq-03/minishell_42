@@ -12,19 +12,19 @@
 
 #include "../minishell.h"
 
-
 // expand values of env variables
 // char *expander(char *env_var, t_env *env);
 
-char *env_search(char *env_var)
+char	*env_search(char *env_var)
 {
 	// implement later
 	return (ft_strjoin("env", ft_strdup(env_var)));
 }
 
-void	expander(t_item	*list)
+void	expander(t_item *list)
 {
 	char	*tmp;
+
 	while (list)
 	{
 		if (list->type == ENV && list->state == IN_DQUOTE)

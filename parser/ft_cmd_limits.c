@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 17:15:14 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/13 19:30:54 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_cmd_limits	*new_limit(t_item *start)
 {
-	t_cmd_limits *new;
+	t_cmd_limits	*new;
 
 	new = malloc(sizeof(t_cmd_limits));
 	if (!new)
@@ -60,9 +60,9 @@ t_item	*skip_other_types(t_item *tmp)
 
 t_cmd_limits	*set_cmd_limits(t_item *head)
 {
-	t_cmd_limits *list;
-	t_cmd_limits *new;
-	int			i;
+	t_cmd_limits	*list;
+	t_cmd_limits	*new;
+	int				i;
 
 	i = 0;
 	set_tokens(&head);
@@ -70,13 +70,10 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 	list = new_limit(head);
 	head = skip_other_types(head);
 	list->end = head;
-	// printf("start  = %s\tend %s\n", list->start->content, list->end->content);
 	while (head)
 	{
-		// printf("[%s]\n", tmp->content);
 		if (head->type == PIPE_LINE && head->state == GENERAL && head->next)
 		{
-			// printf("pipe : %s\n", tmp->content);
 			new = new_limit(head->next);
 			head = skip_other_types(head);
 			new->end = head;
