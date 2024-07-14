@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 12:34:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 12:40:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int check_redirections(t_item **lst);
 int	check_pipes(t_item **lst);
 
 int is_alone(t_item *lst);
-
+t_item	*organizer(t_item *list);
 
 t_simple_cmd	*ft_cmd_list(t_cmd_limits *list);
 
