@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/11 15:19:28 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 11:35:24 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_data
 	char			*line;// line
 	t_simple_cmd	*cmds; //parsing
 	t_item			*tokenization;//lexing
+	t_item			*token_lst; // lexing
 	t_cmd_limits	*limits; // parsing
 }	t_data;
 
@@ -159,6 +160,8 @@ int check_redirections(t_item **lst);
 int	check_pipes(t_item **lst);
 
 int is_alone(t_item *lst);
+
+t_item	*organizer(t_item *list);
 
 
 t_simple_cmd	*ft_cmd_list(t_cmd_limits *list);
