@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:03 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 13:15:28 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/20 12:36:35 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ t_item	*my_lexer(char *input)
 	ft_add_state(&head);
 	reset_tokens(head);
 	lexer_errors(&head);
-	print_list(head);
 	return (head);
 }

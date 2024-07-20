@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 11:56:41 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:46:25 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,62 @@
 
 void	ft_new_list(t_item *list, t_item **new_list)
 {
+	char *join_content;
+	int type;
+
+	join_content = NULL;
+	type = WORD;
 	while (list)
 	{
-		if (!is_empty(list->content) && !(list->type == DOUBLE_QUOTE || list->type == QOUTE))
+		if (list && (!(list->type == WHITE_SPACE && list->state == GENERAL)) && list->type != QOUTE && list->type != DOUBLE_QUOTE)
 		{
-			if(list->type == WORD)
-				add_back_items(new_list, new_item(list->content, ft_strlen(list->content), list->type, list->state));
+			printf("---> %s\n", list->content);
+			join_content = ft_strjoin(join_content, list->content);
+			printf("===> %s\n", join_content);
+		}
+		if (!list->next || (list->next && join_content && (list->next->type == WHITE_SPACE && list->next->state == GENERAL)))
+		{
+			printf("new_node %d\n", list->type);
+			if (list->type == REDIR_IN || list->type == REDIR_OUT || list->type == DREDIR_OUT || list->type == HERE_DOC || list->type == PIPE_LINE)
+				type = list->type;
+			add_back_items(new_list, new_item(join_content, ft_strlen(join_content), type, GENERAL));
+			free(join_content);
+			join_content = NULL;
+			type = WORD;
 		}
 		list = list->next;
 	}
 }
+// void	ft_new_list(t_item *list, t_item **new_list)
+// {
+// 	char *join_content;
+// 	int flag;
 
-t_item	*organizer(t_item *list)
+// 	flag = 0;
+// 	join_content = NULL;
+// 	while (list)
+// 	{
+// 		while (list && !(list->type == WHITE_SPACE && list->state == GENERAL))
+// 		{
+// 			join_content = ft_strjoin(join_content, list->content);
+// 			// printf("---> %s\n", list->content);
+// 			// printf("===> %s\n", join_content);
+			// if (list->next && list->next->type == WHITE_SPACE && list->next->state == GENERAL)
+			// {
+			// 	printf("hello\n");
+			// 	flag = 1;
+			// }
+// 			list = list->next;
+// 		}
+// 		if (flag)
+// 			add_back_items(new_list, new_item(join_content, ft_strlen(list->content), list->type, list->state));
+// 		else
+// 			add_back_items(new_list, new_item(list->content, ft_strlen(list->content), list->type, list->state));
+// 		list = list->next;
+// 	}
+// }
+
+t_item	*organizer(t_item **list)
 {
 	t_item	*new_list;
 

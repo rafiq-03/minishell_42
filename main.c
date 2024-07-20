@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 15:31:58 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:23:56 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(void)
             mini.token_lst = organizer(mini.tokenization);
             // mini.limits = set_cmd_limits(mini.token_lst);
             // mini.cmds = ft_cmd_list(mini.limits);
+
+			print_list(mini.tokenization);
             printf ("***********************************************\n");
 			print_list(mini.token_lst);
             add_history(mini.line);
