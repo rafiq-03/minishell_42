@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 15:06:17 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:32:42 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,6 @@ t_item	*organizer(t_item *list);
 t_cmd_limits	*set_cmd_limits(t_item *head);
 t_simple_cmd	*ft_cmd_list(t_cmd_limits *list);
 int				is_empty(char *str);
+// testing
+void	print_list(t_item *head);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 12:32:55 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:31:58 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	main(void)
         {
             mini.tokenization = my_lexer(mini.line);
             mini.token_lst = organizer(mini.tokenization);
-            mini.limits = set_cmd_limits(mini.token_lst);
-            mini.cmds = ft_cmd_list(mini.limits);
-            
+            // mini.limits = set_cmd_limits(mini.token_lst);
+            // mini.cmds = ft_cmd_list(mini.limits);
+            printf ("***********************************************\n");
+			print_list(mini.token_lst);
             add_history(mini.line);
         }
     }

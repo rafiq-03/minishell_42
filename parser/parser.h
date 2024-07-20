@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:25:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/14 15:06:50 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:30:44 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_cmd_limits	*new_limit(t_item *start);
 t_cmd_limits	*last_limit(t_cmd_limits *lst);
 t_cmd_limits	*set_cmd_limits(t_item *head);
 t_item			*skip_other_types(t_item *tmp);
+void			expander(t_item *list);
 
 // void	add_back_limit(t_cmd_limits **lst, t_cmd_limits *new);
 
