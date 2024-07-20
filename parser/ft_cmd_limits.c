@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_limits.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/14 13:17:58 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:51:17 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 	int				i;
 
 	i = 0;
-	set_tokens(&head);
+	// set_tokens(&head);
 	list = new_limit(head);
 	head = skip_other_types(head);
 	list->end = head;

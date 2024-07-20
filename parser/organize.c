@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:21 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:45:05 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 int	join_limiter(int type, int state)
 {
-	if ((type == WHITE_SPACE && state == GENERAL) || (type != WORD
-			&& type != QOUTE && type != DOUBLE_QUOTE))
+	if (((type == WHITE_SPACE && state == GENERAL) || type == REDIR_IN || type == REDIR_OUT || type == DREDIR_OUT || type == HERE_DOC) && type != QOUTE && type != DOUBLE_QUOTE)
 		return (0);
 	return (1);
 }
@@ -31,17 +30,13 @@ void	ft_new_list(t_item *list, t_item **new_list)
 	type = WORD;
 	while (list)
 	{
-		if (list && (!(list->type == WHITE_SPACE && list->state == GENERAL))
-			&& list->type != QOUTE && list->type != DOUBLE_QUOTE)
+		if (list && (!(list->type == WHITE_SPACE && list->state == GENERAL)) && list->type != QOUTE && list->type != DOUBLE_QUOTE)
 			join_content = ft_strjoin(join_content, list->content);
-		if (!list->next || (list->next && join_content
-				&& (!join_limiter(list->next->type, list->next->state)
-					|| !join_limiter(list->type, 0))))
+		if (!list->next || (list->next && join_content && (!join_limiter(list->next->type, list->next->state) || !join_limiter(list->type, 0))))
 		{
 			if (!join_limiter(list->type, 0))
 				type = list->type;
-			add_back_items(new_list, new_item(join_content,
-						ft_strlen(join_content), type, GENERAL));
+			add_back_items(new_list, new_item(join_content, ft_strlen(join_content), type, GENERAL));
 			free(join_content);
 			join_content = NULL;
 			type = WORD;
