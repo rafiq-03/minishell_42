@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 17:03:56 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/20 17:29:36 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,23 @@ void	ft_new_list(t_item *list, t_item **new_list)
 	}
 }
 
+void	last_tokinization(t_item	**list)
+{
+	while (*list)
+	{
+		// || (*list)->type == REDIR_OUT || (*list)->type == DREDIR_OUT || (*list)->type == HERE_DOC || (*list)->type == PIPE_LINE
+		if ((*list)->type == REDIR_IN)
+				(*list)->next->type = REDIR_IN_FILE;
+		else if ((*list)->type == REDIR_OUT)
+				(*list)->next->type = REDIR_OUT_FILE;
+		else if ((*list)->type == DREDIR_OUT)
+				(*list)->next->type = DREDIR_OUT_FILE;
+		else if ((*list)->type == HERE_DOC)
+				(*list)->next->type = HERE_DOC_LIMITER;
+		*list = (*list)->next;
+	}
+}
+
 t_item	*organizer(t_item *list)
 {
 	t_item	*new_list;
@@ -50,7 +67,7 @@ t_item	*organizer(t_item *list)
 	new_list = NULL;
 	expander(list);
 	ft_new_list(list, &new_list);
-	set_tokens(&new_list);
+	// last_tokinization(&new_list);
 	// set tokens
 	return (new_list);
 }
