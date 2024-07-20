@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:07:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/13 19:55:18 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/14 14:22:17 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	print_redir(t_redir *redir, int type, int num)
 	}
 }
 
-// "\033[0;32m\033[0m"
 void	print_cmd(t_simple_cmd *cmd)
 {
 	printf("\033[0;32m=============================================================\033[0m\n\n");
@@ -88,7 +87,6 @@ void	print_cmd(t_simple_cmd *cmd)
 	printf("\n\033[0;32m=============================================================\033[0m\n");
 	printf("\t\t\t||\n");
 	printf("\t\t\t\\/\n");
-	// printf("%s\n", cmd->redir_in[0].path_or_limiter);
 }
 
 void	print_cmds(t_simple_cmd *cmd)
@@ -100,4 +98,5 @@ void	print_cmds(t_simple_cmd *cmd)
 	}
 	printf("\n\033[0;32m=============================================================\033[0m\n\n");
 }
+// "\033[0;32m\033[0m"
 // "\033[0;%s\033[0m"

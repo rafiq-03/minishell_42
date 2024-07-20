@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:25:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 17:01:17 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/20 17:09:47 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void			print_lst(t_cmd_limits *lst);
 void			print(char **str);
 void			print_cmd(t_simple_cmd *cmd);
 void			print_cmds(t_simple_cmd *cmd);
+
+void	expander(t_item *list);
 
 #endif
