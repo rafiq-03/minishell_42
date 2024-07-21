@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+         #
+#    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/20 17:10:37 by mskhairi         ###   ########.fr        #
+#    Updated: 2024/07/21 15:23:06 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
+# CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 LIBS = -Llibft -lft -lreadline
 
 LEXER_DIR=lexer/
@@ -21,7 +22,7 @@ S_LEXER= $(addprefix $(LEXER_DIR), 	\
 									tokenization_utils.c \
 									testing_print.c \
 									ft_state.c \
-									ft_free_list.c	\
+									lexer_cleaner.c\
 									lexer_errors.c\
 									is_empty.c	\
 									lexer_errors_utils.c	\
@@ -38,6 +39,7 @@ S_PARSER= $(addprefix $(PARSER_DIR), 	\
 										organize.c\
 										testing.c\
 										expander.c\
+										parser_cleaner.c\
 									)
 O_PARSER=$(S_PARSER:.c=.o)
 
@@ -47,16 +49,16 @@ NAME = minishell
 
 all: $(NAME)
 
-$(NAME): $(O_LEXER) $(O_PARSER) main.o
+$(NAME): $(O_LEXER) $(O_PARSER) $(NAME).o
 	make -C Libft
-	$(CC) main.o $(CFLAGS) $(O_LEXER) $(O_PARSER) $(LIBS) -o $(NAME)
+	$(CC) $(NAME).o $(CFLAGS) $(O_LEXER) $(O_PARSER) $(LIBS) -o $(NAME)
 
 %.o:%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
 	make fclean -C Libft
-	rm -f $(O_LEXER) main.o
+	rm -f $(O_LEXER) $(NAME).o
 	rm -r $(O_PARSER)
 
 fclean: clean

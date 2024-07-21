@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 19:56:11 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/14 14:47:27 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 13:19:59 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		set_redin_item(t_item **ptr2head, char *str, int i);
 int		is_token(char c);
 int		set_token_items(t_item **ptr2head, char *str, int i);
 void	ft_add_state(t_item **head);
-void	lexer_errors(t_item **lst);
-void	ft_free_list(t_item **lst);
+int		lexer_errors(t_item **lst);
+void	ft_clear_items(t_item **lst);
 int 	is_empty(char *str);
 int 	is_redirection(int type);
 void	ft_print_error(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_limits.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 20:51:17 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 14:30:52 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 		}
 		head = head->next;
 	}
-	print_lst(list);
+	// print_lst(list);
 	return (list);
 }
 

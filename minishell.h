@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/20 17:01:36 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:44:11 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ enum				e_state
 // Lexing ----------------------//
 typedef struct s_item
 {
-	char			*content;
+	char			*content;// must be freed
 	int				len;
 	enum e_token	type;
 	enum e_state	state;
@@ -98,7 +98,7 @@ typedef struct s_simple_cmd
 	int	i;// index of command;
 	char *cmd_name;// command name
 	char **cmd;//command with its falags and options
-	int	in_num;// number of redir in
+	int	in_num;// number of redir
 	int	out_num;// number of redir out
 	// we must check pipe flag befor assignment of in_out fd
 	t_redir	*redir_in;//in 
@@ -116,19 +116,30 @@ typedef struct s_simple_cmd
 typedef struct s_data
 {
 	char			*line;// line
-	t_simple_cmd	*cmds; //parsing
-	t_item			*tokenization;//lexing
-	t_item			*token_lst; // lexing
-	t_cmd_limits	*limits; // parsing
+	t_item			*token_lst;//lexing
+	t_item			*new_lst; // lexing
+	t_cmd_limits	*limits_lst; // parsing
+	t_simple_cmd	*spl_cmd_lst; //parsing
 }	t_data;
 
 /*-------------------------Prototypes---------------------------------*/
 
-t_item		*my_lexer(char *input);
-t_item	*organizer(t_item *list);
+/*-general prototypes------------------------*/
+
+int				handle_prompt(t_data *data);
+t_item			*lexer(char *input, int *flag);
+t_item			*organizer(t_item *list);
 t_cmd_limits	*set_cmd_limits(t_item *head);
 t_simple_cmd	*ft_cmd_list(t_cmd_limits *list);
 int				is_empty(char *str);
+
+/*-cleaning prototypes------------------------*/
+
+void			ft_clear_items(t_item **lst);
+void			ft_clear_limits(t_cmd_limits **lst);
+void			clean_cmd(t_data *data, int	flag);
+void			ft_clear_cmd_lst(t_simple_cmd **lst);
+
 // testing
-void	print_list(t_item *head);
+void			print_list(t_item *head);
 #endif

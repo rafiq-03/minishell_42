@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 11:19:19 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:47:45 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_new_list(t_item *list, t_item **new_list)
 	{
 		if (list && (!(list->type == WHITE_SPACE && list->state == GENERAL))
 			&& list->type != QOUTE && list->type != DOUBLE_QUOTE)
-			join_content = ft_strjoin(join_content, list->content);
+			join_content = ft_strjoin(join_content, list->content);//null check
 		if (!list->next || (list->next && join_content
 				&& (!join_limiter(list->next->type, list->next->state)
 					|| !join_limiter(list->type, 0))))
@@ -77,6 +77,8 @@ t_item	*organizer(t_item *list)
 	new_list = NULL;
 	expander(list);
 	ft_new_list(list, &new_list);
+	if (!new_list)
+		
 	last_tokinization(new_list);
 	return (new_list);
 }

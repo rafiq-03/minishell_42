@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 22:38:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 15:25:36 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:06:05 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (0);
 	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
 	ft_strlcat(str + ft_strlen (s1), s2, tlen + 1);
+	free(s1);
+	s1 = NULL;
 	return (str);
 }
 
