@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/21 18:09:20 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 19:00:39 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(void)
             add_history(data.line);
             if (handle_prompt(&data))
                 continue;
-        }    
+        }
         clean_cmd(&data);
     }
 }
@@ -43,10 +43,12 @@ int     handle_prompt(t_data *data)
     data->new_lst = organizer(data->token_lst);
     if (!data->new_lst)
         return (1);
-    // data->limits_lst = set_cmd_limits(data->new_lst);
-    // data->spl_cmd_lst = ft_cmd_list(data->limits_lst);
-	// ft_clear_items(&data->new_lst);
-	// ft_clear_limits(&data->limits_lst);
+    data->limits_lst = set_cmd_limits(data->new_lst);
+    // printf("-------------------------------------------\n");
+    // system("leaks -q minishell");
+    data->spl_cmd_lst = ft_cmd_list(data->limits_lst);
+    // printf("-------------------------------------------\n");
+    // system("leaks -q minishell");
     return (0);
 }
 

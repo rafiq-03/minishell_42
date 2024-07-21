@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:45:52 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 14:32:00 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/21 20:43:18 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_simple_cmd	*new_cmd_node(t_cmd_limits *cmd)
 	if (!new)
 		return (NULL);
 	new->i = 0;
-	new->cmd = set_cmd_arr(cmd);
+	new->cmd = set_cmd_arr(cmd);// malloc
 	new->cmd_name = ft_strdup(new->cmd[0]); // cmd_name is first element
 	new->next = NULL;
 	new->prev = NULL;

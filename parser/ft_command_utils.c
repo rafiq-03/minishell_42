@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 14:40:01 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/21 20:42:53 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char	**set_cmd_arr(t_cmd_limits *cmd)//cmd array aka command and its options
 	len = 0;
 	tmp = cmd->start;
 	len = array_len(cmd);
-	printf("len = %d\n", len);
-	cmd_array = malloc(sizeof(char *) * (len + 1));
+	// printf("len = %d\n", len);
+	cmd_array = (char **)malloc(sizeof(char *) * (len + 1));// malloc 
 	if (!cmd_array)
 		return (NULL);
 	while (tmp != cmd->end->next) // same as above

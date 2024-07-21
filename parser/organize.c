@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 18:34:37 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:47:36 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_new_list(t_item *list, t_item **new_list)
 		// printf("==> [%s]\n", list->next->content);
 		if ((join_content && *join_content) && ((!list->next) || (list->next && (!join_limiter(list->next->type, list->next->state) || !join_limiter(list->type, 0)))))
 		{
-			printf("****\n");
+			// printf("****\n");
 			if (!join_limiter(list->type, 0))
 				type = list->type;
 			add_back_items(new_list, new_item(join_content, ft_strlen(join_content), type, GENERAL));//new item
@@ -83,7 +83,7 @@ t_item	*organizer(t_item *list)
 	last_tokinization(new_list);
 	ft_clear_items(&list);
 
-	print_list(new_list);
+	// print_list(new_list);
 	// system("leaks -q minishell");
 	return (new_list);
 }
