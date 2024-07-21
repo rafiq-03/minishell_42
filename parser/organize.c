@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:21 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/21 11:26:30 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_new_list(t_item *list, t_item **new_list)
 			if (!join_limiter(list->type, 0))
 				type = list->type;
 			add_back_items(new_list, new_item(join_content,
-						ft_strlen(join_content), type, GENERAL));
+					ft_strlen(join_content), type, GENERAL));
 			free(join_content);
 			join_content = NULL;
 			type = WORD;
