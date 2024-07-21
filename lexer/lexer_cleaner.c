@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_cleaner.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:26:17 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/21 15:17:25 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:04:55 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,11 @@ void	ft_clear_items(t_item **lst)
 	}
 }
 
-void			clean_cmd(t_data *data, int	flag)
+void			clean_cmd(t_data *data)
 {
-	free(data->line);
-	if (flag == 1)
-		ft_clear_items(&data->token_lst);// free
-	if (flag >= 2)
-		ft_clear_items(&data->new_lst);// free
-	if (flag >= 3)
-		ft_clear_limits(&data->limits_lst);// todo
-	if (flag >= 4)
-		ft_clear_cmd_lst(&data->spl_cmd_lst);// todo
+	// ft_clear_items(&data->token_lst);// free
+	ft_clear_items(&data->new_lst);// free
+	// ft_clear_limits(&data->limits_lst);// todo
+	// ft_clear_cmd_lst(&data->spl_cmd_lst);// todo
 }
 

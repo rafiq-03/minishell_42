@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 15:08:27 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/21 16:06:22 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	expander(t_item *list)
 			{
 				tmp = list->content;
 				list->content = env_search(tmp + 1);
+				// if (!list->content)
+				// 	return ;//null check
 				free(tmp);
 			}
 			list->type = WORD;

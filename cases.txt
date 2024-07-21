@@ -1,1 +1,3 @@
-ls -la >> file"cat    file$a"'$a    aaa '
+ls -la >> file"cat    file$a"'$a    aaa '=> not good behavior
+"     " => segv
+"    "    ls"'>>file'">>file|cat|grep file << h""er"do"c

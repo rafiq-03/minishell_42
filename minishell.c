@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/21 15:48:33 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:09:20 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,24 @@ int	main(void)
             if (handle_prompt(&data))
                 continue;
         }    
-        clean_cmd(&data, 1);
+        clean_cmd(&data);
     }
 }
 
 int     handle_prompt(t_data *data)
 {
-    int flag;
-    
-    flag = 0;
-    data->token_lst = lexer(data->line, &flag);
-    if (flag == 1)
-        return (clean_cmd(data, 1), 1);
-    // data->new_lst = organizer(data->token_lst);
-    // if (!data->new_lst)
-    //     return (clean_cmd(data, 2), 1);
+	
+    data->token_lst = lexer(data->line);
+	free(data->line);
+    if (!data->token_lst)
+        return (1);
+    data->new_lst = organizer(data->token_lst);
+    if (!data->new_lst)
+        return (1);
     // data->limits_lst = set_cmd_limits(data->new_lst);
-    // if (!data->limits_lst)
-    //     return (clean_cmd(data, 3), 1);
     // data->spl_cmd_lst = ft_cmd_list(data->limits_lst);
-    // if (!data->spl_cmd_lst)
-    //     return (clean_cmd(data, 4), 1);
+	// ft_clear_items(&data->new_lst);
+	// ft_clear_limits(&data->limits_lst);
     return (0);
 }
 
