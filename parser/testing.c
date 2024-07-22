@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:07:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/14 14:22:17 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:12:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ void	print(char **str)
 	int	i;
 
 	i = 0;
-	// printf("-------------------------------------\n");
 	while (str[i])
 	{
 		printf("\033[0;33m|  %s  \033[0m", str[i++]);
 	}
-	printf("\033[0;33m|  NULL  |\033[0m\n");
-	// printf("-------------------------------------\n");
+	printf("\033[0;33m|  NULL  |\033[0m\n\n");
 }
 
 void	print_redir(t_redir *redir, int type, int num)
@@ -71,9 +69,8 @@ void	print_redir(t_redir *redir, int type, int num)
 void	print_cmd(t_simple_cmd *cmd)
 {
 	printf("\033[0;32m=============================================================\033[0m\n\n");
-	printf("command name	: %s\n\n", cmd->cmd_name);
+	printf("[%d] => Command name	: %s\n\n",cmd->i, cmd->cmd_name);
 	print(cmd->cmd);
-	printf("index		: %d\n", cmd->i);
 	if (cmd->pipe_flag == 2)
 		printf("pipe flag	: after\n");
 	else if (cmd->pipe_flag == 1)
@@ -85,8 +82,6 @@ void	print_cmd(t_simple_cmd *cmd)
 	print_redir(cmd->redir_in, 1, cmd->in_num);
 	print_redir(cmd->redir_out, 2, cmd->out_num);
 	printf("\n\033[0;32m=============================================================\033[0m\n");
-	printf("\t\t\t||\n");
-	printf("\t\t\t\\/\n");
 }
 
 void	print_cmds(t_simple_cmd *cmd)
@@ -96,7 +91,6 @@ void	print_cmds(t_simple_cmd *cmd)
 		print_cmd(cmd);
 		cmd = cmd->next;
 	}
-	printf("\n\033[0;32m=============================================================\033[0m\n\n");
 }
 // "\033[0;32m\033[0m"
 // "\033[0;%s\033[0m"

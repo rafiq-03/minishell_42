@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/22 15:48:15 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:15:19 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(void)
 
 int	handle_prompt(t_data *data)
 {
+    // check_builin(data->prompt);
 	data->token_lst = lexer(data->prompt);
 	free(data->prompt);
 	if (!data->token_lst)
