@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 11:21:31 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/04 12:47:27 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/22 17:22:03 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ ft_strtrim.c \
 ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
+ft_free.c\
 
 OBJ = ${SRC:.c=.o}
 NAME = libft.a

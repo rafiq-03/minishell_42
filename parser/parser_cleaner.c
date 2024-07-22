@@ -6,19 +6,13 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:08:33 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 15:23:19 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:23:34 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 // clean simple command ---------------------------------
-
-void	ft_free(char **cmd)
-{
-	while (*cmd)
-		free(*cmd++);
-}
 
 void	ft_free_redir(t_redir *redir, int num)
 {
@@ -33,7 +27,6 @@ void	del_cmd_node(t_simple_cmd *lst)
 	{
 		free(lst->cmd_name);
 		ft_free(lst->cmd);
-		free(lst->cmd);
 		ft_free_redir(lst->redir_in, lst->in_num);
 		ft_free_redir(lst->redir_out, lst->out_num);
 		free(lst);
@@ -58,7 +51,6 @@ void	ft_clear_cmd_lst(t_simple_cmd **lst)
 	}
 }
 // clean command limits------------------------------
-
 void	ft_clear_limits(t_cmd_limits **lst)
 {
 	t_cmd_limits	*current;
