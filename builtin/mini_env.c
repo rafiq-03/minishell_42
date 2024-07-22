@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:29:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 16:45:39 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:28:43 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,35 +47,7 @@ void	mini_env(t_env *env_l)// implement env command
 {
 	while (env_l)
 	{
-		printf("\033[0;32m%s\033[0m		=%s\n", env_l->key, env_l->value);
+		printf("%s=%s\n", env_l->key, env_l->value);
 		env_l = env_l->next;
-	}
-}
-
-int main(int ac, char **av, char **env)
-{
-	t_env *env_l = env_list(env);
-	char **cmd;
-	char *input;
-	while (1)
-	{
-		input = readline("prompt :");
-		if (!ft_strncmp(input, "unset", ft_strlen("unset")))
-		{
-			cmd = ft_split(input, ' ');
-			mini_unset(&env_l, cmd[1]);
-			ft_free(cmd);
-			
-		}
-		if (!ft_strncmp(input, "exit", 4))
-		{
-			free(input);
-			system("leaks -q mini");
-			exit(0);
-		}
-		if (!ft_strncmp(input, "env", 3))
-			mini_env(env_l);
-		add_history(input);
-		free(input);
 	}
 }

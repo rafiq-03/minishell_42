@@ -6,25 +6,30 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 17:15:49 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:31:32 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-int	execute_cmd(t_simple_cmd *cmd)
+int	_execute(t_simple_cmd *cmd, t_data *data)
+{
+	(void)data;
+	printf("execute command : %s\n", cmd->cmd_name);
+	return (0);
+}
+
+int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 {
 	while (cmd)
 	{
-		if (check_buitin(cmd->cmd_name))
-			buitin_cmd(cmd);
+		
+		if (check_builtin(cmd->cmd_name))
+			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name));
 		else
-			_execute(cmd);
+			_execute(cmd, data);
 		cmd = cmd->next;
 	}
+	return (0);
 }
 
-int	_execute(t_simple_cmd *cmd)
-{
-	printf("execute command %s\n", cmd->cmd_name);
-}

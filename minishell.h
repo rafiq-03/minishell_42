@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/22 16:23:07 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:20:51 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_data
 	t_item			*new_lst;// lexing
 	t_cmd_limits	*limits_lst;// parsing
 	t_simple_cmd	*spl_cmd_lst;//parsing
+	t_env			*env_l;
 }						t_data;
 
 /*-------------------------Prototypes---------------------------------*/
@@ -140,6 +141,12 @@ t_cmd_limits			*set_cmd_limits(t_item *head);
 t_simple_cmd			*ft_cmd_list(t_cmd_limits *list);
 int						is_empty(char *str);
 
+int						execute_cmd(t_simple_cmd *cmd, t_data *data);
+t_env					*env_list(char **env);//env list
+void	builtin_cmd(t_simple_cmd *buitin, t_data *data, int	flag);
+int						check_builtin(char *str);
+
+
 /*-cleaning prototypes------------------------*/
 
 void					ft_clear_items(t_item **lst);
@@ -149,6 +156,7 @@ void					ft_clear_cmd_lst(t_simple_cmd **lst);
 
 // testing
 void					print_list(t_item *head);
+void	mini_env(t_env *env_l);
 #endif
 
 //if there is pipe or not : 0 = no pipe  1 = before 2 = after 3 = befor & after
