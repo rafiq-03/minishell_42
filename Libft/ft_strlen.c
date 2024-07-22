@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:38:24 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 11:53:15 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:04:35 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	if (!s)
-		return(0);
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
