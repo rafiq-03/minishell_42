@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:26:17 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/21 19:02:54 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:26:35 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ void	ft_clear_items(t_item **lst)
 	}
 }
 
-void			clean_cmd(t_data *data)
+void	clean_cmd(t_data *data)
 {
-	ft_clear_items(&data->new_lst);// free
-	ft_clear_limits(&data->limits_lst);// todo
-	ft_clear_cmd_lst(&data->spl_cmd_lst);// todo
+	ft_clear_items(&data->new_lst); // free
+	ft_clear_limits(&data->limits_lst); // todo
+	ft_clear_cmd_lst(&data->spl_cmd_lst); // todo
 }
-

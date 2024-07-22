@@ -21,8 +21,9 @@ int	is_whitespace(char c)
 
 int	is_token(char c)
 {
-	if (is_whitespace(c) || c == NEW_LINE || c == QOUTE || c == DOUBLE_QUOTE || c == ESCAPE
-		|| c == ENV || c == PIPE_LINE || c == REDIR_IN || c == REDIR_OUT)
+	if (is_whitespace(c) || c == NEW_LINE || c == QOUTE || c == DOUBLE_QUOTE
+		|| c == ESCAPE || c == ENV || c == PIPE_LINE || c == REDIR_IN
+		|| c == REDIR_OUT)
 		return (1);
 	return (0);
 }
@@ -57,8 +58,6 @@ t_item	*lexer(char *input)
 	ft_add_state(&head);
 	reset_tokens(head);
 	if (lexer_errors(&head))
-		return(ft_clear_items(&head), NULL);
+		return (ft_clear_items(&head), NULL);
 	return (head);
 }
-
-

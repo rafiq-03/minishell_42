@@ -14,8 +14,8 @@
 
 int	exepted_tokens(t_item *list)
 {
-	if (list->type == WHITE_SPACE || list->type == WORD
-		|| (list->type == ENV && list->state != IN_QUOTE))
+	if (list->type == WHITE_SPACE || list->type == WORD || (list->type == ENV
+			&& list->state != IN_QUOTE))
 		return (0);
 	return (1);
 }

@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 16:06:22 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:09:11 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// expand values of env variables
-// char *expander(char *env_var, t_env *env);
-
 int	check_herdoc(t_item *list)
 {
 	if (list->prev)
 		list = list->prev;
-	while(list)
+	while (list)
 	{
 		if (list->type != WHITE_SPACE)
-			break;
+			break ;
 		list = list->prev;
 	}
 	if (list->type == HERE_DOC)
@@ -33,8 +30,8 @@ int	check_herdoc(t_item *list)
 char	*env_search(char *env_var)
 {
 	// implement later
-	printf("%s\n", env_var);
-	return (ft_strjoin(ft_strdup("env-"), env_var));
+	(void)env_var;
+	return (ft_strdup("env_var"));
 }
 
 void	expander(t_item *list)

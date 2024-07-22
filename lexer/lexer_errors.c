@@ -17,10 +17,9 @@ void	ft_print_error(void)
 	ft_putendl_fd("Syntax error", 2);
 }
 
-
 int	check_quot(t_item *lst, char c)
 {
-	int count_quote;
+	int	count_quote;
 
 	count_quote = 0;
 	while (lst)
@@ -46,10 +45,11 @@ int	check_quot_error(t_item *lst)
 
 int	lexer_errors(t_item **lst)
 {
-	if (!check_redirections(lst) || !check_pipes(lst) || !check_quot_error(*lst))
+	if (!check_redirections(lst) || !check_pipes(lst)
+		|| !check_quot_error(*lst))
 	{
 		ft_print_error();
-		return (1);// there is an error;
+		return (1); // there is an error;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:14:59 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 13:15:40 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:28:16 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_redirection(int type)
 {
-	if (type == DREDIR_OUT || type == HERE_DOC || type == REDIR_OUT || type == REDIR_IN)
+	if (type == DREDIR_OUT || type == HERE_DOC || type == REDIR_OUT
+		|| type == REDIR_IN)
 		return (1);
 	return (0);
 }
@@ -34,10 +35,11 @@ int	check_pipes(t_item **lst)
 				return (0);
 			while (search->prev)
 			{
-				if (is_redirection(search->prev->type) || search->prev->type == PIPE_LINE)
+				if (is_redirection(search->prev->type)
+					|| search->prev->type == PIPE_LINE)
 					return (0);
 				else if (!is_empty(search->prev->content)
-						&& !is_redirection(search->prev->type))
+					&& !is_redirection(search->prev->type))
 					break ;
 				search = search->prev;
 			}
@@ -48,8 +50,7 @@ int	check_pipes(t_item **lst)
 	return (1);
 }
 
-
-int	check_redirections(t_item	**lst)
+int	check_redirections(t_item **lst)
 {
 	t_item	*search;
 	t_item	*tmp;
@@ -65,9 +66,9 @@ int	check_redirections(t_item	**lst)
 			while (search->prev)
 			{
 				if (is_redirection(search->prev->type))
-					return(0);
+					return (0);
 				else if (!is_empty(search->prev->content)
-						&& !is_redirection(search->prev->type))
+					&& !is_redirection(search->prev->type))
 					break ;
 				search = search->prev;
 			}

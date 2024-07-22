@@ -13,8 +13,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "../minishell.h"
 # include "../lexer/lexer.h"
+# include "../minishell.h"
 
 void			set_tokens(t_item **head);
 
@@ -40,6 +40,6 @@ void			print(char **str);
 void			print_cmd(t_simple_cmd *cmd);
 void			print_cmds(t_simple_cmd *cmd);
 
-void	expander(t_item *list);
+void			expander(t_item *list);
 
 #endif

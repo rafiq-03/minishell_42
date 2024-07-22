@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 18:55:38 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:13:12 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 	int				i;
 
 	i = 0;
-	// set_tokens(&head);
 	list = new_limit(head);
 	head = skip_other_types(head);
 	list->end = head;
@@ -81,13 +80,5 @@ t_cmd_limits	*set_cmd_limits(t_item *head)
 		}
 		head = head->next;
 	}
-	// print_lst(list);
 	return (list);
 }
-
-/*Test cases 
-	|| ls segf
-	|	not a good behaviour
-	ls || ls segf
-	-| syntax error
-*/

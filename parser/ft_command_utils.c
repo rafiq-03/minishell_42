@@ -6,13 +6,13 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/21 20:42:53 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:20:53 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	cmd_number(t_cmd_limits *cmd)// number of commands
+int	cmd_number(t_cmd_limits *cmd) // number of commands
 {
 	int	i;
 
@@ -41,7 +41,7 @@ int	array_len(t_cmd_limits *cmd)
 	return (len);
 }
 
-char	**set_cmd_arr(t_cmd_limits *cmd)//cmd array aka command and its options
+char	**set_cmd_arr(t_cmd_limits *cmd) //cmd array aka command and its options
 {
 	char	**cmd_array;
 	int		len;
@@ -53,7 +53,7 @@ char	**set_cmd_arr(t_cmd_limits *cmd)//cmd array aka command and its options
 	tmp = cmd->start;
 	len = array_len(cmd);
 	// printf("len = %d\n", len);
-	cmd_array = (char **)malloc(sizeof(char *) * (len + 1));// malloc 
+	cmd_array = (char **)malloc(sizeof(char *) * (len + 1)); // malloc
 	if (!cmd_array)
 		return (NULL);
 	while (tmp != cmd->end->next) // same as above
@@ -66,7 +66,7 @@ char	**set_cmd_arr(t_cmd_limits *cmd)//cmd array aka command and its options
 	return (cmd_array);
 }
 
-int	check_redir(t_cmd_limits *cmd, int type_1, int type_2)//nbr of type
+int	check_redir(t_cmd_limits *cmd, int type_1, int type_2) //nbr of type
 {
 	t_item	*tmp;
 	int		i;

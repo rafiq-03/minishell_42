@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 11:47:11 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/14 13:15:59 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:30:17 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	set_env_item(t_item **ptr2head, char *str, int i)
 {
 	if (is_token(str[i + 1]) || !str[i + 1])
 		add_back_items(ptr2head, new_item(str, ++i, WORD, GENERAL));
-	else if (str[++i] == '?' || (str[i] >= '0' && str[i] <= '9'))// check it later
+	else if (str[++i] == '?' || (str[i] >= '0' && str[i] <= '9')) // check it later
 		add_back_items(ptr2head, new_item(str, ++i, ENV, GENERAL));
 	else
 	{
