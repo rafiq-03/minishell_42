@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/22 16:15:19 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:02:13 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(void)
 
 	while (1)
 	{
-		tmp = readline("\033[1;34m[minihell]::~> \033[0m");
+		// tmp = readline("\033[1;34m[minihell]::~> \033[0m");
+		tmp = readline("[minihell]::~> ");
 		data.prompt = ft_strtrim(tmp, "\t \f\v\n\r");
 		free(tmp);
 		if (!ft_strlen(data.prompt) || is_empty(data.prompt))
@@ -39,7 +40,7 @@ int	main(void)
 
 int	handle_prompt(t_data *data)
 {
-    // check_builin(data->prompt);
+    // check_builin(data->prompt); // check in command name for every command 
 	data->token_lst = lexer(data->prompt);
 	free(data->prompt);
 	if (!data->token_lst)
@@ -49,5 +50,6 @@ int	handle_prompt(t_data *data)
 		return (1);
 	data->limits_lst = set_cmd_limits(data->new_lst);
 	data->spl_cmd_lst = ft_cmd_list(data->limits_lst);
+	// execute_command(data->spl_cmd_lst);
 	return (0);
 }

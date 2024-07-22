@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/22 16:02:35 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:23:07 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,14 @@ typedef struct s_simple_cmd
 	struct s_simple_cmd	*prev;// prev_command
 	//10 elemnts
 }						t_simple_cmd;
+
+typedef struct s_env // this is for env variables
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}					t_env;
 
 //this struct will store all data
 typedef struct s_data
