@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/22 18:26:01 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/23 13:17:26 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ S_BUILTIN= $(addprefix $(BUILTIN_DIR), 	\
 										mini_export.c\
 										mini_pwd.c\
 										mini_unset.c\
+										mini_exit.c\
 									)
 O_BUILTIN=$(S_BUILTIN:.c=.o)
 
@@ -77,9 +78,9 @@ $(NAME): $(O_LEXER) $(O_PARSER) $(O_BUILTIN) $(O_EXECUTION) $(NAME).o
 clean:
 	make fclean -C Libft
 	rm -f $(O_LEXER) $(NAME).o
-	rm -r $(O_PARSER)
-	rm -r $(O_BUILTIN)
-	rm -r $(O_EXECUTION)
+	rm -rf $(O_PARSER)
+	rm -rf $(O_BUILTIN)
+	rm -rf $(O_EXECUTION)
 
 fclean: clean
 	rm -f $(NAME)

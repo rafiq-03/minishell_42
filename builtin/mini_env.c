@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:29:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 18:28:43 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/23 13:13:42 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ t_env	*env_list(char **env)//make new env list based on the the parent bash env
 	return (head);
 }
 
-void	mini_env(t_env *env_l)// implement env command
+int	mini_env(t_env *env_l)// implement env command
 {
 	while (env_l)
 	{
 		printf("%s=%s\n", env_l->key, env_l->value);
 		env_l = env_l->next;
 	}
+	return (0);
 }
