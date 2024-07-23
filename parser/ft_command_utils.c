@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 17:37:23 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:42:04 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,6 @@ int	check_redir(t_cmd_limits *cmd) //nbr of type
 	}
 	return (i);
 }
-
-t_redir	*set_here_doc(t_cmd_limits *cmd, int num, int *i)
-{
-	t_redir		*redir;
-	t_item		*tmp;
-
-	redir = malloc(sizeof(t_redir) * num);
-	if (!redir)
-		return (NULL);
-	tmp = cmd->start;
-	while (tmp != cmd->end->next)
-	{
-		if (tmp->type == HERE_DOC_LIMITER)
-		{
-			redir[*i].type = tmp->type;
-			redir[*i].path_or_limiter = ft_strdup(tmp->content);
-			(*i)++;
-		}
-		tmp = tmp->next;
-	}
-	return(redir);
-}
-
 t_redir	*set_redirs(t_cmd_limits *cmd, int num)
 {
 	t_item	*tmp;
@@ -113,10 +90,13 @@ t_redir	*set_redirs(t_cmd_limits *cmd, int num)
 
 	i = 0;
 	tmp = cmd->start;
-	redir = set_here_doc(cmd, num, &i);
+	redir = malloc(sizeof(t_redir) * num);
+	if (!redir)
+		return (NULL);
 	while (tmp != cmd->end->next)
 	{
-		if (tmp->type == REDIR_IN_FILE || tmp->type == REDIR_OUT_FILE || tmp->type == DREDIR_OUT_FILE)
+		if (tmp->type == REDIR_IN_FILE || tmp->type == REDIR_OUT_FILE
+			|| tmp->type == DREDIR_OUT_FILE || tmp->type == HERE_DOC_LIMITER)
 		{
 			redir[i].type = tmp->type;
 			redir[i++].path_or_limiter = ft_strdup(tmp->content);

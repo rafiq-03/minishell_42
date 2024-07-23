@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:07:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 17:50:33 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:44:00 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print(char **str)
 	i = 0;
 	while (str[i])
 	{
-		printf("\033[0;33m[ %s ]-\033[0m", str[i++]);
+		printf("\033[0;33m[ %s ]==\033[0m", str[i++]);
 	}
 	printf("\033[0;33m[ NULL ]\033[0m\n\n");
 }
@@ -52,10 +52,6 @@ void	print_redir(t_redir *redir, int num)
 
 	i = 0;
 	printf("------------------------------\n");
-	if (redir[i].type == HERE_DOC_LIMITER)
-		printf("\nHERE_DOCS\n");
-	while (redir[i].type == HERE_DOC_LIMITER)
-		printf("\t[ %s ]\n", redir[i++].path_or_limiter);
 	printf("\nredirections:\n");
 	while (i < num)
 	{
@@ -65,6 +61,8 @@ void	print_redir(t_redir *redir, int num)
 			printf("\t[ >  ]");
 		if (redir[i].type == DREDIR_OUT_FILE)
 			printf("\t[ >> ]");
+		if (redir[i].type == HERE_DOC_LIMITER)
+			printf("\t[ << ] here doc : ");
 		printf("-[ %s ]\n",redir[i].path_or_limiter);
 		i++;
 	}
