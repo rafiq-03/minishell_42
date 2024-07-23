@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 15:09:11 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:27:07 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	check_herdoc(t_item *list)
+int	_check_before(t_item *list)
 {
 	if (list->prev)
 		list = list->prev;
@@ -24,6 +24,25 @@ int	check_herdoc(t_item *list)
 	}
 	if (list->type == HERE_DOC)
 		return (1);
+	return(0);
+}
+
+int	check_herdoc(t_item *list)
+{
+	if (list->prev)
+		list = list->prev;
+	while (list)
+	{
+		if ((list->type == WORD && list->state == GENERAL) || (list->type == HERE_DOC))
+			break ;
+		list = list->prev;
+	}
+	if (!list || (list->type == WORD && list->state == GENERAL && list->next->type == WHITE_SPACE))
+		return (0);
+	else if (list->type == HERE_DOC)
+		return (1);
+	else if (list->type == WORD && list->state == GENERAL && list->next->type != WHITE_SPACE)
+		return(_check_before(list));
 	return (0);
 }
 

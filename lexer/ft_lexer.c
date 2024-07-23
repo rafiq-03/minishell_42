@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:03 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/21 17:16:32 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:20:47 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ t_item	*lexer(char *input)
 	reset_tokens(head);
 	if (lexer_errors(&head))
 		return (ft_clear_items(&head), NULL);
+	print_list(head);
 	return (head);
 }

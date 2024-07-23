@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/22 18:18:27 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/23 10:18:55 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **env)
 
 int	handle_prompt(t_data *data)
 {
-    // check_builin(data->prompt); // check in command name for every command 
+    // check_builin(data->prompt); // check in command name for every command
 	data->token_lst = lexer(data->prompt);
 	free(data->prompt);
 	if (!data->token_lst)
