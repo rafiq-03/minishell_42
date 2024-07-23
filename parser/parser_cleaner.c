@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:08:33 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 17:23:34 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:28:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	del_cmd_node(t_simple_cmd *lst)
 	{
 		free(lst->cmd_name);
 		ft_free(lst->cmd);
-		ft_free_redir(lst->redir_in, lst->in_num);
-		ft_free_redir(lst->redir_out, lst->out_num);
+		ft_free_redir(lst->redirs, lst->redir_num);
 		free(lst);
 	}
 }

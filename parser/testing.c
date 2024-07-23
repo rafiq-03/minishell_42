@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:07:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 16:12:46 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:50:33 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,34 @@ void	print(char **str)
 	i = 0;
 	while (str[i])
 	{
-		printf("\033[0;33m|  %s  \033[0m", str[i++]);
+		printf("\033[0;33m[ %s ]-\033[0m", str[i++]);
 	}
-	printf("\033[0;33m|  NULL  |\033[0m\n\n");
+	printf("\033[0;33m[ NULL ]\033[0m\n\n");
 }
 
-void	print_redir(t_redir *redir, int type, int num)
+void	print_redir(t_redir *redir, int num)
 {
 	int	i;
 
 	i = 0;
-	(void)type;
-	if (type == 1)
-		printf("\n* redirection in :\n");
-	else if (type == 2)
-		printf("\n* redirection out :\n");
-	if (num == 0)
-		printf("\t|no redir|\n");
+	printf("------------------------------\n");
+	if (redir[i].type == HERE_DOC_LIMITER)
+		printf("\nHERE_DOCS\n");
+	while (redir[i].type == HERE_DOC_LIMITER)
+		printf("\t[ %s ]\n", redir[i++].path_or_limiter);
+	printf("\nredirections:\n");
 	while (i < num)
 	{
-		printf("\t-> type : %d\t", redir[i].type);
-		printf("path : %s\n", redir[i].path_or_limiter);
+		if (redir[i].type == REDIR_IN_FILE)
+			printf("\t[ <  ]");
+		if (redir[i].type == REDIR_OUT_FILE)
+			printf("\t[ >  ]");
+		if (redir[i].type == DREDIR_OUT_FILE)
+			printf("\t[ >> ]");
+		printf("-[ %s ]\n",redir[i].path_or_limiter);
 		i++;
 	}
+	printf("-----------------------------\n");
 }
 
 void	print_cmd(t_simple_cmd *cmd)
@@ -79,8 +84,7 @@ void	print_cmd(t_simple_cmd *cmd)
 		printf("pipe flag	: between\n");
 	else
 		printf("pipe flag	: no pipe\n");
-	print_redir(cmd->redir_in, 1, cmd->in_num);
-	print_redir(cmd->redir_out, 2, cmd->out_num);
+	print_redir(cmd->redirs, cmd->redir_num);
 	printf("\n\033[0;32m=============================================================\033[0m\n");
 }
 

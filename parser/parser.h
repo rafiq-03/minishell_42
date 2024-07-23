@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:25:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/20 17:09:47 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:27:11 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void			expander(t_item *list);
 
 int				cmd_number(t_cmd_limits *cmd);
 char			**set_cmd_arr(t_cmd_limits *cmd);
-int				check_redir(t_cmd_limits *cmd, int type_1, int type_2);
-t_redir			*set_redir(t_cmd_limits *cmd, int type1, int type2, int num);
+int				check_redir(t_cmd_limits *cmd);
+t_redir			*set_redirs(t_cmd_limits *cmd, int num);
 void			set_pipe_flag(t_simple_cmd *head, int cmd_nbr);
 void			add_back_simple_cmd(t_simple_cmd **lst, t_simple_cmd *new);
 t_simple_cmd	*last_cmd(t_simple_cmd *lst);
