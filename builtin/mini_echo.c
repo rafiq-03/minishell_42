@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:30:56 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/24 20:58:25 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:15:02 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	mini_echo(char **str)
 	// 	ft_putstr_fd("\n", 1);
 	return (0);
 }
-int main ()
-{
-	char *str = "eho -n hello";
-	char **words = ft_split(str, ' ');
-	mini_echo(words);
-}
+// int main ()
+// {
+// 	char *str = "eho -n hello";
+// 	char **words = ft_split(str, ' ');
+// 	mini_echo(words);
+// }
