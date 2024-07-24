@@ -3,17 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   mini_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:30:56 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 13:13:37 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/24 20:58:25 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-int	mini_echo()
+
+int num_of_words(char **str)
 {
-	printf("mini_echo\n");
+	int i;
+	int count;
+
+	i = 1;
+	count = 0;
+	if (!str || !*str)
+		return(0);
+	while (str[i])
+	{
+		i++;
+		count++;
+	}
+	return (count);
+}
+
+int	mini_echo(char **str)
+{
+	int i;
+	i = 1;
+	if (!str || !*str)
+		return(0);
+		printf("hello\n");
+	printf("words [%d]\n", num_of_words(str));
+	// while (str[i])
+	// {
+	// 	if (i == 2)
+	// 	ft_putstr_fd(str[i], 1);
+	// 	if (i != num_of_words(str) - 1)
+	// 		ft_putstr_fd(" ", 1);
+	// 	i++;
+	// }
+	// if (num_of_words(str) > 2 && !ft_strncmp(str[2], "-n", ft_strlen(str[2])))
+	// 	ft_putstr_fd("\n", 1);
 	return (0);
+}
+int main ()
+{
+	char *str = "eho -n hello";
+	char **words = ft_split(str, ' ');
+	mini_echo(words);
 }
