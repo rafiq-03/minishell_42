@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:45:52 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 18:31:49 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 13:09:48 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_simple_cmd	*ft_cmd_list(t_cmd_limits *list)
 		list = list->next;
 	}
 	set_pipe_flag(cmds_list, cmd_nbr);
-	print_cmds(cmds_list);
+	// print_cmds(cmds_list);
 	return (cmds_list);
 }
 
