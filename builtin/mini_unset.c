@@ -6,26 +6,31 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:25 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 13:14:09 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:29:30 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
 
-int	mini_unset(t_env **env_l , char *key)
+int	mini_unset(t_env **env_l , char **cmd)
 {
-	t_env *tmp;
+	t_env	*tmp;
+	int		i;
 	
+	i = 0;
 	tmp = *env_l;
-	while (tmp)
+	while (cmd[++i])
 	{
-		if (!ft_strncmp(tmp->key, key, ft_strlen(tmp->key)))
+		while (tmp)
 		{
-			env_delone(env_l, tmp);
-			return (0);
-		}
-		tmp = tmp->next;
+			if (!ft_strncmp(tmp->key, cmd[i], ft_strlen(tmp->key)))
+			{
+				env_delone(env_l, tmp);
+				return (0);
+			}
+			tmp = tmp->next;
+		}	
 	}
 	printf("mal9ahch\n");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 13:15:50 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:29:58 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
 	if (flag == 2)
 		mini_pwd();
 	if (flag == 3)
-		mini_env(data->env_l);
+		mini_env(data);
 	if (flag == 4)
-		mini_unset(&data->env_l, builtin->cmd[1]);
+		mini_unset(&data->env_l, builtin->cmd);
 	if (flag == 5)
-		mini_export(data->env_l);
+		mini_export(builtin, data);
 	if (flag == 6)
 		mini_cd();
 	if (flag == 7)
 		mini_exit();
-	printf("this is builtine function\n");
+	// printf("this is builtine function\n");
 }
 
 int	check_builtin(char *str)

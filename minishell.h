@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/23 14:57:34 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:10:21 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,8 @@ void					ft_clear_cmd_lst(t_simple_cmd **lst);
 
 // testing
 void					print_list(t_item *head);
-int		mini_env(t_env *env_l);
+int		mini_env(t_data *data);
+int		is_whitespace(char c);
 #endif
 
 //if there is pipe or not : 0 = no pipe  1 = before 2 = after 3 = befor & after

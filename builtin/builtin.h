@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:26:58 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 13:09:13 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:29:15 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "../minishell.h"
 
-int		mini_env(t_env *env_l);
+int		mini_env(t_data *data);
 void	get_key_and_value(char *env, char **key, char **value);
-int		mini_unset(t_env **env_l , char *key);
+int		mini_unset(t_env **env_l ,char **cmd);
 // void	mini_export(t_env **env_l, char *key);
 int		mini_export();
 int		mini_echo();
