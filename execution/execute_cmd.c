@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 10:28:28 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:59:21 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 {
 	while (cmd)
 	{
-		
 		if (check_builtin(cmd->cmd_name))
 			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name));
 		else
