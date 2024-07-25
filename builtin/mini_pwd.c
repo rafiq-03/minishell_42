@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:21 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 13:13:49 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:23:11 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 // pwd buitin implementation
 int	mini_pwd()
 {
-	printf("mini_pwd\n");
+	char *buffer;
+	
+	buffer = getcwd(NULL, 0);
+	if (!buffer)
+		printf ("error\n");
+	printf("%s\n", buffer);
 	return (0);
 }
