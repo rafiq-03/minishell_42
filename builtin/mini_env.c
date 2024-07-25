@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:29:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 14:09:46 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:15:36 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ t_env	*env_list(char **env)//make new env list based on the the parent bash env
 	return (head);
 }
 
+//(t_simple_cmd *export, t_data *data)
 int	mini_env(t_data *data)// implement env command
 {
 	t_env *tmp;
-	// mini_export
+	
+	change_env_value(data->env_l, "builtin_mini_env");
 	tmp = data->env_l;
 	while (tmp)
 	{

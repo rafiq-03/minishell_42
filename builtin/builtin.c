@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 16:42:21 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:13:40 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ int	check_builtin(char *str)
 	if (!ft_strncmp(str, "exit", ft_strlen(str)))
 		return (7);
 	return (0);
+}
+
+void	change_env_value(t_env *env_l, char *value)
+{
+	while (env_l)
+	{
+		if (!ft_strncmp(env_l->key, "_", 1))
+			env_l->value = value;
+		env_l = env_l->next;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 16:49:08 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:16:25 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int is_exist(t_data *data, char *arg)
 	{
 		if (!ft_strncmp(tmp->key, arg, ft_strlen(arg)))
 		{
-			printf("here\n");
-			printf("\n\n\n\ndeja exist\n");
+			printf("deja kayn\n");
 			env_delone(&data->env_l, tmp);
 			return (1);
 		}
