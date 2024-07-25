@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 16:37:33 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:49:08 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int is_exist(t_data *data, char *arg)
 			printf("here\n");
 			printf("\n\n\n\ndeja exist\n");
 			env_delone(&data->env_l, tmp);
-			return (0);
+			return (1);
 		}
 		tmp = tmp->next;
 	}

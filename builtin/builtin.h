@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:26:58 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 16:41:53 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:49:28 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		mini_echo(char **cmd);
 int		mini_pwd();
 int		mini_cd();
 int		mini_exit();
+int		is_exist(t_data *data, char *arg);
 
 t_env	*env_last(t_env *node);
 t_env	*env_new_node(char *key, char *value);
