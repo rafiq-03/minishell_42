@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 17:13:40 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 20:10:13 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,19 @@ int	check_builtin(char *str)
 	return (0);
 }
 
-void	change_env_value(t_env *env_l, char *value)
+void	change_env_value(t_env *env_l, char *key ,char *value)
 {
 	while (env_l)
 	{
-		if (!ft_strncmp(env_l->key, "_", 1))
-			env_l->value = value;
+		if ((ft_strchr(key, '=') && !ft_strncmp(env_l->key, key, ft_strlen(key) - 1))
+			|| !ft_strncmp(env_l->key, key, ft_strlen(key)))
+		{
+			if (!ft_strchr(env_l->key, '=') && ft_strchr(key, '='))
+				env_l->key = ft_strjoin(env_l->key, ft_strdup("="));
+			free(env_l->value);
+			env_l->value = ft_strdup(value);
+		}
 		env_l = env_l->next;
 	}
 }
+

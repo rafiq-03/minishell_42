@@ -6,21 +6,27 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:29:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 17:15:36 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:33:59 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	get_key_and_value(char *env, char **key, char **value)
+int	get_key_and_value(char *env, char **key, char **value)
 {
 	int	i;
-
+	int	len;
+	
 	i = 0;
+	len = 0;
+	len = ft_strlen(env);
 	while (env[i] && env[i] != '=')
 		i++;
-	*key = ft_substr(env, 0, i);
+	*key = ft_substr(env, 0, i + 1);
 	*value = ft_strdup(env + i + 1);
+	if (i == len)
+		return (1);
+	return (0);
 }
 
 t_env	*env_list(char **env)//make new env list based on the the parent bash env
@@ -48,11 +54,12 @@ int	mini_env(t_data *data)// implement env command
 {
 	t_env *tmp;
 	
-	change_env_value(data->env_l, "builtin_mini_env");
+	change_env_value(data->env_l, "_=", "builtin_mini_env");
 	tmp = data->env_l;
 	while (tmp)
 	{
-		printf("%s=%s\n", tmp->key, tmp->value);
+		if (ft_strchr(tmp->key, '='))
+			printf("%s%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 	return (0);

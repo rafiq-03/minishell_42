@@ -19,3 +19,5 @@ ls -la > $a "file"aaaa"111111   222  333 "  55 >> | '    cat -e'
 
 
 new line make leaks
+
+if there is one command we don't need to fork , in case of more than one command we need to fork
