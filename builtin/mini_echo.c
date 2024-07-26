@@ -6,19 +6,45 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:30:56 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 13:08:35 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:15:20 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
+int is_option(char **str, int *flag)
+{
+	int i;
+	int j;
+	
+	i = 1;
+	while (str[i])
+	{
+		if (!ft_strncmp(str[i], "-n", 2))
+		{
+			j = 2;
+			while(str[i][j])
+			{
+				if (str[i][j] != 'n')
+					return (i);
+				j++;
+			}
+			*flag = 0;
+		}
+		else
+			break;
+		i++;
+	}
+	return (i);
+}
+
 int	mini_echo(char **str)
 {
 	int i;
+	int flag;
 
-	i = 1;
-	if (str[i] && !ft_strncmp(str[i], "-n", ft_strlen(str[i])))
-		i++;
+	flag = 1;
+	i = is_option(str, &flag);
 	while (str[i])
 	{
 		ft_putstr_fd(str[i], 1);
@@ -26,7 +52,7 @@ int	mini_echo(char **str)
 			ft_putstr_fd(" ", 1);
 		i++;
 	}
-	if (!str[1] || ft_strncmp(str[1], "-n", ft_strlen(str[1])))
+	if (!str[1] || flag)
 		ft_putstr_fd("\n", 1);
 	return (0);
 }
