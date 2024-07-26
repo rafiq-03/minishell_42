@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/26 10:05:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:30:16 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include <stdlib.h>		
+# include <unistd.h>	
 # include <stdbool.h>
 
 /*---------------------------[ enum ]------------------------------*/
