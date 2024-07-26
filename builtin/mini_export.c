@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 20:06:55 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:18:36 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,28 @@ void	print_env(t_env *env_l)
 {
 	while (env_l)
 	{
-		if (ft_strchr(env_l->key, '='))
-			printf("declare -x %s\"%s\"\n", env_l->key, env_l->value);
+		if (env_l->value_falg)
+			printf("declare -x %s=\"%s\"\n", env_l->key, env_l->value);
 		else
 			printf("declate -x %s\n", env_l->key);
 		env_l = env_l->next;
 	}
 }
 
-int is_exist(t_data *data, char *key, char *value)
+int is_exist(t_data *data, char *key, char *value, bool value_flag)
 {
 	t_env	*tmp;
 
 	tmp = data->env_l;
 	while (tmp)
 	{
-		if ((ft_strchr(key, '=') && !ft_strncmp(tmp->key, key, ft_strlen(key) - 1))
-			|| !ft_strncmp(tmp->key, key, ft_strlen(key)))
+		if (!ft_strncmp(tmp->key, key, ft_strlen(key)))
 		{
-			change_env_value(tmp, key, value);
+			if (value_flag)
+			{
+				change_env_value(tmp, key, value, value_flag);
+				tmp->value_falg = value_flag;
+			}
 			free(key);
 			free(value);
 			return (1);
@@ -43,7 +46,7 @@ int is_exist(t_data *data, char *key, char *value)
 	}
 	return (0);
 }
-int	check_key(char *arg, int *flag)
+int	check_key(char *arg, bool *flag)// check if this key is valid
 {
 	int	i;
 
@@ -52,14 +55,14 @@ int	check_key(char *arg, int *flag)
 		return (0);
 	if(arg[i] != '_' && !ft_isalpha(arg[i]))
 	{
-		*flag = 1;
+		*flag = true;
 		return (1);
 	}
 	while (arg[++i])
 	{
 		if (!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
 		{
-			*flag = 1;
+			*flag = true;
 			return (1);	
 		}
 	}
@@ -72,7 +75,8 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 	char	*key;
 	char	*value;
 	t_env	*new;
-	int		flag;
+	bool	flag;
+	bool	value_flag;
 
 	flag = 0;
 	i = 0;
@@ -82,8 +86,10 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 		print_env(data->env_l);
 	while (export->cmd[++i])
 	{
-		get_key_and_value(export->cmd[i], &key, &value);
-		if (check_key(key, &flag) || is_exist(data, key, value))// check bug of env without = " a= != a"
+		value_flag = get_key_and_value(export->cmd[i], &key, &value);
+		if (is_exist(data, key, value, value_flag))// pass false
+			continue;
+		if (check_key(key, &flag))// check bug of env without = " a= != a"
 		{
 			if (flag == 1)
 			{
@@ -96,7 +102,7 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 		// free(key);
 		// free(value);
 		new = env_new_node(key, value);
-		// printf("%p\n", new);
+		new->value_falg = value_flag;
 		env_add_back(&data->env_l, new);
 	}
 	// system("leaks -q minishell");

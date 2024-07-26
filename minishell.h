@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/25 16:10:21 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:05:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 /*---------------------------[ enum ]------------------------------*/
 
@@ -113,6 +114,7 @@ typedef struct s_env // this is for env variables
 {
 	char			*key;
 	char			*value;
+	bool			value_falg;
 	struct s_env	*next;
 	struct s_env	*prev;
 }					t_env;

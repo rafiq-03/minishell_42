@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:59:01 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 17:23:07 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:24:02 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	env_delone(t_env **head, t_env *node) // delete one node from the list >> h
 	{
 		free(node->key);
 		free(node->value);
-		if (!node->prev)
+		if (!node->prev)// first node
 		{
 			*head = node->next;
 			node->next->prev = *head;
-		}
+		} // last node
 		else if (!node->next)
 			node->prev->next = NULL;
-		else
+		else // other nodes
 		{
 			node->prev->next = node->next;
 			node->next->prev = node->prev;
