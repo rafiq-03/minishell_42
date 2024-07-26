@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 11:30:40 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:43:17 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
 
 int	check_builtin(char *str)
 {
-	if (!ft_strncmp(str, "echo", ft_strlen(str)))
+	if (!ft_strncmp(str, "echo", ft_strlen("echo")))
 		return (1);
-	if (!ft_strncmp(str, "pwd", ft_strlen(str)))
+	if (!ft_strncmp(str, "pwd", ft_strlen("pwd")))
 		return (2);
-	if (!ft_strncmp(str, "env", ft_strlen(str)))
+	if (!ft_strncmp(str, "env", ft_strlen("env")))
 		return (3);
-	if (!ft_strncmp(str, "unset", ft_strlen(str)))
+	if (!ft_strncmp(str, "unset", ft_strlen("unset")))
 		return (4);
-	if (!ft_strncmp(str, "export", ft_strlen(str)))
+	if (!ft_strncmp(str, "export", ft_strlen("export")))
 		return (5);
-	if (!ft_strncmp(str, "cd", ft_strlen(str)))
+	if (!ft_strncmp(str, "cd", ft_strlen("cd")))
 		return (6);
-	if (!ft_strncmp(str, "exit", ft_strlen(str)))
+	if (!ft_strncmp(str, "exit", ft_strlen("exit")))
 		return (7);
 	return (0);
 }
