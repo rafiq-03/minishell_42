@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 11:43:17 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:55:22 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
 	if (flag == 5)
 		mini_export(builtin, data);
 	if (flag == 6)
-		mini_cd();
+		mini_cd(data->env_l, builtin->cmd);
 	if (flag == 7)
 		mini_exit();
 	// printf("this is builtine function\n");

@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:21 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/25 16:47:13 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:39:37 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 int	mini_pwd()
 {
 	char *buffer;
-	
+
 	buffer = getcwd(NULL, 0);
-	if (!buffer)
-		printf ("error\n");
-	printf("%s\n", buffer);
+    if (buffer)
+        printf("%s\n", buffer);
+    else
+        perror("Error");
 	return (0);
 }

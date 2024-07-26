@@ -6,12 +6,21 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/25 16:43:51 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:58:34 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void handler(int signal)
+{
+	if (signal == SIGINT)
+	{
+		rl_on_new_line();
+		// rl_replace_line("", 0);//C99
+		rl_redisplay();
+	}	
+}
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -20,6 +29,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
+	// signal(SIGINT, handler);
 	data.env_l = env_list(env);
 	while (1)
 	{
