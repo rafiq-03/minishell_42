@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 11:43:17 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:57:47 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
 {
+	// if (builtin->pipe_flag != 0)
+	// fork()
 	if (flag == 1)
 		mini_echo(builtin->cmd);
 	if (flag == 2)

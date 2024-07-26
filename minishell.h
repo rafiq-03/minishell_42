@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/26 12:07:13 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:10:36 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <fcntl.h>
 
 /*---------------------------[ enum ]------------------------------*/
 
@@ -156,6 +157,7 @@ void					ft_clear_cmd_lst(t_simple_cmd **lst);
 
 // testing
 void					print_list(t_item *head);
+void					print(char **str);
 int		mini_env(t_data *data);
 int		is_whitespace(char c);
 #endif

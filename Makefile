@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/25 20:03:22 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/26 18:47:42 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ O_BUILTIN=$(S_BUILTIN:.c=.o)
 EXECUTION_DIR=execution/
 S_EXECUTION= $(addprefix $(EXECUTION_DIR), 	\
 										execute_cmd.c\
+										ft_utils.c\
 									)
 O_EXECUTION=$(S_EXECUTION:.c=.o)
 
