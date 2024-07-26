@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:25:21 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/21 12:51:59 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:25:43 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int	check_quot(t_item *lst, char c)
 
 int	check_quot_error(t_item *lst)
 {
-	int	count_quot;
-
-	count_quot = 0;
 	if (!check_quot(lst, DOUBLE_QUOTE) || !check_quot(lst, QOUTE))
 		return (0);
 	return (1);
