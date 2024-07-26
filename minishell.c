@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/25 16:43:51 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:06:58 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	handle_prompt(t_data *data)
 	free(data->prompt);
 	if (!data->token_lst)
 		return (1);
-	data->new_lst = organizer(data->token_lst);
+	data->new_lst = organizer(data->env_l, data->token_lst);
 	if (!data->new_lst)
 		return (1);
 	data->limits_lst = set_cmd_limits(data->new_lst);

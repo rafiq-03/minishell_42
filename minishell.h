@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/26 10:05:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:07:13 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_data
 
 int						handle_prompt(t_data *data);
 t_item					*lexer(char *input);
-t_item					*organizer(t_item *list);
+t_item					*organizer(t_env *env_l, t_item *list);
 t_cmd_limits			*set_cmd_limits(t_item *head);
 t_simple_cmd			*ft_cmd_list(t_cmd_limits *list);
 int						is_empty(char *str);

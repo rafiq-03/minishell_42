@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 12:27:07 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:16:15 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,21 @@ int	check_herdoc(t_item *list)
 	return (0);
 }
 
-char	*env_search(char *env_var)
+char	*env_search(t_env *env_l, char *env_var)
 {
-	// implement later
-	(void)env_var;
-	return (ft_strdup("env_var"));
+	t_env *tmp;
+	
+	tmp = env_l;
+	while (tmp)
+	{
+		if (!ft_strncmp(tmp->key, env_var, ft_strlen(tmp->key)))
+			return (ft_strdup(tmp->value));
+		tmp = tmp->next;
+	}
+	return (ft_strdup(""));
 }
 
-void	expander(t_item *list)
+void	expander(t_env *env_l, t_item *list)
 {
 	char	*tmp;
 
@@ -64,7 +71,7 @@ void	expander(t_item *list)
 			if (!check_herdoc(list))
 			{
 				tmp = list->content;
-				list->content = env_search(tmp + 1);
+				list->content = env_search(env_l, tmp + 1);
 				// if (!list->content)
 				// 	return ;//null check
 				free(tmp);
