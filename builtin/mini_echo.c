@@ -6,24 +6,24 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:30:56 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 11:15:20 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:27:35 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-int is_option(char **str, int *flag)
+int	is_option(char **str, int *flag)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 1;
 	while (str[i])
 	{
 		if (!ft_strncmp(str[i], "-n", 2))
 		{
 			j = 2;
-			while(str[i][j])
+			while (str[i][j])
 			{
 				if (str[i][j] != 'n')
 					return (i);
@@ -32,7 +32,7 @@ int is_option(char **str, int *flag)
 			*flag = 0;
 		}
 		else
-			break;
+			break ;
 		i++;
 	}
 	return (i);
@@ -40,8 +40,8 @@ int is_option(char **str, int *flag)
 
 int	mini_echo(char **str)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	flag = 1;
 	i = is_option(str, &flag);
