@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/26 19:14:30 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:22:59 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	handle_prompt(t_data *data)
 	free(data->prompt);
 	if (!data->token_lst)
 		return (1);
-	data->new_lst = organizer(data->token_lst);
+	data->new_lst = organizer(data->env_l, data->token_lst);
 	if (!data->new_lst)
 		return (1);
 	data->limits_lst = set_cmd_limits(data->new_lst);

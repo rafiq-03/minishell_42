@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 09:57:51 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:06:31 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	last_tokinization(t_item *list)
 	}
 }
 
-t_item	*organizer(t_item *list)
+t_item	*organizer(t_env *env_l, t_item *list)
 {
 	t_item	*new_list;
 
 	new_list = NULL;
-	expander(list);
+	expander(env_l, list);
 	ft_new_list(list, &new_list);
 	last_tokinization(new_list);
 	ft_clear_items(&list);
