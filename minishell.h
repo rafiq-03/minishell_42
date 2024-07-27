@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/26 19:21:19 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:48:13 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ enum					e_state
 	IN_DQUOTE = 3,
 };
 
+# define AFTER_PIPE 100
+# define BEFORE_PIPE 101
+# define BETWEEN_PIPES 102
+
 /*------------------------[ typedefs ]----------------------------*/
 
 // Lexing ----------------------//
@@ -91,6 +95,7 @@ typedef struct s_redir
 {
 	int		type;//out[ (1 = '>') (2 = '>>') ]*in [ (1 = '<') (2 = '<<') ]
 	char	*path_or_limiter;
+	int		fd;// file descriptor of this redirection
 		// path of this redir or limiter in the case of herdoc
 }						t_redir;
 
@@ -105,6 +110,7 @@ typedef struct s_simple_cmd
 	t_redir				*redirs;// redirs pointer
 	t_fd				fd;//fd of in and out fd.in=open(redir_in->path);
 	int					pipe[2];// pipe if needed
+	int					here_doc_pipe[2];
 	int					pipe_flag;
 	struct s_simple_cmd	*next;//next_command
 	struct s_simple_cmd	*prev;// prev_command
@@ -158,8 +164,10 @@ void					ft_clear_cmd_lst(t_simple_cmd **lst);
 // testing
 void					print_list(t_item *head);
 void					print(char **str);
+void	print_cmds(t_simple_cmd *cmd);
+void	print_cmd(t_simple_cmd *cmd);
 int		mini_env(t_data *data);
 int		is_whitespace(char c);
 #endif
 
-//if there is pipe or not : 0 = no pipe  1 = before 2 = after 3 = befor & after
+//if there is pipe or not : 0 -> no pipe  1 -> before 2 -> after 3 -> befor & after

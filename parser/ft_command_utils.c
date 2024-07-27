@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 09:49:13 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:50:29 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_redir	*set_redirs(t_cmd_limits *cmd, int num)
 			|| tmp->type == DREDIR_OUT_FILE || tmp->type == HERE_DOC_LIMITER)
 		{
 			redir[i].type = tmp->type;
+			redir[i].fd = -1;
 			redir[i++].path_or_limiter = ft_strdup(tmp->content);
 		}
 		tmp = tmp->next;
@@ -114,11 +115,11 @@ void	set_pipe_flag(t_simple_cmd *head, int cmd_nbr)
 	while (head)
 	{
 		if (head->i == 0)
-			head->pipe_flag = 2; // after
+			head->pipe_flag = BEFORE_PIPE;// command is before pipe
 		else if (head->i == cmd_nbr - 1)
-			head->pipe_flag = 1; // before
+			head->pipe_flag = AFTER_PIPE;// command is after pipe
 		else
-			head->pipe_flag = 3; // before and after
+			head->pipe_flag = BETWEEN_PIPES;//command is between pipes
 		head = head->next;
 	}
 }
