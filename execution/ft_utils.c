@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/27 13:10:51 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/28 09:57:02 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ int	close_all_fds(t_simple_cmd *cmd)
 		close(cmd->redirs[i].fd);
 		i++;
 	}
-	close(cmd->here_doc_pipe[0]);
-	close(cmd->here_doc_pipe[1]);
+	// close(cmd->here_doc_pipe[0]);
+	// close(cmd->here_doc_pipe[1]);
+	//close pipes in child process
+	// close(cmd->pipe[0]);
+	// close(cmd->pipe[1]);
 	return (0);
 }
 
@@ -70,14 +73,18 @@ int	last_redir(t_redir *redir, int len, int type, int last_fd)
 	{
 		if (type == REDIR_IN)
 		{
+			close(last_fd);
 			if (redir[i].type == REDIR_IN_FILE)
-				last_fd = redir[i].fd;	
+				last_fd = redir[i].fd;
+			else if (redir[i].type == HERE_DOC_LIMITER)
+				last_fd = redir[i].fd;
 		}
 		else if (type == REDIR_OUT)
 		{
+			close(last_fd);
 			if (redir[i].type == REDIR_OUT_FILE)
 				last_fd = redir[i].fd;
-			if (redir[i].type == DREDIR_OUT_FILE)
+			else if (redir[i].type == DREDIR_OUT_FILE)
 				last_fd = redir[i].fd;
 		}
 		i++;
@@ -112,7 +119,9 @@ int handle_here_doc(t_simple_cmd *cmd)
 	{
 		if (cmd->redirs[i].type == HERE_DOC_LIMITER)
 		{
-			printf("here_doce\n");
+			cmd->redirs[i].fd = open("/tmp/here_doc_test", O_RDWR | O_CREAT , 0666);
+			
+			printf("here_doce fd = %d\n", cmd->redirs[i].fd);
 		}
 	}
 	return (0);
@@ -128,16 +137,19 @@ int handle_redirections(t_simple_cmd *cmd)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR);
 			printf("fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
+			// close(cmd->pipe[0]);
 		}
 		else if (cmd->redirs[i].type == REDIR_OUT_FILE)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR | O_CREAT, 0666);
 			printf("fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
+			// close(cmd->pipe[1]);
 		}
-		else if (cmd->redirs[i].type == REDIR_OUT_FILE)
+		else if (cmd->redirs[i].type == DREDIR_OUT_FILE)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR | O_CREAT | O_APPEND, 0666);
 			printf("fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
+			// close(cmd->pipe[1]);
 		}
 		i++;
 	}
