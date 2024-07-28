@@ -6,7 +6,7 @@
 #    By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/26 19:22:09 by mskhairi         ###   ########.fr        #
+#    Updated: 2024/07/26 19:38:23 by mskhairi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ $(NAME): $(O_LEXER) $(O_PARSER) $(O_BUILTIN) $(O_EXECUTION) $(NAME).o
 	$(CC) $(CFLAGS) $(NAME).o $(LIBFT) $(O_LEXER) $(O_PARSER) $(O_BUILTIN) $(O_EXECUTION)  $(LIBS) -o $(NAME)
 
 %.o:%.c
-	$(CC) -c $(CFLAGS) $< -o $@ -I/Users/mskhairi/.brew/opt/readline/include 
+	$(CC) -c $(CFLAGS) $< -o $@ -I/Users/mskhairi/.brew/opt/readline/include
 clean:
 	make fclean -C Libft
 	rm -f $(O_LEXER) $(NAME).o
