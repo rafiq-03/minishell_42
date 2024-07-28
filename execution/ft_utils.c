@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/28 09:57:02 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/28 14:18:41 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,12 @@ int	close_all_fds(t_simple_cmd *cmd)
 	i = 0;
 	while (i < cmd->redir_num)
 	{
-		printf("close fd = %d\n", cmd->redirs[i].fd);
+		dprintf(2, "close fd = %d\n", cmd->redirs[i].fd);
 		close(cmd->redirs[i].fd);
 		i++;
 	}
 	// close(cmd->here_doc_pipe[0]);
 	// close(cmd->here_doc_pipe[1]);
-	//close pipes in child process
-	// close(cmd->pipe[0]);
-	// close(cmd->pipe[1]);
 	return (0);
 }
 
@@ -76,8 +73,8 @@ int	last_redir(t_redir *redir, int len, int type, int last_fd)
 			close(last_fd);
 			if (redir[i].type == REDIR_IN_FILE)
 				last_fd = redir[i].fd;
-			else if (redir[i].type == HERE_DOC_LIMITER)
-				last_fd = redir[i].fd;
+			// else if (redir[i].type == HERE_DOC_LIMITER)
+			// 	last_fd = redir[i].fd;
 		}
 		else if (type == REDIR_OUT)
 		{
@@ -136,20 +133,17 @@ int handle_redirections(t_simple_cmd *cmd)
 		if (cmd->redirs[i].type == REDIR_IN_FILE)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR);
-			printf("fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
-			// close(cmd->pipe[0]);
+			dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
 		}
 		else if (cmd->redirs[i].type == REDIR_OUT_FILE)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR | O_CREAT, 0666);
-			printf("fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
-			// close(cmd->pipe[1]);
+			dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
 		}
 		else if (cmd->redirs[i].type == DREDIR_OUT_FILE)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR | O_CREAT | O_APPEND, 0666);
-			printf("fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
-			// close(cmd->pipe[1]);
+			dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
 		}
 		i++;
 	}

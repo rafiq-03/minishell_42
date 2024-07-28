@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+         #
+#    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/28 10:45:18 by mskhairi         ###   ########.fr        #
+#    Updated: 2024/07/28 15:10:49 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror 
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 # LIBS = -Llibft -lft -lreadline -L/goinfre/mskhairi/homebrew/opt/readline/lib -I/goinfre/mskhairi/homebrew/opt/readline/include -lncurses
-LIBS = -I/Users/mskhairi/.brew/opt/readline/include -L/Users/mskhairi/.brew/opt/readline/lib -lreadline -lncurses
+LIBS = -lreadline -L ~/goinfre/homebrew/opt/readline/lib -I ~/goinfre/homebrew/opt/readline/include
 LIBFT = ./Libft/libft.a
 LEXER_DIR=lexer/
 S_LEXER= $(addprefix $(LEXER_DIR), 	\
@@ -75,7 +75,7 @@ $(NAME): $(O_LEXER) $(O_PARSER) $(O_BUILTIN) $(O_EXECUTION) $(NAME).o
 	$(CC) $(CFLAGS) $(NAME).o $(LIBFT) $(O_LEXER) $(O_PARSER) $(O_BUILTIN) $(O_EXECUTION)  $(LIBS) -o $(NAME)
 
 %.o:%.c
-	$(CC) -c $(CFLAGS) $< -o $@ -I/Users/mskhairi/.brew/opt/readline/include
+	$(CC) -c $(CFLAGS) $< -o $@ -I ~/goinfre/homebrew/opt/readline/include
 clean:
 	make fclean -C Libft
 	rm -f $(O_LEXER) $(NAME).o
