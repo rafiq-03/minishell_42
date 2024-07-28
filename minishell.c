@@ -6,12 +6,31 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/26 19:22:59 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/28 10:33:43 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	handle_SigInt(int signal)
+{
+	if (signal == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+// void	handle_SigQuit(int signal)
+// {
+// 	printf("hey\n");
+// 	if (signal == SIGQUIT)
+// 	{
+// 		printf("exit\n");
+// 		exit(1);
+// 	}
+// }
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -21,16 +40,24 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 	data.env_l = env_list(env);
+	signal(SIGINT, handle_SigInt);
+	signal(SIGQUIT, SIG_IGN);//signal(SIGQUIT, SIG_DFL); in child proccesses
 	while (1)
 	{
 		// tmp = readline("\033[1;34m[minihell]::~> \033[0m");
 		tmp = readline("[minihell]::~> ");
 		data.prompt = ft_strtrim(tmp, "\t \f\v\n\r");
 		free(tmp);
-		if (!data.prompt || is_empty(data.prompt))//is modefied!!
+		if (!data.prompt)//is modefied!!
 		{
 			free(data.prompt);
-			continue ;
+			printf("exit\n");
+			exit(1);
+		}
+		else if (is_empty(data.prompt))
+		{
+			free(data.prompt);
+			continue;
 		}
 		if (ft_strlen(data.prompt))
 		{
