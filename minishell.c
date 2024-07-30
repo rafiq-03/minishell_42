@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/28 15:01:54 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:31:42 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		// tmp = readline("\033[1;34m[minihell]::~> \033[0m");
-		tmp = readline("[minihell]::~> ");
+		tmp = readline("minihell-3.2$ ");
 		data.prompt = ft_strtrim(tmp, "\t \f\v\n\r");
 		free(tmp);
 		if (!data.prompt)//is modefied!!

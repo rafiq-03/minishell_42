@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 12:53:37 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:36:27 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	last_redir(t_redir *redir, int len, int type, int last_fd)
 		if (type == REDIR_IN)
 		{
 			if (redir[i].type == REDIR_IN_FILE)
-				last_fd = redir[i].fd;
-			// else if (redir[i].type == HERE_DOC_LIMITER)
-			// 	last_fd = redir[i].fd;
+				last_fd = redir[i].fd;//4
+			else if (redir[i].type == HERE_DOC_LIMITER)
+				last_fd = redir[i].fd;//3
 		}
 		else if (type == REDIR_OUT)
 		{
@@ -109,16 +109,27 @@ char	*search_cmd_path(char **split_path, char *cmd_name, bool *flag)
 int handle_here_doc(t_simple_cmd *cmd)
 {
 	int	i;
+	int	fd;
+	char *input;
 
 	i = -1;
 	while (++i < cmd->redir_num)
 	{
 		if (cmd->redirs[i].type == HERE_DOC_LIMITER)
 		{
-			cmd->redirs[i].fd = open("/tmp/here_doc_test", O_RDWR | O_CREAT , 0666);
-			
-			printf("here_doce fd = %d\n", cmd->redirs[i].fd);
+			fd = open("../here_doc_test.txt", O_RDWR | O_CREAT , 0666);
+			input = readline("> ");
+			while(input)
+			{
+				if (!ft_strcmp(input, cmd->redirs[i].path_or_limiter))
+					break;
+				write(fd, input, ft_strlen(input));
+				write(fd, "\n", 1);
+				input = readline("> ");
+			}
+			close(fd);
 		}
+		cmd->redirs[i].fd = open("../here_doc_test.txt", O_RDWR | O_CREAT , 0666);
 	}
 	return (0);
 }
