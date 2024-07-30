@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
+#    By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 11:21:31 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/30 13:18:50 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/30 13:22:41 by mskhairi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,6 @@ ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
 ft_free.c\
-gnl/get_next_line.c\
-gnl/get_next_line_utils.c\
 
 OBJ = ${SRC:.c=.o}
 NAME = libft.a
