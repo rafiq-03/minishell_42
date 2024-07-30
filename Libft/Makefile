@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 11:21:31 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/30 13:02:48 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/07/30 13:18:50 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ ft_strlcpy.c \
 ft_strlen.c \
 ft_strmapi.c \
 ft_strncmp.c \
+ft_strcmp.c \
 ft_strnstr.c \
 ft_strrchr.c \
 ft_strtrim.c \
