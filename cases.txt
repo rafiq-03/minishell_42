@@ -23,3 +23,7 @@ new line make leaks
 if there is one command we don't need to fork , in case of more than one command we need to fork
 
 echo -nnnnnnnnnnnnnnn -n hello
+
++ expand problem in expand values
+
+ls| grep file > l > ll > lll

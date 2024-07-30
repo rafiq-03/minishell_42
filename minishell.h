@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/27 12:48:13 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:22:20 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ typedef struct s_simple_cmd
 	t_redir				*redirs;// redirs pointer
 	t_fd				fd;//fd of in and out fd.in=open(redir_in->path);
 	int					pipe[2];// pipe if needed
-	int					here_doc_pipe[2];
 	int					pipe_flag;
 	struct s_simple_cmd	*next;//next_command
 	struct s_simple_cmd	*prev;// prev_command
