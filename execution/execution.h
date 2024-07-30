@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:03:42 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/27 11:12:53 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 12:05:24 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 char	**get_path_env(t_env *env_l);
 char	*search_cmd_path(char **split_path, char *cmd_name, bool *flag);
 char	**list_to_arr(t_env *tmp);
+char	*cmd_exist(char *cmd_name, char **path, bool *exist);
 
 int	handle_pipes(t_simple_cmd *cmd);
 int handle_here_doc(t_simple_cmd *cmd);

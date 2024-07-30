@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/28 09:51:47 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:55:35 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
 {
-	// if (builtin->pipe_flag != 0)
-	// fork()
+	
+	dup_and_close(builtin);
 	if (flag == 1)
 		mini_echo(builtin->cmd);
 	if (flag == 2)
@@ -30,7 +30,6 @@ void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
 		mini_cd(data->env_l, builtin->cmd);
 	if (flag == 7)
 		mini_exit(builtin->cmd);
-	// printf("this is builtine function\n");
 }
 
 int	check_builtin(char *str)
