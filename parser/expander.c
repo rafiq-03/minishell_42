@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/28 17:26:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:28:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*env_search(t_env *env_l, char *env_var)
 	tmp = env_l;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->key, env_var, ft_strlen(tmp->key)))// we must compare the values whit
+		if (!ft_strcmp(tmp->key, env_var))// we must compare the values whit
 			return (ft_strdup(tmp->value));
 		tmp = tmp->next;
 	}

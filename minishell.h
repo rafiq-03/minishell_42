@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/30 11:30:44 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:52:19 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <unistd.h>	
 # include <stdbool.h>
 # include <fcntl.h>
+#include <sys/stat.h>// stat system call
+#include <errno.h> // error
 
 /*---------------------------[ enum ]------------------------------*/
 
@@ -134,6 +136,8 @@ typedef struct s_data
 	t_cmd_limits	*limits_lst;// parsing
 	t_simple_cmd	*spl_cmd_lst;//parsing
 	t_env			*env_l;
+	int				*fork_pid;// store data of forks;
+	int				cmd_nbr;
 }						t_data;
 
 /*-------------------------Prototypes---------------------------------*/
@@ -144,7 +148,7 @@ int						handle_prompt(t_data *data);
 t_item					*lexer(char *input);
 t_item					*organizer(t_env *env_l, t_item *list);
 t_cmd_limits			*set_cmd_limits(t_item *head);
-t_simple_cmd			*ft_cmd_list(t_cmd_limits *list);
+t_simple_cmd	*ft_cmd_list(t_cmd_limits *list, t_data *data);
 int						is_empty(char *str);
 
 int						execute_cmd(t_simple_cmd *cmd, t_data *data);
