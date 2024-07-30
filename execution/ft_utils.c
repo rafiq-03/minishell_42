@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 15:36:27 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:43:10 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,10 @@ int	handle_pipes(t_simple_cmd *cmd)
 
 char *cmd_exist(char *cmd_name, char **path, bool *exist)
 {
+	// int flag;
 	int	i;
 	char *tmp;
+	// struct stat cmd_info;
 
 	tmp=ft_strjoin(ft_strdup("/"), cmd_name);
 	
@@ -218,6 +220,12 @@ char *cmd_exist(char *cmd_name, char **path, bool *exist)
 	while (path[i])
 	{
 		cmd_name = ft_strjoin(ft_strdup(path[i]), ft_strdup(tmp));
+		
+		// flag = stat(cmd_name, &cmd_info);
+		// if (flag == -1)
+		// 	return (NULL);
+		// if (S_ISREG(cmd_info.st_mode) && S)
+		
 		if (!access(cmd_name, X_OK))
 		{
 			*exist = true;

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 12:04:32 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:30:55 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 	exit(1);
 }
 
-int	handle_cmd(t_simple_cmd *cmd, t_data *data)
+int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)
 {
 	int pid;
 
 	pid = fork();
 	if (!pid)// child 
 	{
+		// dprintf(2, "pid of this child is %d\n", getpid());
 		handle_here_doc(cmd);
 		handle_redirections(cmd);// open 
 		if (check_builtin(cmd->cmd_name))
@@ -42,6 +43,7 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data)
 	}
 	else// parent
 	{
+		*fork_pid = pid;
 		if (cmd->pipe_flag == AFTER_PIPE || cmd->pipe_flag == BETWEEN_PIPES)// close unused pipes in parent process
 		{
 			close(cmd->prev->pipe[0]);
@@ -54,6 +56,10 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data)
 
 int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 {
+	int i;
+
+	i = 0;
+	data->fork_pid = malloc(data->cmd_nbr * sizeof(int));// must be freed
 	while (cmd)
 	{
 		if (!cmd->next && check_builtin(cmd->cmd_name))// check if there is one builtin
@@ -63,9 +69,13 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 			break;
 		}
 		handle_pipes(cmd);
-		handle_cmd(cmd, data);
+		handle_cmd(cmd, data, &data->fork_pid[i++]);
 		cmd = cmd->next;
 	}
-	wait(NULL);// wati for all forks to finish
+	i = 0;
+	// while (i < data->cmd_nbr)
+	// 	dprintf(2, "pid of command %d\n", data->fork_pid[i++]);
+	while (wait(NULL) > 0)
+		;
 	return (0);
 }

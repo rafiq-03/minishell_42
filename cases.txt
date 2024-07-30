@@ -27,3 +27,5 @@ echo -nnnnnnnnnnnnnnn -n hello
 + expand problem in expand values
 
 ls| grep file > l > ll > lll
+
+echo $"USER" must desplay only USER without $
