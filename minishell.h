@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/31 11:20:01 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:42:58 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void					ft_clear_cmd_lst(t_simple_cmd **lst);
 /*-execution prototypes-----------------------*/
 
 int	dup_and_close(t_simple_cmd *cmd);
+int	close_all_fds(t_simple_cmd *cmd);
 
 // testing
 void					print_list(t_item *head);

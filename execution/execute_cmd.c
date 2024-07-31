@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 16:31:14 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:39:12 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	if (!cmd->next && check_builtin(cmd->cmd_name))// check if there is one builtin
 	{
 		flag = true;
+		handle_here_doc(cmd);
+		handle_redirections(cmd);
 		builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), flag);
 		return (0);
 	}
