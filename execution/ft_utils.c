@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 16:11:47 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:54:05 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int handle_here_doc(t_simple_cmd *cmd)
 	{
 		if (cmd->redirs[i].type == HERE_DOC_LIMITER)
 		{
-			fd = open("../here_doc_test.txt", O_RDWR | O_CREAT , 0666);
+			fd = open("/tmp/here_doc_test.txt", O_RDWR | O_CREAT , 0666);
 			input = readline("> ");
 			while(input)
 			{
@@ -128,8 +128,9 @@ int handle_here_doc(t_simple_cmd *cmd)
 				input = readline("> ");
 			}
 			close(fd);
+			cmd->redirs[i].fd = open("/tmp/here_doc_test.txt", O_RDWR | O_CREAT , 0666);
 		}
-		cmd->redirs[i].fd = open("../here_doc_test.txt", O_RDWR | O_CREAT , 0666);
+		unlink("/tmp/here_doc_test.txt");
 	}
 	return (0);
 }
