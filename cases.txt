@@ -29,3 +29,5 @@ echo -nnnnnnnnnnnnnnn -n hello
 ls| grep file > l > ll > lll
 
 echo $"USER" must desplay only USER without $
+
+>$hello segf problem in expander and it's not create a node to empty string

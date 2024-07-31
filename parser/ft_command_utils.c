@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/27 12:50:29 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:10:37 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	check_redir(t_cmd_limits *cmd) //nbr of type
 	tmp = cmd->start;
 	while (tmp != cmd->end->next) //must check last limit aka end not end->next
 	{
-		if (tmp->type == REDIR_IN || tmp->type == HERE_DOC
-			|| tmp->type == REDIR_OUT || tmp->type == DREDIR_OUT)
+		if (tmp->type == REDIR_IN_FILE || tmp->type == HERE_DOC_LIMITER
+			|| tmp->type == REDIR_OUT_FILE || tmp->type == DREDIR_OUT_FILE)
 			i++;
 		tmp = tmp->next;
 	}

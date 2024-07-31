@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 12:06:31 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:05:51 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	last_tokinization(t_item *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->type == REDIR_IN)
+		if (tmp->type == REDIR_IN && tmp->next)
 			tmp->next->type = REDIR_IN_FILE;
-		else if (tmp->type == REDIR_OUT)
+		else if (tmp->type == REDIR_OUT && tmp->next)
 			tmp->next->type = REDIR_OUT_FILE;
-		else if (tmp->type == DREDIR_OUT)
+		else if (tmp->type == DREDIR_OUT && tmp->next)
 			tmp->next->type = DREDIR_OUT_FILE;
-		else if (tmp->type == HERE_DOC)
+		else if (tmp->type == HERE_DOC && tmp->next)
 			tmp->next->type = HERE_DOC_LIMITER;
 		tmp = tmp->next;
 	}
