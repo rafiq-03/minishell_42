@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:26:58 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/28 12:44:06 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:28:19 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ t_env	*env_last(t_env *node);
 t_env	*env_new_node(char *key, char *value);
 void	env_add_back(t_env **head, t_env *new);
 void	env_delone(t_env **head, t_env *node);
+int handle_here_doc(t_simple_cmd *cmd);
+int handle_redirections(t_simple_cmd *cmd);
 
 #endif

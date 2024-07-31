@@ -6,16 +6,30 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:35:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 13:29:51 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:24:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
+int	handle_one_builtin(t_simple_cmd *builtin)
+{
+	// printf("in %d\n", builtin->fd.in);
+	// printf("out %d\n", builtin->fd.out);
+		dup2(STDIN_FILENO, builtin->fd.in);
+		dup2(STDOUT_FILENO, builtin->fd.out);
+	return (0);
+}
+void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag, bool one_cmd)
 {
 	
-	dup_and_close(builtin);
+	if (one_cmd)
+	{
+		handle_one_builtin(builtin);
+		// printf("one command\n");
+	}
+	else
+		dup_and_close(builtin);
 	if (flag == 1)
 		mini_echo(builtin->cmd);
 	if (flag == 2)
@@ -30,6 +44,15 @@ void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag)
 		mini_cd(data->env_l, builtin->cmd);
 	if (flag == 7)
 		mini_exit(builtin->cmd);
+	if (one_cmd)
+	{
+		if (builtin->fd.in != 0)
+			close(builtin->fd.in);
+		if (builtin->fd.out != 1)
+			close(builtin->fd.out);
+	}
+	if (!one_cmd)
+		exit(0);
 }
 
 int	check_builtin(char *str)

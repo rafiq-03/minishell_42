@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 15:43:10 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:11:47 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int handle_redirections(t_simple_cmd *cmd)
 
 int	dup_and_close(t_simple_cmd *cmd)
 {
-		if (cmd->fd.in != 0)
+	if (cmd->fd.in != 0)
 	{
 		dup2(cmd->fd.in, STDIN_FILENO);
 		// dprintf(2, "\n                             dup fd.in %d\n", cmd->fd.in);

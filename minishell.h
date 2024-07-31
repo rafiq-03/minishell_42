@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/30 14:52:19 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:20:01 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct s_fd
 
 typedef struct s_redir
 {
-	int		type;//out[ (1 = '>') (2 = '>>') ]*in [ (1 = '<') (2 = '<<') ]
+	int		type;
 	char	*path_or_limiter;
 	int		fd;// file descriptor of this redirection
 		// path of this redir or limiter in the case of herdoc
@@ -153,7 +153,7 @@ int						is_empty(char *str);
 
 int						execute_cmd(t_simple_cmd *cmd, t_data *data);
 t_env					*env_list(char **env);//env list
-void	builtin_cmd(t_simple_cmd *buitin, t_data *data, int	flag);
+void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int flag, bool one_cmd);
 int						check_builtin(char *str);
 
 

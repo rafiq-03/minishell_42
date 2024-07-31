@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 14:30:55 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:31:14 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)
 		handle_here_doc(cmd);
 		handle_redirections(cmd);// open 
 		if (check_builtin(cmd->cmd_name))
-			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name));
+			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), false);
 		else
 			_execute(cmd, data);
 	}
@@ -57,22 +57,24 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)
 int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 {
 	int i;
+	bool	flag;
 
 	i = 0;
+	flag = false;
 	data->fork_pid = malloc(data->cmd_nbr * sizeof(int));// must be freed
+	if (!cmd->next && check_builtin(cmd->cmd_name))// check if there is one builtin
+	{
+		flag = true;
+		builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), flag);
+		return (0);
+	}
 	while (cmd)
 	{
-		if (!cmd->next && check_builtin(cmd->cmd_name))// check if there is one builtin
-		{
-			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name));
-			cmd = cmd->next;
-			break;
-		}
 		handle_pipes(cmd);
 		handle_cmd(cmd, data, &data->fork_pid[i++]);
 		cmd = cmd->next;
 	}
-	i = 0;
+	// i = 0;
 	// while (i < data->cmd_nbr)
 	// 	dprintf(2, "pid of command %d\n", data->fork_pid[i++]);
 	while (wait(NULL) > 0)
