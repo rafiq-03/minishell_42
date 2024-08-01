@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 15:29:15 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:12:10 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,26 @@ void	ft_new_list(t_item *list, t_item **new_list)
 
 	join_content = NULL;
 	type = WORD;
+	// handle_ambiguous(list);
 	handle_list(list, new_list, &type, join_content);
 	free(join_content);
 }
 
-void	last_tokinization(t_item *list)
+void	last_tokinization(t_item *list, int *flag)
 {
 	t_item	*tmp;
 
 	tmp = list;
+	// if (tmp)
+
 	while (tmp)
 	{
+		if ((tmp->type == REDIR_IN || tmp->type == REDIR_OUT || tmp->type == DREDIR_OUT) && !tmp->next)
+		{
+			ft_putstr_fd("minihell: ambiguous redirect\n", 2);
+			*flag = 1;
+			return;
+		}
 		if (tmp->type == REDIR_IN && tmp->next)
 			tmp->next->type = REDIR_IN_FILE;
 		else if (tmp->type == REDIR_OUT && tmp->next)
@@ -86,12 +95,17 @@ void	last_tokinization(t_item *list)
 t_item	*organizer(t_env *env_l, t_item *list)
 {
 	t_item	*new_list;
+	int flag;
 
+	flag = 0;
 	new_list = NULL;
+	// if env after split 
 	expander(env_l, list);
 	ft_new_list(list, &new_list);
-	last_tokinization(new_list);
+	last_tokinization(new_list, &flag);
+	if(flag)
+		return(0);
 	ft_clear_items(&list);
-	// print_list(new_list);
+	print_list(new_list);
 	return (new_list);
 }
