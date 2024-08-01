@@ -6,12 +6,13 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 10:05:34 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:07:12 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
+extern int exit_status;
 int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 {
 	char **path = get_path_env(data->env_l);
@@ -58,6 +59,7 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)
 int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 {
 	int i;
+	int state;
 	bool	flag;
 
 	i = 0;
@@ -77,10 +79,20 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 		handle_cmd(cmd, data, &data->fork_pid[i++]);
 		cmd = cmd->next;
 	}
-	// i = 0;
+	i = 0;
 	// while (i < data->cmd_nbr)
 	// 	dprintf(2, "pid of command %d\n", data->fork_pid[i++]);
-	while (wait(NULL) > 0)
+	while (waitpid(data->fork_pid[i++], &state, 0) > 0)
 		;
+	if (WIFSIGNALED(state))
+	{
+		exit_status = WTERMSIG(state);
+		// printf("sig ==> %d\n", exit_status);
+	}
+	else if (WIFEXITED(state))
+	{
+		exit_status = WEXITSTATUS(state);
+		// printf("GEN ==> %d\n", exit_status);
+	}
 	return (0);
 }

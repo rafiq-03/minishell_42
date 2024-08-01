@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/01 08:49:54 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 10:53:15 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	handle_prompt(t_data *data)
 		return (1);
 	data->limits_lst = set_cmd_limits(data->new_lst);
 	data->spl_cmd_lst = ft_cmd_list(data->limits_lst, data);
+	// print_list(data->new_lst);
 	execute_cmd(data->spl_cmd_lst, data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 09:48:09 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:14:55 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int handle_redirections(t_simple_cmd *cmd)
 	{
 		if (cmd->redirs[i].type == REDIR_IN_FILE)
 		{
+			printf("===>%s\n", cmd->redirs[i].path_or_limiter);
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR);
 			// dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
 		}
@@ -158,7 +159,7 @@ int handle_redirections(t_simple_cmd *cmd)
 			// dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
 		}
 		// if (cmd->redirs[i].fd == -1)
-		// 	exit_status = 2;
+		// 	exit_status = 1;
 		i++;
 	}
 	cmd->fd.in = last_redir(cmd->redirs, cmd->redir_num, REDIR_IN, cmd->fd.in);
