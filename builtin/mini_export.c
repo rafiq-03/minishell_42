@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 08:56:18 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:01:33 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 		{
 			if (flag == 1)
 			{
-				ft_putstr_fd("export : `", 2);			
+				ft_putstr_fd("export : `", 2);	
 				ft_putstr_fd(export->cmd[i], 2);			
 				ft_putstr_fd("\': not a valid identifier\n", 2);
 			}

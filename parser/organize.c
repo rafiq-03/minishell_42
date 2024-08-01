@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 10:35:31 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:10:35 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ void	ft_new_list(t_item *list, t_item **new_list)
 	type = WORD;
 	while (list)
 	{
+		if (!strcmp(list->content, "$") && list->state == GENERAL && list->next && (list->next->type == DOUBLE_QUOTE || list->next->type == QOUTE))
+		{
+			// printf("*****\n");
+			list = list->next;
+			continue;
+		}
+		
 		if (list && (!(list->type == WHITE_SPACE && list->state == GENERAL))
 			&& list->type != QOUTE && list->type != DOUBLE_QUOTE)
 			join_content = ft_strjoin(join_content, ft_strdup(list->content));
@@ -80,6 +87,6 @@ t_item	*organizer(t_env *env_l, t_item *list)
 	ft_new_list(list, &new_list);
 	last_tokinization(new_list);
 	ft_clear_items(&list);
-	// print_list(new_list);
+	print_list(new_list);
 	return (new_list);
 }

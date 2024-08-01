@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:25:21 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/01 12:49:30 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:59:49 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	check_quot(t_item *lst, char c)
 			count_quote++;
 		lst = lst->next;
 	}
-	printf("=====> %d\n", count_quote);
 	if (count_quote % 2 != 0)
 		return (0);
 	return (1);
