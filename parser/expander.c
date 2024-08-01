@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 09:43:57 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:44:05 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ void	expander(t_env *env_l, t_item *list)
 			{
 				tmp = list->content;
 				list->content = ft_itoa(exit_status);
+				free(tmp);
+				flag = 1;
+			}
+			else if (!ft_strcmp(list->content, "$$"))
+			{
+				tmp = list->content;
+				list->content = ft_itoa(getpid());
 				free(tmp);
 				flag = 1;
 			}
