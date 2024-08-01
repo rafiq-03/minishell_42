@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 14:10:35 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:29:15 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,17 @@ int	join_limiter(int type, int state)
 	return (1);
 }
 
-void	ft_new_list(t_item *list, t_item **new_list)
+void	handle_list(t_item *list, t_item **new_list, int *type,
+		char *join_content)
 {
-	char	*join_content;
-	int		type;
-
-	join_content = NULL;
-	type = WORD;
 	while (list)
 	{
-		if (!strcmp(list->content, "$") && list->state == GENERAL && list->next && (list->next->type == DOUBLE_QUOTE || list->next->type == QOUTE))
+		if (!strcmp(list->content, "$") && list->state == GENERAL && list->next
+			&& (list->next->type == DOUBLE_QUOTE || list->next->type == QOUTE))
 		{
-			// printf("*****\n");
 			list = list->next;
-			continue;
+			continue ;
 		}
-		
 		if (list && (!(list->type == WHITE_SPACE && list->state == GENERAL))
 			&& list->type != QOUTE && list->type != DOUBLE_QUOTE)
 			join_content = ft_strjoin(join_content, ft_strdup(list->content));
@@ -47,16 +42,26 @@ void	ft_new_list(t_item *list, t_item **new_list)
 						|| !join_limiter(list->type, 0)))))
 		{
 			if (!join_limiter(list->type, 0))
-				type = list->type;
+				*type = list->type;
 			add_back_items(new_list, new_item(join_content,
-					ft_strlen(join_content), type, GENERAL)); //new item
-			free(join_content); //ft_free();
-			join_content = ft_strdup(""); //ft_free();
-			type = WORD;
+					ft_strlen(join_content), *type, GENERAL));
+			free(join_content);
+			join_content = ft_strdup("");
+			*type = WORD;
 		}
 		list = list->next;
 	}
-	free(join_content); //ft_free();
+}
+
+void	ft_new_list(t_item *list, t_item **new_list)
+{
+	char	*join_content;
+	int		type;
+
+	join_content = NULL;
+	type = WORD;
+	handle_list(list, new_list, &type, join_content);
+	free(join_content);
 }
 
 void	last_tokinization(t_item *list)
@@ -87,6 +92,6 @@ t_item	*organizer(t_env *env_l, t_item *list)
 	ft_new_list(list, &new_list);
 	last_tokinization(new_list);
 	ft_clear_items(&list);
-	print_list(new_list);
+	// print_list(new_list);
 	return (new_list);
 }
