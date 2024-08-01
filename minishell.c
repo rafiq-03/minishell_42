@@ -6,12 +6,13 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/30 15:42:56 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 08:49:54 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int exit_status;
 void	handle_SigInt(int signal)
 {
 	if (signal == SIGINT)
@@ -39,6 +40,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
+	exit_status = 0;
 	data.env_l = env_list(env);
 	signal(SIGINT, handle_SigInt);
 	signal(SIGQUIT, SIG_IGN);//signal(SIGQUIT, SIG_DFL); in child proccesses

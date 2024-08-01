@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/31 15:54:05 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/01 09:48:09 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
+extern int exit_status;
 char **get_path_env(t_env *env_l)
 {
 	while (env_l)
@@ -156,6 +157,8 @@ int handle_redirections(t_simple_cmd *cmd)
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR | O_CREAT | O_APPEND, 0644);
 			// dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
 		}
+		// if (cmd->redirs[i].fd == -1)
+		// 	exit_status = 2;
 		i++;
 	}
 	cmd->fd.in = last_redir(cmd->redirs, cmd->redir_num, REDIR_IN, cmd->fd.in);

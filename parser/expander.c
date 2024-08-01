@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 13:28:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/01 09:43:57 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+extern int exit_status;
 int	_check_before(t_item *list)
 {
 	if (list->prev)
@@ -63,21 +64,32 @@ char	*env_search(t_env *env_l, char *env_var)
 void	expander(t_env *env_l, t_item *list)
 {
 	char	*tmp;
+	int flag;
 
+	flag = 0;
 	while (list)
 	{
 		if (list->type == ENV)
 		{
-			if (!check_herdoc(list))
+			if (!ft_strcmp(list->content, "$?"))
+			{
+				tmp = list->content;
+				list->content = ft_itoa(exit_status);
+				free(tmp);
+				flag = 1;
+			}
+			if (!check_herdoc(list) && !flag)
 			{
 				tmp = list->content;
 				list->content = env_search(env_l, tmp + 1);
 				// if (!list->content)
-				// 	return ;//null check
+				// 	exit_status = 126;
+					// return ;//null check
 				free(tmp);
 			}
 			list->type = WORD;
 		}
+		flag = 0;
 		list = list->next;
 	}
 }

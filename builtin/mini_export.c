@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 11:18:36 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/01 08:56:18 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
+extern int exit_status;
 void	print_env(t_env *env_l)
 {
 	while (env_l)
@@ -106,5 +107,6 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 		env_add_back(&data->env_l, new);
 	}
 	// system("leaks -q minishell");
+	exit_status = EXIT_SUCCESS;
 	return (0);
 }

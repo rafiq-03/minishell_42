@@ -6,13 +6,14 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:21 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 16:52:22 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 08:51:47 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
 // pwd buitin implementation
+extern int exit_status;
 int	mini_pwd()
 {
 	char *buffer;
@@ -23,8 +24,10 @@ int	mini_pwd()
     else
 	{
         perror("Error");
-		return (1);
+		exit_status = EXIT_FAILURE;
+		return (EXIT_FAILURE);
 	}
 	free(buffer);
-	return (0);
+	exit_status = EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/31 12:39:12 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/01 09:07:39 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 	dup_and_close(cmd);
 	// print_cmd(cmd);
 	execve(cmd->cmd[0], cmd->cmd, env);
-	printf("exeve doesn't work\n");
+	// printf("exeve doesn't work\n");
 	exit(1);
 }
 
