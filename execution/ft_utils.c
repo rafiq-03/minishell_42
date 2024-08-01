@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 11:14:55 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:52:41 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,13 @@ int handle_redirections(t_simple_cmd *cmd)
 	i = 0;
 	while (i < cmd->redir_num)
 	{
+		if (cmd->redirs[i].path_or_limiter == NULL)
+		{
+			ft_putstr_fd("minihell: ambiguous redirect\n", 2);
+			exit(EXIT_FAILURE);
+		}
 		if (cmd->redirs[i].type == REDIR_IN_FILE)
 		{
-			printf("===>%s\n", cmd->redirs[i].path_or_limiter);
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR);
 			// dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
 		}

@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 13:01:33 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:51:17 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ int is_exist(t_data *data, char *key, char *value, bool value_flag)
 	tmp = data->env_l;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->key, key, ft_strlen(key)))
+		if (ft_strlen(key) == 0)
+		{
+			tmp = tmp->next;
+			continue;
+		}
+		else if (!ft_strncmp(tmp->key, key, ft_strlen(key)))
 		{
 			if (value_flag)
 			{
@@ -52,8 +57,11 @@ int	check_key(char *arg, bool *flag)// check if this key is valid
 	int	i;
 
 	i = 0;
-	if (!arg)
-		return (0);
+	if (!arg || arg[i] == '\0')
+	{
+		*flag = true;
+		return (1);
+	}
 	if(arg[i] != '_' && !ft_isalpha(arg[i]))
 	{
 		*flag = true;
@@ -92,6 +100,7 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 			continue;
 		if (check_key(key, &flag))// check bug of env without = " a= != a"
 		{
+			// printf("test\n");
 			if (flag == 1)
 			{
 				ft_putstr_fd("export : `", 2);	
@@ -107,6 +116,9 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 		env_add_back(&data->env_l, new);
 	}
 	// system("leaks -q minishell");
-	exit_status = EXIT_SUCCESS;
+	if (flag == 0)
+		exit_status = EXIT_SUCCESS;
+	else
+		exit_status = EXIT_FAILURE;
 	return (0);
 }

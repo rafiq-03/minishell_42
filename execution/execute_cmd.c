@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 12:18:35 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:19:04 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)
 		// dprintf(2, "pid of this child is %d\n", getpid());
 		signal(SIGQUIT, SIG_DFL);
 		handle_here_doc(cmd);
-		handle_redirections(cmd);// open 
+		handle_redirections(cmd);// open
 		if (check_builtin(cmd->cmd_name))
 			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), false);
 		else

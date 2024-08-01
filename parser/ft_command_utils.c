@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/31 15:10:37 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:53:21 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_redir	*set_redirs(t_cmd_limits *cmd, int num)
 			redir[i].type = tmp->type;
 			redir[i].fd = -1;
 			redir[i++].path_or_limiter = ft_strdup(tmp->content);
+			// printf("----> %s\n", redir[i - 1].path_or_limiter);
 		}
 		tmp = tmp->next;
 	}

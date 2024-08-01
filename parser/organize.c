@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 16:12:10 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:55:16 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	handle_list(t_item *list, t_item **new_list, int *type,
 {
 	while (list)
 	{
-		if (!strcmp(list->content, "$") && list->state == GENERAL && list->next
+		if (!ft_strcmp(list->content, "$") && list->state == GENERAL && list->next
 			&& (list->next->type == DOUBLE_QUOTE || list->next->type == QOUTE))
 		{
 			list = list->next;
@@ -65,7 +65,8 @@ void	ft_new_list(t_item *list, t_item **new_list)
 	free(join_content);
 }
 
-void	last_tokinization(t_item *list, int *flag)
+// void	last_tokinization(t_item *list, int *flag)
+void	last_tokinization(t_item *list)
 {
 	t_item	*tmp;
 
@@ -74,12 +75,12 @@ void	last_tokinization(t_item *list, int *flag)
 
 	while (tmp)
 	{
-		if ((tmp->type == REDIR_IN || tmp->type == REDIR_OUT || tmp->type == DREDIR_OUT) && !tmp->next)
-		{
-			ft_putstr_fd("minihell: ambiguous redirect\n", 2);
-			*flag = 1;
-			return;
-		}
+		// if ((tmp->type == REDIR_IN || tmp->type == REDIR_OUT || tmp->type == DREDIR_OUT) && !tmp->next)
+		// {
+		// 	ft_putstr_fd("minihell: ambiguous redirect\n", 2);
+		// 	*flag = 1;
+		// 	return;
+		// }
 		if (tmp->type == REDIR_IN && tmp->next)
 			tmp->next->type = REDIR_IN_FILE;
 		else if (tmp->type == REDIR_OUT && tmp->next)
@@ -102,7 +103,7 @@ t_item	*organizer(t_env *env_l, t_item *list)
 	// if env after split 
 	expander(env_l, list);
 	ft_new_list(list, &new_list);
-	last_tokinization(new_list, &flag);
+	last_tokinization(new_list);
 	if(flag)
 		return(0);
 	ft_clear_items(&list);

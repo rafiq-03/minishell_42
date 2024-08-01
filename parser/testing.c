@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:07:43 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/28 18:08:49 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:54:28 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,21 @@ void	print_redir(t_redir *redir, int num)
 
 void	print_cmd(t_simple_cmd *cmd)
 {
-	// printf("\033[0;32m=============================================================\033[0m\n\n");
-	// printf("[%d] => Command name	: %s\n\n",cmd->i, cmd->cmd_name);
-	// print(cmd->cmd);
-	// if (cmd->pipe_flag == 2)
-	// 	printf("pipe flag	: after\n");
-	// else if (cmd->pipe_flag == 1)
-	// 	printf("pipe flag	: before\n");
-	// else if (cmd->pipe_flag == 3)
-	// 	printf("pipe flag	: between\n");
-	// else
-	// 	printf("pipe flag	: no pipe\n");
-	// print_redir(cmd->redirs, cmd->redir_num);
-	printf("\ncommand %s\t", cmd->cmd_name);
-	dprintf(2, "[fd.in = %d]\t[fd.out = %d]\n", cmd->fd.in, cmd->fd.out);
-	// printf("\n\033[0;32m=============================================================\033[0m\n");
+	printf("\033[0;32m=============================================================\033[0m\n\n");
+	printf("[%d] => Command name	: %s\n\n",cmd->i, cmd->cmd_name);
+	print(cmd->cmd);
+	if (cmd->pipe_flag == 2)
+		printf("pipe flag	: after\n");
+	else if (cmd->pipe_flag == 1)
+		printf("pipe flag	: before\n");
+	else if (cmd->pipe_flag == 3)
+		printf("pipe flag	: between\n");
+	else
+		printf("pipe flag	: no pipe\n");
+	print_redir(cmd->redirs, cmd->redir_num);
+	// printf("\ncommand %s\t", cmd->cmd_name);
+	// dprintf(2, "[fd.in = %d]\t[fd.out = %d]\n", cmd->fd.in, cmd->fd.out);
+	printf("\n\033[0;32m=============================================================\033[0m\n");
 }
 
 void	print_cmds(t_simple_cmd *cmd)
