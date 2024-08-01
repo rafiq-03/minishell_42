@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 09:49:02 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/01 09:55:43 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ t_item	*organizer(t_env *env_l, t_item *list)
 	ft_new_list(list, &new_list);
 	last_tokinization(new_list);
 	ft_clear_items(&list);
-	print_list(new_list);
+	// print_list(new_list);
 	return (new_list);
 }
