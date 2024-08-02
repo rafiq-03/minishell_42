@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 11:08:13 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:27:09 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,16 @@ extern int exit_status;
 int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 {
 	char *error_str;
-	bool exist;
 	char **path;
 	char **env;
 	
 	error_str = NULL;
-	exist = false;
 	env = list_to_arr(data->env_l);
 	path = get_path_env(data->env_l);
-	cmd->cmd[0] = cmd_exist(cmd->cmd[0], path, &exist);
+	cmd->cmd[0] = cmd_exist(cmd->cmd[0], cmd->cmd_name, path);
 	dup_and_close(cmd);
-	// print_cmd(cmd);
-	// handle_errors(cmd->cmd[0]);
 	execve(cmd->cmd[0], cmd->cmd, env);
-	// printf("exeve doesn't work\n");
-	// if (execve(cmd->cmd[0], cmd->cmd, env))
-	// {
-	// 	// dprintf("minihell : %s : command not found\n", error_str);//  No such file or directory in case of $PATH
-	// 	// perror("error_str:");
-	// 	exit_status = 126;
-	// 	exit(exit_status);
-	// }
-	// exit_status = EXIT_SUCCESS;
+	// perror("minihell :");
 	exit(exit_status);
 }
 

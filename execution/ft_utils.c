@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 11:58:33 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:31:23 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,14 +219,27 @@ int	handle_pipes(t_simple_cmd *cmd)
 	return (0);
 }
 
-char *cmd_exist(char *cmd_name, char **path, bool *exist)
+int	is_valid(char *cmd_name)
 {
-	int flag;
-	int	i;
-	char *tmp;
 	struct stat cmd_info;
+	int	flag;
 
-	// if (ft_strchr(cmd_name, '/'))
+	if (access(cmd_name, F_OK))
+	{
+		// printf("file or directory dosn;t exit\n");
+		// printf("kayn\n");
+		return (0);
+	}
+	if (access(cmd_name, X_OK))
+	{
+		// printf("permission dineid\n");
+		return (0);
+	}
+	flag = stat(cmd_name, &cmd_info);
+	if (flag == -1 || S_ISDIR(cmd_info.st_mode))
+		return (0);
+	return (1);
+}
 	// {
 	// 	printf("%s\n", cmd_name);
 	// 	flag = stat(cmd_name, &cmd_info);
@@ -236,21 +249,46 @@ char *cmd_exist(char *cmd_name, char **path, bool *exist)
 	// 		handle_errors(cmd_name, flag);
 	// 		return (cmd_name);
 	// 	}
-	// 	// return (cmd_name);
+	// 	else {
+	// 	if (errno == ENOENT){
+	// 		fprintf(stderr, "%s: No such file or directory\n", cmd_name);
+	// 		exit(127);
+	// 	} else {
+	// 		perror(cmd_name);
+	// 		exit(126);
+	// 	}
+    // }
+		// return (cmd_name);
 	// }
+
+
+char *cmd_exist(char *cmd, char *cmd_name,  char **path)
+{
+	bool	is_path;
+	char	*tmp;
+	int		i;
+
 	i = 0;
-	tmp=ft_strjoin(ft_strdup("/"), cmd_name);
-	while (path[i])
+	is_path = false;
+	if (!ft_strchr(cmd, '/') && !ft_strchr(cmd, '.'))
 	{
-		cmd_name = ft_strjoin(ft_strdup(path[i]), ft_strdup(tmp));
-		flag = stat(cmd_name, &cmd_info);
-		if (!flag)
+		tmp = ft_strjoin(ft_strdup("/"), cmd);
+		while (path && path[i])
 		{
-			*exist = true;
-			return (cmd_name);
+			cmd = ft_strjoin(ft_strdup(path[i]), ft_strdup(tmp));
+			if (is_valid(cmd) == 1)
+				return (cmd);
+			i++;
 		}
-		i++;
+		// if (is_valid(cmd_name))
+		// 	return (cmd_name);
 	}
-	handle_errors(cmd_name, flag);
+	else
+	{
+		is_path = true;
+		if (is_valid(cmd) == 1)
+			return (cmd);
+	}
+	handle_errors(cmd_name, is_path);
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 10:36:05 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/02 11:54:06 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:40:38 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,46 @@ extern int exit_status;
 //     }
 // }
 
-void handle_errors(const char *cmd, int flag)
+void    print_error(char *cmd, char *error)
 {
-    struct stat statbuf;
- 
- 	if (flag != -1) {
-        if (S_ISDIR(statbuf.st_mode)) {
-            fprintf(stderr, "%s: is a directory\n", cmd);
+    ft_putstr_fd("minishell : ", 2);
+    ft_putstr_fd(cmd, 2);
+    ft_putstr_fd(error, 2);
+}
+
+
+void handle_errors(char *cmd, bool is_path)
+{
+    struct stat cmd_info;
+    int flag;
+
+    flag = stat(cmd, &cmd_info);
+ 	if (flag != -1)
+    {
+        if (S_ISDIR(cmd_info.st_mode))
+        {
+            print_error(cmd, ": is a dierectory\n");
             exit(126);
-        } else if (!(statbuf.st_mode & S_IXUSR)) {
-            fprintf(stderr, "%s: Permission denied\n", cmd);
+        }
+        else if (!(cmd_info.st_mode & S_IXUSR))
+        {
+            print_error(cmd, ": Permission denied\n");
             exit(126);
-        } else {
-            fprintf(stderr, "%s: command not found\n", cmd);
+        } 
+        else
+        {
+            print_error(cmd, " command not found\n");
             exit(127);
         }
     }
 	else {
+        if (!is_path)
+        {
+            print_error(cmd, ": command not found\n");    
+            exit(127);
+        }
 		if (errno == ENOENT){
-			fprintf(stderr, "%s: No such file or directory\n", cmd);
+			print_error(cmd, ": No such file or directory\n");
 			exit(127);
 		} else {
 			perror(cmd);
