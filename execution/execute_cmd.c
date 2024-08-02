@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 11:08:13 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:27:48 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	
 	// while (i < data->cmd_nbr)
 	// 	dprintf(2, "pid of command %d\n", data->fork_pid[i++]);
-	while (waitpid(data->fork_pid[i++], &state, 0) > 0)
+	while (waitpid(data->fork_pid[i++], &state, 0) > 0 && i < data->cmd_nbr)
 		;
 	if (WIFSIGNALED(state))
 	{

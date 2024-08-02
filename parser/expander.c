@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 12:44:05 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:49:18 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*env_search(t_env *env_l, char *env_var)
 			return (ft_strdup(tmp->value));
 		tmp = tmp->next;
 	}
-	return (ft_strdup(""));
+	return (ft_strdup(" "));
 }
 
 void	expander(t_env *env_l, t_item *list)
@@ -75,13 +75,6 @@ void	expander(t_env *env_l, t_item *list)
 			{
 				tmp = list->content;
 				list->content = ft_itoa(exit_status);
-				free(tmp);
-				flag = 1;
-			}
-			else if (!ft_strcmp(list->content, "$$"))
-			{
-				tmp = list->content;
-				list->content = ft_itoa(getpid());
 				free(tmp);
 				flag = 1;
 			}

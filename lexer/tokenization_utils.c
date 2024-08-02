@@ -6,20 +6,15 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 11:47:11 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/01 12:51:05 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:49:57 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
 int	set_env_item(t_item **ptr2head, char *str, int i)
-{	
-	if (str[i + 1] == '$')
-	{
-		i++;
-		add_back_items(ptr2head, new_item(str, ++i, ENV, GENERAL));
-	}
-	else if (is_token(str[i + 1]) || !str[i + 1])
+{
+	if (is_token(str[i + 1]) || !str[i + 1])
 		add_back_items(ptr2head, new_item(str, ++i, WORD, GENERAL));
 	else if (str[++i] == '?' || (str[i] >= '0' && str[i] <= '9')) // check it later
 		add_back_items(ptr2head, new_item(str, ++i, ENV, GENERAL));
@@ -66,7 +61,15 @@ int	set_token_items(t_item **ptr2head, char *str, int i)
 	else if (str[i] == QOUTE)
 		add_back_items(ptr2head, new_item(str, ++i, QOUTE, GENERAL));
 	else if (str[i] == DOUBLE_QUOTE)
-		add_back_items(ptr2head, new_item(str, ++i, DOUBLE_QUOTE, GENERAL));
+	{
+		if (str[i + 1] == DOUBLE_QUOTE)
+		{
+			i = i + 2;
+			add_back_items(ptr2head, new_item("", 1, WORD, GENERAL));
+		}
+		else
+			add_back_items(ptr2head, new_item(str, ++i, DOUBLE_QUOTE, GENERAL));
+	}
 	else if (str[i] == ESCAPE)
 		add_back_items(ptr2head, new_item(str, ++i, ESCAPE, GENERAL));
 	else if (str[i] == PIPE_LINE)

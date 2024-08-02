@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_syntax.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:38:02 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/22 15:29:17 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:09:47 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ int	is_alone(t_item *lst)
 	check_before(tmp, &before);
 	tmp = lst;
 	check_after(tmp, &after);
-	if (is_redirection(tmp->type) && ((!after && !before) || (before
+	if (is_redirection(tmp->type) && !tmp->next && ((!after && !before) || (before
 				&& !after)))
 		return (0);
-	else if (tmp->type == PIPE_LINE && ((!after && !before) || (!before
+	else if (tmp->type == PIPE_LINE && !tmp->next && ((!after && !before) || (!before
 				&& after) || (before && !after)))
-		return (0);
+		{
+			return (0);				
+		}
 	return (1);
 }
