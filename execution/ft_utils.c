@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 16:31:23 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:39:28 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ char **list_to_arr(t_env *tmp)
 	while (env_l && i < len)
 	{
 		if (env_l->value_falg)
-		env[i++] = ft_strjoin(ft_strdup(env_l->key), ft_strdup(env_l->value));
+		env[i++] = ft_strjoin(ft_strjoin(ft_strdup(env_l->key),
+			ft_strdup("=")), ft_strdup(env_l->value));
+		env_l = env_l->next;
 	}
 	env[i] = NULL;
 	return (env);
