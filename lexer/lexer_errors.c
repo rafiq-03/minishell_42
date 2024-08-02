@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:25:21 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/01 12:59:49 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:11:13 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_error(void)
 {
-	ft_putendl_fd("Syntax error", 2);
+	ft_putendl_fd("minihell: syntax error", 2);
 }
 
 int	check_quot(t_item *lst, char c)
@@ -40,7 +40,7 @@ int	check_quot_error(t_item *lst)
 	return (1);
 }
 
-int	lexer_errors(t_item **lst)
+int	 lexer_errors(t_item **lst)
 {
 	if (!check_redirections(lst) || !check_pipes(lst)
 		|| !check_quot_error(*lst))

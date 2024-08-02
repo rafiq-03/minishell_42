@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 16:39:28 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:20:30 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,11 @@ int handle_redirections(t_simple_cmd *cmd)
 	i = 0;
 	while (i < cmd->redir_num)
 	{
-		if (cmd->redirs[i].path_or_limiter == NULL)
-		{
-			ft_putstr_fd("minihell: ambiguous redirect\n", 2);
-			exit(EXIT_FAILURE);
-		}
+		// if (!strcmp(cmd->redirs[i].path_or_limiter, "") || !strcmp(cmd->redirs[i].path_or_limiter, " "))
+		// {
+		// 	ft_putstr_fd("minihell: ambiguous redirect\n", 2);
+		// 	exit(EXIT_FAILURE);
+		// }
 		if (cmd->redirs[i].type == REDIR_IN_FILE)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR);
