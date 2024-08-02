@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
+#    By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 14:50:47 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/07/31 15:00:00 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/08/02 11:06:43 by mskhairi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ EXECUTION_DIR=execution/
 S_EXECUTION= $(addprefix $(EXECUTION_DIR), 	\
 										execute_cmd.c\
 										ft_utils.c\
+										handle_error.c\
 									)
 O_EXECUTION=$(S_EXECUTION:.c=.o)
 

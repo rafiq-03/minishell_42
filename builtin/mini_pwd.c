@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:21 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 08:51:47 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/02 10:25:51 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	mini_pwd()
     else
 	{
         perror("Error");
-		exit_status = EXIT_FAILURE;
-		return (EXIT_FAILURE);
+		exit_status = 126;
+		return (126);
 	}
 	free(buffer);
 	exit_status = EXIT_SUCCESS;

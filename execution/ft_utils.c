@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 08:25:57 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:58:33 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,29 +221,36 @@ int	handle_pipes(t_simple_cmd *cmd)
 
 char *cmd_exist(char *cmd_name, char **path, bool *exist)
 {
-	// int flag;
+	int flag;
 	int	i;
 	char *tmp;
-	// struct stat cmd_info;
+	struct stat cmd_info;
 
-	tmp=ft_strjoin(ft_strdup("/"), cmd_name);
-	
+	// if (ft_strchr(cmd_name, '/'))
+	// {
+	// 	printf("%s\n", cmd_name);
+	// 	flag = stat(cmd_name, &cmd_info);
+	// 	if (flag != -1)
+	// 	{
+	// 		*exist = true;
+	// 		handle_errors(cmd_name, flag);
+	// 		return (cmd_name);
+	// 	}
+	// 	// return (cmd_name);
+	// }
 	i = 0;
+	tmp=ft_strjoin(ft_strdup("/"), cmd_name);
 	while (path[i])
 	{
 		cmd_name = ft_strjoin(ft_strdup(path[i]), ft_strdup(tmp));
-		
-		// flag = stat(cmd_name, &cmd_info);
-		// if (flag == -1)
-		// 	return (NULL);
-		// if (S_ISREG(cmd_info.st_mode) && S)
-		
-		if (!access(cmd_name, X_OK))
+		flag = stat(cmd_name, &cmd_info);
+		if (!flag)
 		{
 			*exist = true;
 			return (cmd_name);
 		}
 		i++;
 	}
+	handle_errors(cmd_name, flag);
 	return (NULL);
 }

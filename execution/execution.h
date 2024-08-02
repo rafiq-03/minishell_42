@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:03:42 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 12:05:24 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:35:00 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int handle_here_doc(t_simple_cmd *cmd);
 int handle_redirections(t_simple_cmd *cmd);
 int	last_redir(t_redir *redir, int len, int type, int last_fd);
 int	close_all_fds(t_simple_cmd *cmd);
+void handle_errors(const char *cmd, int flag);
 
 #endif
