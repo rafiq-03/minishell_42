@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 18:20:30 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:43:16 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,20 @@ char	*search_cmd_path(char **split_path, char *cmd_name, bool *flag)
     }
 	return (cmd_name);
 }
-int handle_here_doc(t_simple_cmd *cmd)
+int handle_here_doc(t_simple_cmd *cmd, int id)
 {
 	int	i;
 	int	fd;
 	char *input;
+	char *heredoc;
 
 	i = -1;
 	while (++i < cmd->redir_num)
 	{
 		if (cmd->redirs[i].type == HERE_DOC_LIMITER)
 		{
-			fd = open("/tmp/here_doc_test.txt", O_RDWR | O_CREAT , 0666);
+			heredoc = ft_strjoin(ft_strdup("here_doc"), ft_itoa(id + 1));
+			fd = open(heredoc, O_RDWR | O_CREAT , 0666);
 			input = readline("> ");
 			while(input)
 			{
@@ -131,9 +133,10 @@ int handle_here_doc(t_simple_cmd *cmd)
 				input = readline("> ");
 			}
 			close(fd);
-			cmd->redirs[i].fd = open("/tmp/here_doc_test.txt", O_RDWR | O_CREAT , 0666);
+			cmd->redirs[i].path_or_limiter = heredoc;
+			// cmd->redirs[i].fd = open(heredoc, O_RDWR | O_CREAT , 0666);
 		}
-		unlink("/tmp/here_doc_test.txt");
+		// unlink(heredoc);
 	}
 	return (0);
 }
@@ -144,29 +147,20 @@ int handle_redirections(t_simple_cmd *cmd)
 	i = 0;
 	while (i < cmd->redir_num)
 	{
-		// if (!strcmp(cmd->redirs[i].path_or_limiter, "") || !strcmp(cmd->redirs[i].path_or_limiter, " "))
-		// {
-		// 	ft_putstr_fd("minihell: ambiguous redirect\n", 2);
-		// 	exit(EXIT_FAILURE);
-		// }
-		if (cmd->redirs[i].type == REDIR_IN_FILE)
+		if (cmd->redirs[i].type == HERE_DOC_LIMITER)
 		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR);
-			// dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
+			unlink(cmd->redirs[i].path_or_limiter);
 		}
+		if (cmd->redirs[i].type == REDIR_IN_FILE)
+			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR);
 		else if (cmd->redirs[i].type == REDIR_OUT_FILE)
-		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR | O_CREAT | O_TRUNC , 0644);
-			// dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
-		}
 		else if (cmd->redirs[i].type == DREDIR_OUT_FILE)
-		{
 			cmd->redirs[i].fd = open(cmd->redirs[i].path_or_limiter, O_RDWR | O_CREAT | O_APPEND, 0644);
-			// dprintf(2, "fd = %d -> open (%s) \n", cmd->redirs[i].fd, cmd->redirs[i].path_or_limiter);
-		}
 		if (cmd->redirs[i].fd == -1)
 		{
-			dprintf(2, "No such file or directory\n");
+			perror(ft_strjoin(ft_strdup("minishell : "), ft_strdup(cmd->redirs[i].path_or_limiter)));
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -188,7 +182,12 @@ int	dup_and_close(t_simple_cmd *cmd)
 		dup2(cmd->fd.out, STDOUT_FILENO);
 		// dprintf(2, "\n                             dup fd.out %d\n", cmd->fd.out);
 	}
-	if (cmd->pipe_flag == AFTER_PIPE || cmd->pipe_flag == BETWEEN_PIPES)// close unused pipes in child process
+	if (cmd->pipe_flag == BEFORE_PIPE)
+	{
+		close(cmd->pipe[0]);
+		close(cmd->pipe[1]);
+	}
+	else if (cmd->pipe_flag == AFTER_PIPE || cmd->pipe_flag == BETWEEN_PIPES)// close unused pipes in child process
 	{
 		close(cmd->prev->pipe[0]);
 		close(cmd->prev->pipe[1]);
@@ -272,7 +271,7 @@ char *cmd_exist(char *cmd, char *cmd_name,  char **path)
 
 	i = 0;
 	is_path = false;
-	if (!ft_strchr(cmd, '/') && !ft_strchr(cmd, '.'))
+	if (cmd && !ft_strchr(cmd, '/') && !ft_strchr(cmd, '.'))
 	{
 		tmp = ft_strjoin(ft_strdup("/"), cmd);
 		while (path && path[i])

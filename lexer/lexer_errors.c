@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:25:21 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/02 18:11:13 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:38:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
+extern int exit_status;
 void	ft_print_error(void)
 {
 	ft_putendl_fd("minihell: syntax error", 2);
@@ -46,6 +47,7 @@ int	 lexer_errors(t_item **lst)
 		|| !check_quot_error(*lst))
 	{
 		ft_print_error();
+		exit_status = 258;
 		return (1); // there is an error;
 	}
 	return (0);

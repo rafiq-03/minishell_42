@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 17:49:18 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:28:52 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*env_search(t_env *env_l, char *env_var)
 			return (ft_strdup(tmp->value));
 		tmp = tmp->next;
 	}
-	return (ft_strdup(" "));
+	return (ft_strdup(""));
 }
 
 void	expander(t_env *env_l, t_item *list)

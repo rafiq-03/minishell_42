@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/02 18:21:28 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:21:59 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 	error_str = NULL;
 	env = list_to_arr(data->env_l);
 	path = get_path_env(data->env_l);
+	if (!cmd->cmd[0])
+		exit(0);
 	cmd->cmd[0] = cmd_exist(cmd->cmd[0], cmd->cmd_name, path);
 	dup_and_close(cmd);
 	execve(cmd->cmd[0], cmd->cmd, env);
@@ -38,7 +40,7 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)
 	{
 		// dprintf(2, "pid of this child is %d\n", getpid());
 		signal(SIGQUIT, SIG_DFL);
-		handle_here_doc(cmd);
+		// handle_here_doc(cmd);
 		handle_redirections(cmd);// open
 		if (check_builtin(cmd->cmd_name))
 			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), false);
@@ -63,6 +65,7 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	int i;
 	int state;
 	bool	flag;
+	t_simple_cmd *tmp;
 
 	i = 0;
 	flag = false;
@@ -70,10 +73,16 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	if (!cmd->next && check_builtin(cmd->cmd_name))// check if there is one builtin
 	{
 		flag = true;
-		handle_here_doc(cmd);
+		handle_here_doc(cmd, 0);
 		handle_redirections(cmd);
 		builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), flag);
 		return (0);
+	}
+	tmp = cmd;
+	while (tmp)
+	{
+		handle_here_doc(tmp, i + 10);
+		tmp = tmp->next;
 	}
 	while (cmd)
 	{

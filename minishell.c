@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/02 15:50:10 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:26:43 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ int	main(int ac, char **av, char **env)
 		{
 			free(data.prompt);
 			printf("exit\n");
-			exit(1);
+			exit_status = 0;
+			exit(0);
 		}
 		else if (is_empty(data.prompt))
 		{
 			free(data.prompt);
+			exit_status = 0;
 			continue;
 		}
 		if (ft_strlen(data.prompt))
