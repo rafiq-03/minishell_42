@@ -6,13 +6,14 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:30:56 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 17:07:08 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:59:21 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
+
 int	is_option(char **str, int *flag)
 {
 	int	i;

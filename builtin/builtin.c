@@ -21,7 +21,7 @@ int	return_default_fd(int in, int out)
 	return (0);
 }
 
-int execute_builtin(t_simple_cmd *builtin, t_data *data, int flag)
+int	execute_builtin(t_simple_cmd *builtin, t_data *data, int flag)
 {
 	if (flag == 1)
 		mini_echo(builtin->cmd);
@@ -40,11 +40,11 @@ int execute_builtin(t_simple_cmd *builtin, t_data *data, int flag)
 	return (0);
 }
 
-void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int	flag, bool one_cmd)
+void	builtin_cmd(t_simple_cmd *builtin, t_data *data, int flag, bool one_cmd)
 {
-	int in;
+	int	in;
 	int	out;
-	
+
 	if (one_cmd)
 	{
 		in = dup(STDIN_FILENO);
@@ -77,7 +77,7 @@ int	check_builtin(char *str)
 	return (0);
 }
 
-void	change_env_value(t_env *env_l, char *key ,char *value, bool value_flag)
+void	change_env_value(t_env *env_l, char *key, char *value, bool value_flag)
 {
 	while (env_l)
 	{
@@ -90,4 +90,3 @@ void	change_env_value(t_env *env_l, char *key ,char *value, bool value_flag)
 		env_l = env_l->next;
 	}
 }
-
