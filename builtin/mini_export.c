@@ -6,13 +6,13 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 18:51:17 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:07:08 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-extern int exit_status;
+extern int g_exit_status;
 void	print_env(t_env *env_l)
 {
 	while (env_l)
@@ -117,8 +117,8 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 	}
 	// system("leaks -q minishell");
 	if (flag == 0)
-		exit_status = EXIT_SUCCESS;
+		g_exit_status = EXIT_SUCCESS;
 	else
-		exit_status = EXIT_FAILURE;
+		g_exit_status = EXIT_FAILURE;
 	return (0);
 }

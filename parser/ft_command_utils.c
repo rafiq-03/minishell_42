@@ -6,24 +6,11 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:40:06 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 18:53:21 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:48:05 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	cmd_number(t_cmd_limits *cmd) // number of commands
-{
-	int	i;
-
-	i = 0;
-	while (cmd)
-	{
-		cmd = cmd->next;
-		i++;
-	}
-	return (i);
-}
 
 int	array_len(t_cmd_limits *cmd)
 {
@@ -43,10 +30,10 @@ int	array_len(t_cmd_limits *cmd)
 
 char	**set_cmd_arr(t_cmd_limits *cmd) //cmd array aka command and its options
 {
-	char	**cmd_array;
+	int		i;
 	int		len;
 	t_item	*tmp;
-	int		i;
+	char	**cmd_array;
 
 	i = 0;
 	len = 0;
@@ -68,8 +55,8 @@ char	**set_cmd_arr(t_cmd_limits *cmd) //cmd array aka command and its options
 
 int	check_redir(t_cmd_limits *cmd) //nbr of type
 {
-	t_item	*tmp;
 	int		i;
+	t_item	*tmp;
 
 	i = 0;
 	tmp = cmd->start;
@@ -82,6 +69,7 @@ int	check_redir(t_cmd_limits *cmd) //nbr of type
 	}
 	return (i);
 }
+
 t_redir	*set_redirs(t_cmd_limits *cmd, int num)
 {
 	t_item	*tmp;
@@ -116,11 +104,11 @@ void	set_pipe_flag(t_simple_cmd *head, int cmd_nbr)
 	while (head)
 	{
 		if (head->i == 0)
-			head->pipe_flag = BEFORE_PIPE;// command is before pipe
+			head->pipe_flag = BEFORE_PIPE; // command is before pipe
 		else if (head->i == cmd_nbr - 1)
-			head->pipe_flag = AFTER_PIPE;// command is after pipe
+			head->pipe_flag = AFTER_PIPE; // command is after pipe
 		else
-			head->pipe_flag = BETWEEN_PIPES;//command is between pipes
+			head->pipe_flag = BETWEEN_PIPES; //command is between pipes
 		head = head->next;
 	}
 }

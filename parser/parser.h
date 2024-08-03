@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:25:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/30 14:37:44 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:44:44 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_cmd_limits	*new_limit(t_item *start);
 t_cmd_limits	*last_limit(t_cmd_limits *lst);
 t_cmd_limits	*set_cmd_limits(t_item *head);
 t_item			*skip_other_types(t_item *tmp);
-void			expander(t_env *env_l, t_item *list);
+void			expander(t_env *env_l, t_item *list, char	*tmp);
 
 // void	add_back_limit(t_cmd_limits **lst, t_cmd_limits *new);
 

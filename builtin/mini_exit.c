@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:15:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 14:34:20 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:07:08 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-extern int exit_status;
+extern int g_exit_status;
 int is_number(char *str)
 {
 	int i;
@@ -45,7 +45,7 @@ int check_args(char **cmd)
 	if (cmd[1] && cmd[2])
 	{
 		dprintf(2, " too many arguments\n");
-		exit_status = EXIT_FAILURE;
+		g_exit_status = EXIT_FAILURE;
 		return(EXIT_FAILURE);// exit(check exit status in bash);
 	}
 	// check if is_number(cmd[i]) else ==> print arg is not numeric ==> exit(check exit status in bash) ;
@@ -60,7 +60,7 @@ int	mini_exit(char **cmd)
 	check_errors = check_args(cmd);
 	if (check_errors)
 		return(1);
-	exit_status  = ft_atoi(cmd[1]);
-	exit(exit_status);
+	g_exit_status  = ft_atoi(cmd[1]);
+	exit(g_exit_status);
 	return (0);//optionally , to giving the OS all informations about the process through the return value
 }

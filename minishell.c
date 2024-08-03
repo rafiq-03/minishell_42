@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/03 14:26:43 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:07:08 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int exit_status;
+int g_exit_status;
 void	handle_SigInt(int signal)
 {
 	if (signal == SIGINT)
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
-	exit_status = 0;
+	g_exit_status = 0;
 	data.env_l = env_list(env);
 	signal(SIGINT, handle_SigInt);
 	signal(SIGQUIT, SIG_IGN);//signal(SIGQUIT, SIG_DFL); in child proccesses
@@ -54,13 +54,13 @@ int	main(int ac, char **av, char **env)
 		{
 			free(data.prompt);
 			printf("exit\n");
-			exit_status = 0;
+			g_exit_status = 0;
 			exit(0);
 		}
 		else if (is_empty(data.prompt))
 		{
 			free(data.prompt);
-			exit_status = 0;
+			g_exit_status = 0;
 			continue;
 		}
 		if (ft_strlen(data.prompt))

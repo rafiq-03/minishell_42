@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:14:59 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/02 18:03:18 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:09:41 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ int	is_redirection(int type)
 	return (0);
 }
 
-int	check_pipes(t_item **lst)
+int	check_pipes(t_item **lst, t_item	*tmp)
 {
 	t_item	*search;
-	t_item	*tmp;
 
 	tmp = *lst;
 	search = *lst;

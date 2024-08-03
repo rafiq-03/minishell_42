@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:45:52 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 18:54:58 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:48:13 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ t_simple_cmd	*new_cmd_node(t_cmd_limits *cmd)
 		return (NULL);
 	new->i = 0;
 	new->cmd = set_cmd_arr(cmd);// malloc
-	new->cmd_name = ft_strdup(new->cmd[0]);// cmd_name is first element
+	new->cmd_name = ft_strdup(new->cmd[0]); // cmd_name is first element
 	new->next = NULL;
 	new->prev = NULL;
-	new->pipe_flag = 0;// how to check pipe flag ?? will set it later
+	new->pipe_flag = 0; // how to check pipe flag ?? will set it later
 	new->fd.in = 0;
 	new->fd.out = 1;
 	new->redir_num = check_redir(cmd);
@@ -78,4 +78,17 @@ t_simple_cmd	*last_cmd(t_simple_cmd *lst)
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
+}
+
+int	cmd_number(t_cmd_limits *cmd) // number of commands
+{
+	int	i;
+
+	i = 0;
+	while (cmd)
+	{
+		cmd = cmd->next;
+		i++;
+	}
+	return (i);
 }
