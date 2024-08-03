@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:28:17 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 15:43:16 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:53:55 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ int	close_all_fds(t_simple_cmd *cmd)
 	while (i < cmd->redir_num)
 	{
 		if (cmd->redirs[i].fd != 0 && cmd->redirs[i].fd != 1)
-		{
-			// dprintf(2, "close fd = %d\n", cmd->redirs[i].fd);
 			close(cmd->redirs[i].fd);
-		}
 		i++;
 	}
 	return (0);
@@ -75,9 +72,9 @@ int	last_redir(t_redir *redir, int len, int type, int last_fd)
 		if (type == REDIR_IN)
 		{
 			if (redir[i].type == REDIR_IN_FILE)
-				last_fd = redir[i].fd;//4
+				last_fd = redir[i].fd;
 			else if (redir[i].type == HERE_DOC_LIMITER)
-				last_fd = redir[i].fd;//3
+				last_fd = redir[i].fd;
 		}
 		else if (type == REDIR_OUT)
 		{
@@ -121,7 +118,7 @@ int handle_here_doc(t_simple_cmd *cmd, int id)
 	{
 		if (cmd->redirs[i].type == HERE_DOC_LIMITER)
 		{
-			heredoc = ft_strjoin(ft_strdup("here_doc"), ft_itoa(id + 1));
+			heredoc = ft_strjoin(ft_strdup("here_doc"), ft_itoa(id + 1));//check it later
 			fd = open(heredoc, O_RDWR | O_CREAT , 0666);
 			input = readline("> ");
 			while(input)
@@ -134,9 +131,7 @@ int handle_here_doc(t_simple_cmd *cmd, int id)
 			}
 			close(fd);
 			cmd->redirs[i].path_or_limiter = heredoc;
-			// cmd->redirs[i].fd = open(heredoc, O_RDWR | O_CREAT , 0666);
 		}
-		// unlink(heredoc);
 	}
 	return (0);
 }
@@ -241,27 +236,6 @@ int	is_valid(char *cmd_name)
 		return (0);
 	return (1);
 }
-	// {
-	// 	printf("%s\n", cmd_name);
-	// 	flag = stat(cmd_name, &cmd_info);
-	// 	if (flag != -1)
-	// 	{
-	// 		*exist = true;
-	// 		handle_errors(cmd_name, flag);
-	// 		return (cmd_name);
-	// 	}
-	// 	else {
-	// 	if (errno == ENOENT){
-	// 		fprintf(stderr, "%s: No such file or directory\n", cmd_name);
-	// 		exit(127);
-	// 	} else {
-	// 		perror(cmd_name);
-	// 		exit(126);
-	// 	}
-    // }
-		// return (cmd_name);
-	// }
-
 
 char *cmd_exist(char *cmd, char *cmd_name,  char **path)
 {
