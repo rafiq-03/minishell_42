@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/04 11:00:09 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/04 12:44:57 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 	cmd->cmd[0] = cmd_exist(cmd->cmd[0], cmd->cmd_name, path);
 	dup_and_close(cmd);
 	execve(cmd->cmd[0], cmd->cmd, env);
-	// perror("minihell :");
 	exit(g_exit_status);
 }
 
@@ -35,10 +34,12 @@ int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)
 {
 	int pid;
 
+	signal (SIGINT, SIG_IGN);
 	pid = fork();
 	if (!pid)
 	{
 		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		handle_redirections(cmd);// open
 		if (check_builtin(cmd->cmd_name))
 			builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), false);
@@ -74,8 +75,11 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 		builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), flag);
 		return (0);
 	}
-	handle_all_heredocs(cmd);
-	// print_cmds(cmd);
+	if (handle_all_heredocs(cmd, &state))
+	{
+		g_exit_status = EXIT_FAILURE;
+		return (1);
+	}
 	while (cmd)
 	{
 		handle_pipes(cmd);
@@ -86,8 +90,9 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	while (waitpid(data->fork_pid[i++], &state, 0) > 0 && i < data->cmd_nbr)
 		;
 	if (WIFSIGNALED(state))
-		exit_status = WTERMSIG(state);
+		g_exit_status = WTERMSIG(state) + 128;
 	else if (WIFEXITED(state))
-		exit_status = WEXITSTATUS(state);
+		g_exit_status = WEXITSTATUS(state);
+	signal(SIGINT, handle_sigint);
 	return (0);
 }

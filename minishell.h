@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/04 11:02:42 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/04 12:10:22 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,12 @@ typedef struct s_simple_cmd
 	char					**cmd;//command with its falags and options
 	// we must check pipe flag befor assignment of in_out fd
 	t_redir				*redirs;// redirs pointer
-	t_fd				fd;//fd of in and out fd.in=open(redir_in->path);
 	int					pipe[2];// pipe if needed
 	int					pipe_flag;
+	int						redir_num;//number of redir
+	char					*cmd_name;//command name
 	char				**heredoc_arr;
 	int					heredoc_nbr;
-	struct s_simple_cmd	*next;//next_command
-	struct s_simple_cmd	*prev;// prev_command
-	t_redir					*redirs;//redirs pointer
-	char					*cmd_name;//command name
-	int						redir_num;//number of redir
-	int						pipe[2];//pipe if needed
-	int						pipe_flag;
 	struct s_simple_cmd		*next;//next_command
 	struct s_simple_cmd		*prev;//prev_command
 	//10 elemnts

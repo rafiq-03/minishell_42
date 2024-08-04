@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 17:34:18 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/04 10:47:36 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/04 12:43:33 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+extern int g_exit_status;
 
 int	heredoc_nbr(t_simple_cmd *cmd)// heredoc nbr in one command;
 {
@@ -51,14 +53,16 @@ int	heredocs_array(t_simple_cmd *cmd) // heredoce arr one array per command
 	return (0);
 }
 
-int handle_all_heredocs(t_simple_cmd *cmd)
+int handle_all_heredocs(t_simple_cmd *cmd, int *state)
 {
 	int pid;
-
+	
+	signal(SIGINT, SIG_IGN);
 	heredocs_array(cmd);
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		while (cmd)
 		{
 			handle_here_doc(cmd);
@@ -67,7 +71,14 @@ int handle_all_heredocs(t_simple_cmd *cmd)
 		exit(0);
 	}
 	else
-		wait(NULL);// check it
+	{
+		waitpid(pid, state, 0);
+		if (*state == 2)
+		{
+			printf("\n");
+			return (1);
+		}
+	}
 	return (0);
 }
 
@@ -87,7 +98,7 @@ int handle_here_doc(t_simple_cmd *cmd)
 			fd = open(cmd->heredoc_arr[id++], O_RDWR | O_CREAT | O_TRUNC, 0666);
 			if (fd == -1)
 				perror("minishell :heredoc :");
-			line = readline("> ");
+			line = readline("herdoc> ");
 			while(line)
 			{
 				if (!ft_strcmp(line, cmd->redirs[i].path_or_limiter))
@@ -98,7 +109,7 @@ int handle_here_doc(t_simple_cmd *cmd)
 				write(fd, line, ft_strlen(line));
 				write(fd, "\n", 1);
 				free(line);
-				line = readline("> ");
+				line = readline("herdoc> ");
 			}
 			close(fd);
 		}
