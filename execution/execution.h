@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:03:42 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 12:54:40 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/04 10:04:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	**list_to_arr(t_env *tmp);
 char	*cmd_exist(char *cmd, char *cmd_name, char **path);
 
 int	handle_pipes(t_simple_cmd *cmd);
-int handle_here_doc(t_simple_cmd *cmd, int id);
+int handle_all_heredocs(t_simple_cmd *cmd);
+int handle_here_doc(t_simple_cmd *cmd);
 int handle_redirections(t_simple_cmd *cmd);
 int	last_redir(t_redir *redir, int len, int type, int last_fd);
 int	close_all_fds(t_simple_cmd *cmd);

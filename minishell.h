@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/31 12:42:58 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/04 10:20:26 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ typedef struct s_simple_cmd
 	t_fd				fd;//fd of in and out fd.in=open(redir_in->path);
 	int					pipe[2];// pipe if needed
 	int					pipe_flag;
+	char				**heredoc_arr;
+	int					heredoc_nbr;
 	struct s_simple_cmd	*next;//next_command
 	struct s_simple_cmd	*prev;// prev_command
 	//10 elemnts

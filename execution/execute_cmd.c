@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 15:55:00 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/04 10:20:01 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	int i;
 	int state;
 	bool	flag;
-	t_simple_cmd *tmp;
 
 	i = 0;
 	flag = false;
@@ -70,17 +69,13 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	if (!cmd->next && check_builtin(cmd->cmd_name))
 	{
 		flag = true;
-		handle_here_doc(cmd, 0);
+		handle_here_doc(cmd);
 		handle_redirections(cmd);
 		builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), flag);
 		return (0);
 	}
-	tmp = cmd;
-	while (tmp)
-	{
-		handle_here_doc(tmp, i + 10);
-		tmp = tmp->next;
-	}
+	handle_all_heredocs(cmd);
+	// print_cmds(cmd);
 	while (cmd)
 	{
 		handle_pipes(cmd);
@@ -91,14 +86,8 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	while (waitpid(data->fork_pid[i++], &state, 0) > 0 && i < data->cmd_nbr)
 		;
 	if (WIFSIGNALED(state))
-	{
 		exit_status = WTERMSIG(state);
-		// printf("sig ==> %d\n", exit_status);
-	}
 	else if (WIFEXITED(state))
-	{
 		exit_status = WEXITSTATUS(state);
-		// printf("GEN ==> %d\n", exit_status);
-	}
 	return (0);
 }
