@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cleaner.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:08:33 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 17:19:23 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/04 13:35:33 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	del_cmd_node(t_simple_cmd *lst)
 		free(lst->cmd_name);
 		ft_free(lst->cmd);
 		ft_free_redir(lst->redirs, lst->redir_num);
+		free(lst->heredoc_arr);
 		free(lst);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/04 12:44:57 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:38:34 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 	i = 0;
 	flag = false;
 	data->fork_pid = malloc(data->cmd_nbr * sizeof(int));// must be freed
+	if (handle_all_heredocs(cmd, &state))
+	{
+		g_exit_status = EXIT_FAILURE;
+		return (1);
+	}
 	if (!cmd->next && check_builtin(cmd->cmd_name))
 	{
 		flag = true;
@@ -74,11 +79,6 @@ int	execute_cmd(t_simple_cmd *cmd, t_data *data)
 		handle_redirections(cmd);
 		builtin_cmd(cmd, data, check_builtin(cmd->cmd_name), flag);
 		return (0);
-	}
-	if (handle_all_heredocs(cmd, &state))
-	{
-		g_exit_status = EXIT_FAILURE;
-		return (1);
 	}
 	while (cmd)
 	{

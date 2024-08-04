@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 10:36:05 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/03 17:07:08 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/04 13:01:36 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void handle_errors(char *cmd, bool is_path)
     {
         if (S_ISDIR(cmd_info.st_mode))
         {
-            print_error(cmd, ": is a dierectory\n");
+            print_error(cmd, ": is a directory\n");
             exit(126);
         }
         else if (!(cmd_info.st_mode & S_IXUSR))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:37 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 17:58:21 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:52:13 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,32 @@ int	get_current_dir(t_env *env, char *pwd_type, char *current_dir)
 	}
 	else
 	{
-		perror("Error");
+		perror("minishell");
 		g_exit_status = EXIT_FAILURE;
 		return (1);
+	}
+	return (0);
+}
+
+int	get_home_env(t_env *env_l)
+{
+	char	*home_env;
+
+	while (env_l)
+	{
+		if (!strcmp(env_l->key, "HOME"))
+		{
+			home_env = ft_strdup(env_l->value);
+			if (chdir(home_env) == -1)
+			{
+				free(home_env);
+				perror("minishell");
+				g_exit_status = EXIT_FAILURE;
+				return (1);
+			}
+			free(home_env);
+		}
+		env_l = env_l->next;
 	}
 	return (0);
 }
@@ -40,22 +63,16 @@ int	get_current_dir(t_env *env, char *pwd_type, char *current_dir)
 int	mini_cd(t_env *env, char **cmd)
 {
 	char	*current_dir;
+	
 
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
 		return (1);
-	if (!cmd[1] || !ft_strncmp(cmd[1], "~", ft_strlen(cmd[1])))
-	{
-		if (chdir("/Users/mskhairi") == -1)
-		{
-			perror("Error");
-			g_exit_status = EXIT_FAILURE;
-			return (1);
-		}
-	}
+	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
+		get_home_env(env);
 	else if (chdir(cmd[1]) == -1)
 	{
-		perror("Error");
+		perror("minishell");
 		g_exit_status = EXIT_FAILURE;
 		return (1);
 	}
