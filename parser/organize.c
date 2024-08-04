@@ -6,7 +6,7 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:37:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 17:45:04 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/04 11:36:27 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	check_dol_join(t_item *list, int flag)
 {
 	if (!flag)
 	{
-		if (!ft_strcmp(list->content, "$") && list->state == GENERAL
+		if (!list->content || (!ft_strcmp(list->content, "$") && list->state == GENERAL
 			&& list->next && (list->next->type == DOUBLE_QUOTE
-				|| list->next->type == QOUTE))
-			return (0);
-	}
-	else if (flag)
-	{
+				|| list->next->type == QOUTE)))
+		{
+			list = list->next;
+			continue ;
+		}
 		if ((list && !(list->type == WHITE_SPACE && list->state == GENERAL)
 				&& list->type != QOUTE && list->type != DOUBLE_QUOTE)
 			|| (!ft_strcmp(list->content, "")))
