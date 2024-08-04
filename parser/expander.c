@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:27:32 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/03 14:28:52 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/04 11:21:06 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,24 @@ int	check_herdoc(t_item *list)
 	return (0);
 }
 
-char	*env_search(t_env *env_l, char *env_var)
+char	*env_search(t_env *env_l, t_item *env_node)
 {
 	t_env *tmp;
 	
 	tmp = env_l;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->key, env_var))// we must compare the values whit
+		if (!ft_strcmp(tmp->key, (env_node->content) + 1))// we must compare the values whit
 			return (ft_strdup(tmp->value));
 		tmp = tmp->next;
 	}
-	return (ft_strdup(""));
+	if (env_node->state == GENERAL)
+	{
+		env_node->type = WHITE_SPACE;
+		return (NULL);
+	}
+	else
+		return (ft_strdup(""));
 }
 
 void	expander(t_env *env_l, t_item *list)
@@ -81,7 +87,7 @@ void	expander(t_env *env_l, t_item *list)
 			if (!check_herdoc(list) && !flag)
 			{
 				tmp = list->content;
-				list->content = env_search(env_l, tmp + 1);
+				list->content = env_search(env_l, list);
 				// if (!list->content)
 				// 	exit_status = 126;
 					// return ;//null check
