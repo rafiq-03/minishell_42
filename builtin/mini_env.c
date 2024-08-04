@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:29:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 11:35:13 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 18:00:34 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	get_key_and_value(char *env, char **key, char **value)
 {
 	int	i;
-	
+
 	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
@@ -26,13 +26,14 @@ bool	get_key_and_value(char *env, char **key, char **value)
 	return (true);
 }
 
-t_env	*env_list(char **env)//make new env list based on the the parent bash env
+t_env	*env_list(char **env)
+	//make new env list based on the the parent bash env
 {
+	int		i;
 	t_env	*head;
 	t_env	*tmp;
 	char	*key;
 	char	*value;
-	int		i;
 
 	get_key_and_value(env[0], &key, &value);
 	head = env_new_node(key, value);
@@ -48,11 +49,10 @@ t_env	*env_list(char **env)//make new env list based on the the parent bash env
 	return (head);
 }
 
-//(t_simple_cmd *export, t_data *data)
-int	mini_env(t_data *data)// implement env command
+int	mini_env(t_data *data) // implement env command
 {
-	t_env *tmp;
-	
+	t_env	*tmp;
+
 	change_env_value(data->env_l, "_", "builtin_mini_env", true);
 	tmp = data->env_l;
 	while (tmp)

@@ -6,13 +6,14 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:31:02 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 18:51:17 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:59:40 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-extern int exit_status;
+extern int	g_exit_status;
+
 void	print_env(t_env *env_l)
 {
 	while (env_l)
@@ -25,7 +26,7 @@ void	print_env(t_env *env_l)
 	}
 }
 
-int is_exist(t_data *data, char *key, char *value, bool value_flag)
+int	is_exist(t_data *data, char *key, char *value, bool value_flag)
 {
 	t_env	*tmp;
 
@@ -35,7 +36,7 @@ int is_exist(t_data *data, char *key, char *value, bool value_flag)
 		if (ft_strlen(key) == 0)
 		{
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
 		else if (!ft_strncmp(tmp->key, key, ft_strlen(key)))
 		{
@@ -52,9 +53,10 @@ int is_exist(t_data *data, char *key, char *value, bool value_flag)
 	}
 	return (0);
 }
-int	check_key(char *arg, bool *flag)// check if this key is valid
+
+int	check_key(char *arg, bool *flag) // check if this key is valid
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (!arg || arg[i] == '\0')
@@ -62,7 +64,7 @@ int	check_key(char *arg, bool *flag)// check if this key is valid
 		*flag = true;
 		return (1);
 	}
-	if(arg[i] != '_' && !ft_isalpha(arg[i]))
+	if (arg[i] != '_' && !ft_isalpha(arg[i]))
 	{
 		*flag = true;
 		return (1);
@@ -72,7 +74,7 @@ int	check_key(char *arg, bool *flag)// check if this key is valid
 		if (!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
 		{
 			*flag = true;
-			return (1);	
+			return (1);
 		}
 	}
 	return (0);
@@ -80,7 +82,7 @@ int	check_key(char *arg, bool *flag)// check if this key is valid
 
 int	mini_export(t_simple_cmd *export, t_data *data)
 {
-	int	i;
+	int		i;
 	char	*key;
 	char	*value;
 	t_env	*new;
@@ -89,25 +91,24 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 
 	flag = 0;
 	i = 0;
-	
 	// system("leaks -q minishell");
 	if (!export->cmd[1])
 		print_env(data->env_l);
 	while (export->cmd[++i])
 	{
 		value_flag = get_key_and_value(export->cmd[i], &key, &value);
-		if (is_exist(data, key, value, value_flag))// pass false
-			continue;
-		if (check_key(key, &flag))// check bug of env without = " a= != a"
+		if (is_exist(data, key, value, value_flag)) // pass false
+			continue ;
+		if (check_key(key, &flag)) // check bug of env without = " a= != a"
 		{
 			// printf("test\n");
 			if (flag == 1)
 			{
-				ft_putstr_fd("export : `", 2);	
-				ft_putstr_fd(export->cmd[i], 2);			
+				ft_putstr_fd("export : `", 2);
+				ft_putstr_fd(export->cmd[i], 2);
 				ft_putstr_fd("\': not a valid identifier\n", 2);
 			}
-			continue;
+			continue ;
 		}
 		// free(key);
 		// free(value);
@@ -117,8 +118,8 @@ int	mini_export(t_simple_cmd *export, t_data *data)
 	}
 	// system("leaks -q minishell");
 	if (flag == 0)
-		exit_status = EXIT_SUCCESS;
+		g_exit_status = EXIT_SUCCESS;
 	else
-		exit_status = EXIT_FAILURE;
+		g_exit_status = EXIT_FAILURE;
 	return (0);
 }

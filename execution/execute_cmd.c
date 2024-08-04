@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:05:09 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/04 10:20:01 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/04 11:00:09 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-extern int exit_status;
+extern int g_exit_status;
 int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 {
 	char *error_str;
@@ -28,7 +28,7 @@ int	_execute(t_simple_cmd *cmd, t_data *data)// child process
 	dup_and_close(cmd);
 	execve(cmd->cmd[0], cmd->cmd, env);
 	// perror("minihell :");
-	exit(exit_status);
+	exit(g_exit_status);
 }
 
 int	handle_cmd(t_simple_cmd *cmd, t_data *data, int *fork_pid)

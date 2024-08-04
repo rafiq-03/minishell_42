@@ -63,7 +63,7 @@ void	print_redir(t_redir *redir, int num)
 			printf("\t[ >> ]");
 		if (redir[i].type == HERE_DOC_LIMITER)
 			printf("\t[ << ] here doc : ");
-		printf("-[ %s ]\n",redir[i].path_or_limiter);
+		printf("-[ %s ]\n", redir[i].path_or_limiter);
 		i++;
 	}
 	printf("-----------------------------\n");
@@ -72,7 +72,7 @@ void	print_redir(t_redir *redir, int num)
 void	print_cmd(t_simple_cmd *cmd)
 {
 	printf("\033[0;32m=============================================================\033[0m\n\n");
-	printf("[%d] => Command name	: %s\n\n",cmd->i, cmd->cmd_name);
+	printf("[%d] => Command name	: %s\n\n", cmd->i, cmd->cmd_name);
 	print(cmd->cmd);
 	if (cmd->pipe_flag == 2)
 		printf("pipe flag	: after\n");

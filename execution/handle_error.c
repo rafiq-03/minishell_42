@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 10:36:05 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/02 15:40:38 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:07:08 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-extern int exit_status;
+extern int g_exit_status;
 // void handle_access_error(const char *cmd) {
 //     if (errno == EACCES) {
 //         fprintf(stderr, "%s: Permission denied\n", cmd);

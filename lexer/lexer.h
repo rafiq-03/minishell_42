@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 19:56:11 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/22 15:25:35 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:08:35 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		is_empty(char *str);
 int		is_redirection(int type);
 void	ft_print_error(void);
 int		check_redirections(t_item **lst);
-int		check_pipes(t_item **lst);
+int		check_pipes(t_item **lst, t_item	*tmp);
 int		is_alone(t_item *lst);
 void	reset_tokens(t_item *list);
 

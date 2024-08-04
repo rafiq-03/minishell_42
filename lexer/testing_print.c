@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testing_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:20:07 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/07/22 15:30:45 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:08:54 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ char	*rtype(int type)
 void	print_list(t_item *head)
 {
 	char	*token;
-	char	*state[5] = {"general", "\033[0;32mIN_QUT\033[0m", "\033[0;33mIN_DQUT\033[0m", NULL};
+	char	*state[5] = {"general", "\033[0;32mIN_QUT\033[0m",
+		"\033[0;33mIN_DQUT\033[0m", NULL};
 	printf(" --------------------------------------------------------------------------------\n");
 	printf("|	[CMD]	|	[len]	|	[state]	|	[token]				\n");
 	printf(" --------------------------------------------------------------------------------\n");

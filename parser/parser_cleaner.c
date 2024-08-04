@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cleaner.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:08:33 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/23 15:28:10 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:19:23 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_clear_cmd_lst(t_simple_cmd **lst)
 		*lst = NULL;
 	}
 }
+
 // clean command limits------------------------------
 void	ft_clear_limits(t_cmd_limits **lst)
 {

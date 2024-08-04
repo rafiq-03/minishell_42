@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:33:23 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/03 14:26:43 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 19:47:02 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int exit_status;
-void	handle_SigInt(int signal)
+int	g_exit_status;
+
+void	handle_sigint(int signal)
 {
 	if (signal == SIGINT)
 	{
@@ -23,15 +24,23 @@ void	handle_SigInt(int signal)
 		rl_redisplay();
 	}
 }
-// void	handle_SigQuit(int signal)
-// {
-// 	printf("hey\n");
-// 	if (signal == SIGQUIT)
-// 	{
-// 		printf("exit\n");
-// 		exit(1);
-// 	}
-// }
+
+int	check_empty_input(char *prompt)
+{
+	if (!prompt) //is modefied!!
+	{
+		free(prompt);
+		printf("exit\n");
+		exit (g_exit_status);
+	}
+	else if (!*prompt)
+	{
+		free(prompt);
+		return (0);
+	}
+	return (1);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -40,29 +49,17 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
-	exit_status = 0;
+	g_exit_status = 0;
 	data.env_l = env_list(env);
-	signal(SIGINT, handle_SigInt);
+	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);//signal(SIGQUIT, SIG_DFL); in child proccesses
 	while (1)
 	{
-		// tmp = readline("\033[1;34m[minihell]::~> \033[0m");
 		tmp = readline("minihell-3.2$ ");
 		data.prompt = ft_strtrim(tmp, "\t \f\v\n\r");
 		free(tmp);
-		if (!data.prompt)//is modefied!!
-		{
-			free(data.prompt);
-			printf("exit\n");
-			exit_status = 0;
-			exit(0);
-		}
-		else if (is_empty(data.prompt))
-		{
-			free(data.prompt);
-			exit_status = 0;
-			continue;
-		}
+		if (!check_empty_input(data.prompt))
+			continue ;
 		if (ft_strlen(data.prompt))
 		{
 			add_history(data.prompt);
@@ -75,7 +72,7 @@ int	main(int ac, char **av, char **env)
 
 int	handle_prompt(t_data *data)
 {
-    // check_builin(data->prompt); // check in command name for every command
+	//check_builin(data->prompt); // check in command name for every command
 	data->token_lst = lexer(data->prompt);
 	free(data->prompt);
 	if (!data->token_lst)
@@ -85,7 +82,6 @@ int	handle_prompt(t_data *data)
 		return (1);
 	data->limits_lst = set_cmd_limits(data->new_lst);
 	data->spl_cmd_lst = ft_cmd_list(data->limits_lst, data);
-	// print_list(data->new_lst);
 	execute_cmd(data->spl_cmd_lst, data);
 	return (0);
 }

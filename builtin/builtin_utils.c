@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:59:01 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/07/26 11:57:44 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:58:04 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-t_env	*env_last(t_env *node)// get the last node of the env list
+t_env	*env_last(t_env *node) // get the last node of the env list
 {
 	if (!node)
 		return (NULL);
@@ -21,7 +21,7 @@ t_env	*env_last(t_env *node)// get the last node of the env list
 	return (node);
 }
 
-t_env	*env_new_node(char *key, char *value)// add new node
+t_env	*env_new_node(char *key, char *value) // add new node
 {
 	t_env	*node;
 
@@ -35,7 +35,8 @@ t_env	*env_new_node(char *key, char *value)// add new node
 	return (node);
 }
 
-void	env_add_back(t_env **head, t_env *new)//add a node to the last of env list
+void	env_add_back(t_env **head, t_env *new)
+	//add a node to the last of env list
 {
 	t_env	*last;
 
@@ -53,20 +54,21 @@ void	env_add_back(t_env **head, t_env *new)//add a node to the last of env list
 	}
 }
 
-void	env_delone(t_env **head, t_env *node) // delete one node from the list >> here the problem :(
+	// delete one node from the list >> here the problem :(
+void	env_delone(t_env **head, t_env *node)
 {
 	if (node)
 	{
 		free(node->key);
 		free(node->value);
-		if (!node->prev)// first node
+		if (!node->prev) // first node
 		{
 			*head = node->next;
-			node->next->prev = NULL;
-		} // last node
+			node->next->prev = NULL;// last node
+		}
 		else if (!node->next)
 			node->prev->next = NULL;
-		else // other nodes
+		else// other nodes
 		{
 			node->prev->next = node->next;
 			node->next->prev = node->prev;
@@ -74,4 +76,3 @@ void	env_delone(t_env **head, t_env *node) // delete one node from the list >> h
 	}
 	free(node);
 }
-

@@ -6,13 +6,14 @@
 /*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:30:56 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/08/01 08:51:05 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:59:21 by mskhairi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-extern int exit_status;
+extern int	g_exit_status;
+
 int	is_option(char **str, int *flag)
 {
 	int	i;
@@ -55,6 +56,6 @@ int	mini_echo(char **str)
 	}
 	if (!str[1] || flag)
 		ft_putstr_fd("\n", 1);
-	exit_status = EXIT_SUCCESS;
+	g_exit_status = EXIT_SUCCESS;
 	return (EXIT_SUCCESS);
 }
