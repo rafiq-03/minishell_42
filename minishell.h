@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskhairi <mskhairi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:34:55 by mskhairi          #+#    #+#             */
-/*   Updated: 2024/08/04 12:10:22 by mskhairi         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:49:32 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 # include "Libft/libft.h"
 # include "readline/readline.h"
-# include <errno.h> // error
+# include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
 # include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <sys/stat.h> // stat system call
+# include <sys/stat.h>
 # include <unistd.h>
 
 /*---------------------------[ enum ]------------------------------*/
@@ -43,9 +43,9 @@ enum					e_token
 	REDIR_OUT = '>',
 	HERE_DOC,
 	DREDIR_OUT,
-	REDIR_IN_FILE, // redir files
+	REDIR_IN_FILE,
 	HERE_DOC_LIMITER,
-	REDIR_OUT_FILE, // redir files
+	REDIR_OUT_FILE,
 	DREDIR_OUT_FILE,
 };
 
@@ -65,7 +65,7 @@ enum					e_state
 // Lexing ----------------------//
 typedef struct s_item
 {
-	char				*content; // must be freed
+	char				*content;
 	int					len;
 	enum e_token		type;
 	enum e_state		state;
@@ -81,7 +81,6 @@ typedef struct s_cmd_limits
 	t_item				*end;
 	int					i;
 	struct s_cmd_limits	*next;
-	// struct s_cmd_limits *prev;
 }						t_cmd_limits;
 
 // in_out_fd ::--------::
@@ -98,16 +97,14 @@ typedef struct s_redir
 	int					type;
 	char				*path_or_limiter;
 	int					fd; // file descriptor of this redirection
-			// path of this redir or limiter in the case of herdoc
 }						t_redir;
 
 // Simple command
 typedef struct s_simple_cmd
 {
 	int						i;//index of command;
-	t_fd					fd;//fd of in and out fd.in=open(redir_in->path);
+	t_fd					fd;
 	char					**cmd;//command with its falags and options
-	// we must check pipe flag befor assignment of in_out fd
 	t_redir				*redirs;// redirs pointer
 	int					pipe[2];// pipe if needed
 	int					pipe_flag;
@@ -117,7 +114,6 @@ typedef struct s_simple_cmd
 	int					heredoc_nbr;
 	struct s_simple_cmd		*next;//next_command
 	struct s_simple_cmd		*prev;//prev_command
-	//10 elemnts
 }						t_simple_cmd;
 
 typedef struct s_env // this is for env variables
@@ -129,16 +125,15 @@ typedef struct s_env // this is for env variables
 	struct s_env	*prev;
 }						t_env;
 
-//this struct will store all data
 typedef struct s_data
 {
-	char			*prompt;// prompt
-	t_item			*token_lst;//lexing
-	t_item			*new_lst;// lexing
-	t_cmd_limits	*limits_lst;// parsing
-	t_simple_cmd	*spl_cmd_lst;//parsing
+	char			*prompt;
+	t_item			*token_lst;
+	t_item			*new_lst;
+	t_cmd_limits	*limits_lst;
+	t_simple_cmd	*spl_cmd_lst;
 	t_env			*env_l;
-	int				*fork_pid;// store data of forks;
+	int				*fork_pid;
 	int				cmd_nbr;
 }						t_data;
 
@@ -178,5 +173,3 @@ void					print_cmd(t_simple_cmd *cmd);
 int						mini_env(t_data *data);
 int						is_whitespace(char c);
 #endif
-
-//if there is pipe or not : 0 -> no pipe  1 -> before 2 -> after 3 -> befor & after
