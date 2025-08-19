@@ -1,32 +1,56 @@
-  <h1>minishell</h1>
+# Minishell
 
-  <h2>Introduction</h2>
-  <p>Welcome to the <strong>minishell</strong> project, part of the curriculum at 42. This project aims to create a simple shell that mimics the behavior of common UNIX command interpreters. This project helps you understand how command-line interfaces work and deepens your knowledge of process creation and management, file descriptors, and signal handling.</p>
+This project is a custom implementation of a shell, similar to `bash`. It is written in C and is a project for the 42 school curriculum.
 
-  <h2>Objective</h2>
-  <p>The objective of the "minishell" project is to build a basic shell that can interpret and execute commands provided by the user. The shell should handle built-in commands as well as external programs, manage environment variables, and provide a simple command-line interface for user interaction.</p>
+This shell can parse and execute simple commands, including built-in commands, and it supports features like pipes and I/O redirections.
 
-  <h2>Requirements</h2>
-  <p>The minishell program must meet the following requirements:</p>
-  <ul>
-      <li>Display a prompt and wait for user input.</li>
-      <li>Execute commands entered by the user.</li>
-      <li>Implement built-in commands such as <code>echo</code>, <code>cd</code>, <code>unset</code>, <code>export</code>, <code>env</code>, and <code>pwd</code>.</li>
-      <li>Handle command-line arguments and environment variables.</li>
-      <li>Support input and output redirection.</li>
-      <li>Handle pipes to connect multiple commands.</li>
-      <li>Manage signals, including handling <code>Ctrl+C</code>, <code>Ctrl+D</code>, and <code>Ctrl+\</code>.</li>
-      <li>Implement error handling and display appropriate error messages.</li>
-  </ul>
+## Features
 
-  <h2>Key Concepts</h2>
-  <ul>
-      <li><strong>Command Parsing</strong>: Interpreting and breaking down user input into commands and arguments.</li>
-      <li><strong>Process Creation and Management</strong>: Creating and managing processes using system calls like <code>fork</code>, <code>execve</code>, and <code>wait</code>.</li>
-      <li><strong>File Descriptors</strong>: Managing input and output streams using file descriptors for redirection and pipes.</li>
-      <li><strong>Environment Variables</strong>: Using and modifying environment variables to store configuration settings and pass information to processes.</li>
-      <li><strong>Signal Handling</strong>: Responding to and managing signals to control process behavior and handle user interruptions.</li>
-  </ul>
-  
-  <h2>Conclusion</h2>
-  <p>The <strong>minishell</strong> project provides a hands-on opportunity to understand how a shell works, focusing on command parsing, process management, and input/output handling. By completing this project, you will gain practical experience in building a functional command-line interface, enhancing your skills in C programming and UNIX system calls.</p>
+*   **Command Execution**: Execute simple commands with arguments.
+*   **Built-in Commands**:
+    *   `echo` with `-n` option
+    *   `cd` with relative or absolute path
+    *   `pwd`
+    *   `export`
+    *   `unset`
+    *   `env`
+    *   `exit`
+*   **Pipes (`|`)**: Chain multiple commands together.
+*   **I/O Redirections**:
+    *   `<` redirect input
+    *   `>` redirect output
+    *   `<<` here document
+    *   `>>` append redirected output
+*   **Environment Variables**: Handling of environment variables (`$VAR`).
+*   **Signal Handling**: Handles `Ctrl+C` (SIGINT) and `Ctrl+\\` (SIGQUIT) like `bash`.
+
+## How to Use
+
+1.  **Clone the repository and navigate to the directory.**
+
+2.  **Compile the project:**
+    ```bash
+    make
+    ```
+
+3.  **Run the shell:**
+    ```bash
+    ./minishell
+    ```
+
+## Project Structure
+
+The project is divided into the following main components:
+
+*   **`Libft`**: A custom library of C functions used throughout the project.
+*   **`lexer`**: Responsible for tokenizing the input string. It breaks the input into a sequence of tokens, such as words, pipes, and redirection operators.
+*   **`parser`**: Takes the list of tokens from the lexer and builds a command structure. This includes handling syntax, expanding environment variables, and organizing commands.
+*   **`builtin`**: Implements the shell's built-in commands (e.g., `cd`, `echo`, `env`).
+*   **`execution`**: Executes the parsed commands. It manages processes, pipes, and I/O redirections.
+*   **`minishell.c`**: The main file containing the entry point and the main loop of the shell.
+*   **`minishell.h`**: The main header file with all the necessary data structures and function prototypes.
+
+## Authors
+
+*   [**@rmarzouk**](https://github.com/rmarzouk)
+*   [**@mskhairi**](https://github.com/mskhairi)
